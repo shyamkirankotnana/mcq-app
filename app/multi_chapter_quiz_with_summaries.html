@@ -703,6 +703,99 @@
                 <p>4. <strong>Adaptation:</strong> “Evolve to Comply” – Stay updated with regulatory changes.</p>
                 <p>5. <strong>Enforcement:</strong> “Audit, Inspect, Enforce” – Strict oversight through audits and inspections.</p>
                 <p>6. <strong>Future Directions:</strong> “Tech and ESG forward” – Embracing technology and sustainable practices as integral parts of compliance.</p>
+
+                <h3>5.9 Key Fee Calculation Formulas</h3>
+                <p>This section introduces the formulas used to compute the various fees inherent to Category III AIF operations. It explains how management and performance fees are determined, along with supporting concepts such as the high-water mark and hurdle rate.</p>
+                <p><strong>Management Fee (MF):</strong></p>
+                <p>The fee charged for managing the fund is typically calculated on committed or invested capital.</p>
+                <p>Formula:</p>
+                <p>MF = r<sub>m</sub> × C</p>
+                <p>where:</p>
+                <p>- r<sub>m</sub> = management fee rate (expressed as a decimal)</p>
+                <p>- C = committed capital or invested amount</p>
+                <p><strong>Performance Fee (PF):</strong></p>
+                <p>The performance fee is earned only when the returns exceed a predetermined hurdle rate.</p>
+                <p>Formula:</p>
+                <p>PF = r<sub>p</sub> × max(0, (NAV<sub>current</sub> - NAV<sub>threshold</sub>))</p>
+                <p>where:</p>
+                <p>- r<sub>p</sub> = performance fee rate</p>
+                <p>- NAV<sub>current</sub> = current Net Asset Value</p>
+                <p>- NAV<sub>threshold</sub> = NAV<sub>previous</sub> × (1 + Hurdle Rate)</p>
+                <p><strong>High-Water Mark (HWM):</strong></p>
+                <p>The HWM ensures that performance fees are charged only on new gains above the fund’s previous peak value.</p>
+                <p>Formula:</p>
+                <p>HWM<sub>new</sub> = max(HWM<sub>old</sub>, NAV<sub>current</sub>)</p>
+                <p><div class="tip">Memory Aid: Think “Manage = Rate × Capital, Perform only after Hurdle, and update your Peak (HWM)” to remember the fee structure cascade.</div></p>
+
+                <h3>5.10 Net Asset Value (NAV) & Return Calculations</h3>
+                <p>This section presents the formulas for calculating the Net Asset Value (NAV) of the fund and the overall return metrics—a critical component for both investor reporting and performance monitoring.</p>
+                <p><strong>Net Asset Value (NAV):</strong></p>
+                <p>NAV is calculated by taking the total assets of the fund, subtracting total liabilities, and then dividing by the number of outstanding units/shares.</p>
+                <p>Formula:</p>
+                <p>NAV = <span style="font-style: italic;">Total Assets - Total Liabilities</span> / Number of Outstanding Units</p>
+                <p><strong>Percentage Return:</strong></p>
+                <p>The total return over a period includes both the change in NAV and any distributions (dividends or interest) made during that period.</p>
+                <p>Formula:</p>
+                <p>Return % = <span style="font-style: italic;">((Ending NAV - Beginning NAV + Distributions) / Beginning NAV)</span> × 100</p>
+                <p><div class="tip">Memory Aid: “Assets minus Liabilities per share gives NAV; compare start and end NAV (plus distributions) to see gain percentage.”</div></p>
+
+                <h3>5.11 Risk Metrics: Alpha, Beta & Drawdown Calculations</h3>
+                <p>This portion covers the key quantitative measures used to evaluate the risk and performance of a Category III AIF relative to market benchmarks.</p>
+                <p><strong>Alpha (α):</strong></p>
+                <p>Alpha represents the excess return of the fund over a benchmark return, adjusted for risk.</p>
+                <p>Formula:</p>
+                <p>α = R<sub>p</sub> - [R<sub>f</sub> + β × (R<sub>m</sub> - R<sub>f</sub>))]</p>
+                <p>where:</p>
+                <p>- R<sub>p</sub> = Portfolio return</p>
+                <p>- R<sub>f</sub> = Risk-free rate</p>
+                <p>- R<sub>m</sub> = Market return</p>
+                <p>- β = Beta of the portfolio</p>
+                <p><strong>Beta (β):</strong></p>
+                <p>Beta measures the sensitivity of the fund’s returns to market movements.</p>
+                <p>Formula:</p>
+                <p>β = Cov(R<sub>p</sub>, R<sub>m</sub>) / Var(R<sub>m</sub>)</p>
+                <p><strong>Drawdown:</strong></p>
+                <p>Drawdown quantifies the decline from a fund’s peak value to its trough.</p>
+                <p>Formula:</p>
+                <p>Drawdown% = <span style="font-style: italic;">(Peak NAV - Trough NAV) / Peak NAV</span> × 100</p>
+                <p><div class="tip">Memory Aid: “Alpha adds, Beta relates, and Drawdown shows the drop”—use these phrases to link each risk metric with its purpose: performance outperformance (alpha), market sensitivity (beta), and peak-to-trough loss (drawdown).</div></p>
+
+                <h3>5.12 Advanced Regulatory Calculation Considerations</h3>
+                <p>This final section of Chapter 5 (Part 3) outlines additional quantitative elements critical for ensuring compliance as well as effective internal and external reporting.</p>
+                <p><strong>Hurdle Rate Adjustments:</strong></p>
+                <p>The hurdle rate is applied to ensure that only returns above a specified minimum are eligible for incentive fees. Adjustments may be made for compounding periods.</p>
+                <p>Example Formula:</p>
+                <p>For an annual hurdle rate h applied over n periods:</p>
+                <p>Effective Minimum NAV = NAV<sub>previous</sub> × (1 + h)<sup>n</sup></p>
+                <p><strong>Exit Load Computation:</strong></p>
+                <p>Some funds impose an exit load on early redemptions.</p>
+                <p>Formula:</p>
+                <p>Exit Load = Exit Load Rate × NAV at redemption</p>
+                <p><strong>Capital Deployment & Drawdown Schedules:</strong></p>
+                <p>The timing of capital calls is also modeled, ensuring that the drawdown of committed funds aligns with the fund’s investment strategy. Although not given as a standard formula, the scheduling can often be represented as:</p>
+                <p>Drawdown Percentage at Time t = <span style="font-style: italic;">Capital Called by t / Total Committed Capital</span> × 100</p>
+                <p><div class="tip">Memory Aid: Picture these formulas as “thresholds and timers”—the hurdle rate sets the minimum performance level, exit loads act as a penalty for premature redemptions, and drawdown schedules (timers) ensure proper capital deployment.</div></p>
+
+                <h3>Final Exam Summary & Revision Tips</h3>
+                <p>1. <strong>Fee Formulas:</strong></p>
+                <p>- Management Fee: MF = r<sub>m</sub> × C</p>
+                <p>- Performance Fee: PF = r<sub>p</sub> × max(0, (NAV<sub>current</sub> - NAV<sub>threshold</sub>))</p>
+                <p>- High-Water Mark: HWM<sub>new</sub> = max(HWM<sub>old</sub>, NAV<sub>current</sub>)</p>
+                <p>- <div class="tip">Remember: “Rate × Capital, then performance only above hurdle.”</div></p>
+                <p>2. <strong>NAV & Return:</strong></p>
+                <p>- NAV: <span style="font-style: italic;">Total Assets - Total Liabilities</span> / Units</p>
+                <p>- Return: <span style="font-style: italic;">((Ending NAV - Beginning NAV + Distributions) / Beginning NAV)</span> × 100</p>
+                <p>- <div class="tip">Remember: “Assets minus Liabilities gives the per-unit value.”</div></p>
+                <p>3. <strong>Risk Metrics:</strong></p>
+                <p>- Alpha: α = R<sub>p</sub> - [R<sub>f</sub> + β × (R<sub>m</sub> - R<sub>f</sub>))]</p>
+                <p>- Beta: β = Cov(R<sub>p</sub>, R<sub>m</sub>) / Var(R<sub>m</sub>)</p>
+                <p>- Drawdown: Drawdown% = <span style="font-style: italic;">(Peak - Trough) / Peak</span> × 100</p>
+                <p>- <div class="tip">Remember: “Alpha adds extra return, Beta shows market dependency, Drawdown reveals worst loss.”</div></p>
+                <p>4. <strong>Advanced Considerations:</strong></p>
+                <p>- Effective Minimum NAV with hurdle rate: NAV<sub>previous</sub> × (1 + h)<sup>n</sup></p>
+                <p>- Exit Load: Exit Load Rate × NAV at redemption</p>
+                <p>- Drawdown Scheduling: <span style="font-style: italic;">Capital Called / Total Committed Capital</span> × 100</p>
+                <p>- <div class="tip">Remember: “Thresholds for exit and effective timing for capital call.”</div></p>
             `
                 }
 
