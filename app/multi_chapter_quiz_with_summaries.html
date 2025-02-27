@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCQ Quiz App - Multi-Chapter</title>
     <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
@@ -236,6 +253,7 @@
                 <option value="chapter3">Chapter 3: Category III AIF Ecosystem</option>
                 <option value="chapter4">Chapter 4: Category III AIF: Fund Structures and Service Providers</option>
                 <option value="chapter5">Chapter 5: Regulatory Framework</option>
+                <option value="chapter6">Chapter 6: Performance Measurement and Risk Management</option>
             </select>
         </div>
         <div>
@@ -1023,8 +1041,328 @@
             </ul>
             
             `
-            }
+            },
 
+            chapter6: {
+                title: "Chapter 6: Performance Measurement and Risk Management",
+                text: `
+                
+            <p>This chapter explains how the performance of a Category III AIF is measured, covering both return metrics and risk-adjusted measures.</p>
+
+            <h3>6.1 Fee Structure of a Category III AIF</h3>
+            <p>This section describes how funds charge fees to cover fund management services, including fixed management fees and performance-based (incentive) fees, and outlines additional costs absorbed by the fund.</p>
+
+            <h4>6.1.1 Management Fees and Other Expenses</h4>
+            <ul>
+                <li><strong>Overview:</strong> A Category III AIF is a pooled vehicle that raises capital from investors. An Investment Manager is appointed to manage investments using proprietary strategies—often employing derivatives and leverage. In return, the Manager charges a fee on a percentage basis calculated on the Gross Net Asset Value (GNAV) of the fund rather than on committed capital.</li>
+                <li><strong>Management Fees:</strong>
+                    <ul>
+                        <li>Typically range from 1% to 2.5% of the GNAV and are fixed at the time of launch.</li>
+                        <li>Fees are usually computed on a pro-rata basis and paid periodically (quarterly, semi-annually, or yearly).</li>
+                    </ul>
+                </li>
+                <li><strong>Example 1 (Fund ABC):</strong>
+                    <ul>
+                        <li>Total capital: Rs. 50 crore</li>
+                        <li>GNAV at end of Year 1: Rs. 58 crore; Year 2: Rs. 65 crore</li>
+                        <li>Management Fee rate: 1.5% (before GST)</li>
+                        <li>For Year 1:
+                            <ul>
+                                <li>Fee = 1.5% of 58 crore = Rs. 87 lakhs</li>
+                                <li>Add GST at 18% (i.e., 0.18 × Rs. 87 lakhs = Rs. 15.66 lakhs)</li>
+                                <li>Total = Rs. 102.66 lakhs</li>
+                            </ul>
+                        </li>
+                        <li>Similar computation applies for Year 2.</li>
+                    </ul>
+                </li>
+                <li><strong>Other Expenses:</strong> These include set-up (organizational) costs, operating expenses, transaction costs, custodial and trustee fees, etc. Such expenses are borne by the fund and allocated to investors based on their investment size.</li>
+            </ul>
+
+            <h4>6.1.2 Incentive Fees, Hurdle Rate and Preferred Return</h4>
+            <ul>
+                <li><strong>Incentive (Performance) Fees:</strong> Beyond the fixed management fee, if the fund earns profits, the Manager is entitled to a share (commonly between 0% and 20%) of the incremental return earned over a pre-defined minimum return.</li>
+                <li><strong>Hurdle Rate:</strong>
+                    <ul>
+                        <li>Represents the minimum “preferred” return (often 10%-12% per annum in India) that must be achieved before the Manager starts receiving performance fees.</li>
+                        <li>Both investors and managers negotiate the hurdle rate; a higher rate protects investors, while managers might prefer a lower rate to earn fees more readily.</li>
+                    </ul>
+                </li>
+                <li><strong>Example 2 (Fund ABC):</strong>
+                    <ul>
+                        <li>Using the committed capital, the reference hurdle is computed as:
+                            <ul>
+                                <li>For Year 1: Reference Hurdle = Rs. 50 crore × 1.10 = Rs. 55 crore</li>
+                                <li>For Year 2 (with increased capital due to reinvestment): e.g., Rs. 55 crore × 1.10 = Rs. 60.5 crore</li>
+                            </ul>
+                        </li>
+                        <li>Only returns above this level become eligible for incentive fees.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>6.1.3 High-Water Mark</h4>
+            <ul>
+                <li><strong>Purpose:</strong> The High-Water Mark (HWM) is designed to ensure that incentive fees are charged only on new value created. It is the highest GNAV (net of fees and expenses) reached by the fund.</li>
+                <li><strong>Formula/Concept:</strong> New HWM = max{Previous HWM, Current GNAV (pre-incentives)}. Thus, if a fund’s value declines, no incentive fee is charged until the fund exceeds the previous peak.</li>
+                <li><strong>Example 3:</strong> Two scenarios (best-case and worst-case) are presented where:
+                    <ul>
+                        <li>In the best-case scenario, the fund’s current GNAV exceeds both the HWM and Reference Hurdle, so that incentive fees (calculated as a percentage of the excess) are payable.</li>
+                        <li>In the worst-case scenario, even if GNAV rises moderately, it may still remain below the Reference Hurdle (or if the decline prevents updating the HWM), resulting in zero incentive fees.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>6.1.4 Catch-up Provision</h4>
+            <ul>
+                <li><strong>Definition:</strong> A catch-up clause specifies that the Manager will receive a larger share of profits (up to 100% of residual profits) after the fund’s return surpasses the hurdle until the Manager’s pre-determined profit share is fully paid.</li>
+                <li><strong>Example 4 (Fund XYZ):</strong>
+                    <ul>
+                        <li>Committed capital: Rs. 50 crore; Fund Tenure = 3 years; Ending NAV = Rs. 70 crore</li>
+                        <li>Total profit = Rs. 20 crore</li>
+                        <li>Without catch-up, the Manager’s share based on a 20% incentive fee might be lower (e.g., Rs. 0.69 crore) once the hurdle and distributions to investors are satisfied.</li>
+                        <li>With a 100% catch-up clause, the Manager receives almost the entire residual profit (here Rs. 3.45 crore) until reaching the agreed share—demonstrating a marked difference in incentive payouts.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>6.1.5 Comparative Analysis: Fee Structure of Mutual Funds vs. Category III AIFs vs. PMS</h4>
+            <ul>
+                <li><strong>Mutual Funds:</strong>
+                    <ul>
+                        <li>Governed by Total Expense Ratio (TER) limits set by SEBI (often below 1.5% of AUM), and they do not charge performance incentives.</li>
+                    </ul>
+                </li>
+                <li><strong>Category III AIFs:</strong>
+                    <ul>
+                        <li>Have higher management fee flexibility (up to 2.5% of total assets) and may additionally charge incentive fees based on performance.</li>
+                    </ul>
+                </li>
+                <li><strong>Portfolio Management Services (PMS):</strong>
+                    <ul>
+                        <li>Fees (management and performance) are negotiated individually for high-net-worth clients and can be higher.</li>
+                        <li>Investors in PMS can choose between different fee structures, whereas in a Category III AIF, each unit class has a predetermined fee.</li>
+                    </ul>
+                </li>
+                <li>A summary table (Table 6.1) in the chapter highlights these differences.</li>
+            </ul>
+
+            <h4>6.1.6 Gross (Pre-expense) and Net (Post-expense) Returns</h4>
+            <ul>
+                <li><strong>Gross Return (Pre-expense):</strong> Calculated using the GNAV, it represents the fund’s return before deducting fees and expenses.</li>
+                <li><strong>Net Return (Post-expense):</strong> Calculated after deducting all expenses including management fees, operating costs, and incentive fees.</li>
+                <li><strong>Example 5:</strong> Comparison is made between best-case and worst-case scenarios over two years, showing how high fixed costs and incentive fee payouts reduce the net return relative to the gross return. Compound Annual Growth Rate (CAGR) can be computed using the formula: CAGR = [(Ending Value / Beginning Value)^(1/n)] – 1.</li>
+                <li><strong>Method:</strong> Often computed using the XIRR function in Excel to account for uneven cash flows.</li>
+            </ul>
+
+            <h4>6.1.7 Impact of GST on Fees</h4>
+            <ul>
+                <li><strong>GST Charges:</strong> GST at 18% is levied on management fees, trusteeship fees, and fees from external service providers. Although Category III AIFs do not charge GST on output services, they incur GST costs on fees, which are passed on to investors.</li>
+                <li><strong>Example 6 (Fund N):</strong> The chapter provides a detailed breakdown of fees (Trusteeship, Fund Administrator, Custodian, Auditor, Legal Advisor, and Investment Advisor fees) and calculates the additional GST payable on each component. In the example, total GST payable is approximately Rs. 79.63 lakhs, representing about 0.81% of the committed capital.</li>
+            </ul>
+
+            <h3>6.2 Fund Performance Measurement Tools</h3>
+            <p>This section explains how the performance of a Category III AIF is measured, covering both return metrics and risk-adjusted measures.</p>
+
+            <h4>6.2.1 Return Metrics: Internal Rate of Return (IRR)</h4>
+            <ul>
+                <li><strong>Definition:</strong> IRR measures the annualized compounded rate at which the present value of cash outflows (capital calls, expenses) equals the present value of cash inflows (distributions, terminal value).</li>
+                <li><strong>Gross vs. Net IRR:</strong>
+                    <ul>
+                        <li>Gross IRR: Calculated at the fund level before fees and expenses.</li>
+                        <li>Net IRR: Calculated at the investor level after all fees, expenses, and taxes are deducted.</li>
+                    </ul>
+                </li>
+                <li><strong>Method:</strong> Often computed using the XIRR function in Excel to account for uneven cash flows.</li>
+            </ul>
+
+            <h4>6.2.2 Multiples Method (Paid-In-Capital)</h4>
+            <ul>
+                <li><strong>DPI (Distributions to Paid-In-Capital):</strong> Measures the ratio of total distributions to total capital contributions. DPI = Total Distributions / Total Capital Contributions.</li>
+                <li><strong>RVPI (Residual Value to Paid-In-Capital):</strong> Ratio of the unrealized value (or remaining AUM) to the total capital contributed. RVPI = Assets Under Management (AUM) / Total Capital Contributions.</li>
+                <li><strong>TVPI (Total Value to Paid-In-Capital):</strong> The sum of DPI and RVPI. TVPI = DPI + RVPI.</li>
+                <li><strong>Example 8:</strong> The chapter gives a numerical example for Fund ABC in both best-case (TVPI increases to 2.03, DPI to 2.03, etc.) and worst-case scenarios (lower DPI, lower TVPI), indicating the overall value returned on each rupee invested.</li>
+            </ul>
+
+            <h4>6.2.3 Investor-Level Risks</h4>
+            <ul>
+                <li><strong>Highlights:</strong> This section outlines several concerns such as adverse selection, illiquidity, fund monitoring, cash management challenges, and underlying investment risks that can affect investor returns.</li>
+            </ul>
+
+            <h4>6.2.4 Risk Metrics: Standard Deviation, Skewness, and Kurtosis</h4>
+            <ul>
+                <li><strong>Standard Deviation:</strong> Measures the volatility of historical returns. σ = √(1/n ∑(Rᵢ – R̄)²).</li>
+                <li><strong>Skewness:</strong> Assesses the asymmetry of the return distribution. A zero value indicates a symmetric (normal) distribution. Positive skew indicates a tail on the right; negative skew indicates a tail on the left. (Computed using built-in functions such as =SKEW(range) in Excel.)</li>
+                <li><strong>Kurtosis:</strong> Measures the “peakedness” of the distribution. A normal distribution has a kurtosis of 3; excess kurtosis above 0 suggests fatter tails (more extreme outcomes).</li>
+                <li><strong>Examples 9, 11, and 11.2:</strong> The chapter calculates mean, standard deviation, skewness, and kurtosis for sample funds (Fund A and Fund B), demonstrating that even if one fund has a similar mean return, differences in skewness and kurtosis can signal higher risk or greater likelihood of extreme returns.</li>
+            </ul>
+
+            <h4>6.2.5 Risk-Adjusted Return Metrics</h4>
+            <ul>
+                <li><strong>General Note:</strong> Several ratios help compare returns in the context of the risk taken.</li>
+                <li><strong>Sharpe Ratio:</strong>
+                    <ul>
+                        <li>Sharpe Ratio = (Rₚ – Rₓ) / σₚ, where Rₚ is the portfolio return, Rₓ is the risk-free rate, and σₚ is the standard deviation. A ratio above 1 is considered favorable.</li>
+                    </ul>
+                </li>
+                <li><strong>Treynor Ratio:</strong>
+                    <ul>
+                        <li>Treynor Ratio = (Rₚ – Rₓ) / βₚ, where beta represents the non-diversifiable (systematic) risk. This ratio is useful for well-diversified portfolios.</li>
+                    </ul>
+                </li>
+                <li><strong>Maximum Drawdown (MDD):</strong>
+                    <ul>
+                        <li>Measures the peak-to-trough decline during a given period. MDD = (Peak Value – Trough Value) / Peak Value.</li>
+                        <li><strong>Example 13:</strong> Fund PQR’s MDD is computed and compared with the benchmark (NIFTY50), highlighting that although Fund PQR’s drawdown is -13.71%, the benchmark’s drawdown is much larger (-38.78%), illustrating effective risk control.</li>
+                    </ul>
+                </li>
+                <li><strong>Value at Risk (VaR):</strong>
+                    <ul>
+                        <li>Quantifies the maximum expected loss over a certain time period with a given confidence level (e.g., “There is a 95% probability that the loss over the next month will not exceed Rs. 1 crore”).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>6.3 Performance Benchmarking</h3>
+            <ul>
+                <li><strong>Importance:</strong> Benchmarking is essential for investors and managers to evaluate performance relative to a standard or peer group.</li>
+                <li><strong>Selecting a Benchmark:</strong> The chapter outlines criteria (pre-specification, relevance, measurability, investability, etc.) for choosing an appropriate benchmark. For example, funds investing in large-cap stocks might benchmark against indices such as NIFTY 50 or S&P BSE Sensex.</li>
+                <li><strong>Example 14:</strong> Three funds (Fund X, Y, and Z) with different investment strategies (long-only, market-neutral, investments in SMEs) are discussed. For each, suggested benchmarks are provided:
+                    <ul>
+                        <li>Fund X (large-cap) → NIFTY 50 or S&P BSE Sensex</li>
+                        <li>Fund Y (thematic/mid-cap with unlisted BFSI exposure) → a composite benchmark using sectoral indices</li>
+                        <li>Fund Z (small-cap and SME) → small-cap indices or SME-specific indices</li>
+                    </ul>
+                </li>
+                <li><strong>Benchmarking Agencies and Guidelines:</strong> SEBI has directed that AIFs report performance-related data to industry benchmarking agencies. The chapter describes operational guidelines (data frequency, audited versus unaudited data, reporting in INR and USD, etc.) and how benchmarking reports can help compare a fund’s performance against industry peers.</li>
+                <li><strong>Role of Benchmark in Evaluating Alpha:</strong>
+                    <ul>
+                        <li>Alpha—the excess return relative to a benchmark—is computed using the Capital Asset Pricing Model (CAPM).</li>
+                        <li><strong>CAPM Formula:</strong> E(R) = Rₓ + β × (Rₘ – Rₓ)</li>
+                        <li><strong>Alpha:</strong> α = Actual Return – E(R)</li>
+                        <li><strong>Example 15:</strong> Fund XYZ is evaluated in both a best-case (net IRR of 12.77%, beta of 1.3) and worst-case scenario (net IRR of 3.38%, beta of 1.5). Calculated expected returns (using the given risk-free rate and benchmark return) are then compared with the fund’s IRR to show a positive alpha (2.42%) in the best case and a negative alpha (-7.70%) in the worst case.</li>
+                    </ul>
+                </li>
+                <li><strong>Benchmarking Guidelines:</strong> A benchmark must be pre-specified, relevant, measurable, unambiguous, investable, and complete. Typical benchmarks are broad-market indices adjusted for investment strategy.</li>
+                <li><strong>Multiples:</strong>
+                    <ul>
+                        <li>DPI = Total Distributions / Total Capital Contributions</li>
+                        <li>RVPI = Remaining AUM / Total Capital Contributions</li>
+                        <li>TVPI = DPI + RVPI</li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Note: Additional sections (e.g., 6.4 onwards) will be added when more images are provided. -->
+
+            <h3>Summary of Key Points & Formulas</h3>
+            <ul>
+                <li><strong>Management Fee Formula:</strong> Fee = Rate × GNAV</li>
+                <li><strong>Hurdle Rate:</strong> A threshold return (often 10%-12% per annum) that the fund must exceed before performance fees are triggered.</li>
+                <li><strong>High-Water Mark Concept:</strong> New HWM = max{previous HWM, current GNAV (pre-incentive)}. Incentive fees are charged on returns above this level.</li>
+                <li><strong>Catch-up Provision:</strong> Allows the Manager to “catch up” on incentive fees when residual profits exceed the hurdle threshold.</li>
+                <li><strong>IRR:</strong> The rate that equates the present value of cash outflows (capital calls and expenses) with cash inflows (distributions). Calculated using functions such as XIRR in Excel.</li>
+                <li><strong>Risk-Adjusted Ratios:</strong>
+                    <ul>
+                        <li>Sharpe Ratio: (Rₚ – Rₓ) / σₚ</li>
+                        <li>Treynor Ratio: (Rₚ – Rₓ) / βₚ</li>
+                    </ul>
+                </li>
+                <li><strong>Maximum Drawdown (MDD):</strong> MDD = (Peak – Trough) / Peak</li>
+            </ul>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Formula</th>
+                        <th>Description</th>
+                        <th>Variables / Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Management Fee Calculation</td>
+                        <td>Calculates the fee charged by the investment manager based on the GNAV of the fund.</td>
+                        <td>MF = rₘ × GNAV; Total MF = MF × (1 + GST)<br>where rₘ = management fee rate; GNAV = Gross Net Asset Value; GST = Goods & Services Tax rate</td>
+                    </tr>
+                    <tr>
+                        <td>Reference Hurdle</td>
+                        <td>Establishes the minimum return threshold before performance fees become payable.</td>
+                        <td>Reference Hurdle = Called-up Capital × (1 + Hurdle Rate)<br>(Called-up Capital: invested capital; Hurdle Rate: required minimum return, e.g., 10%-12% p.a.)</td>
+                    </tr>
+                    <tr>
+                        <td>Incentive Fee Calculation</td>
+                        <td>Determines performance fees based on excess returns above a threshold.</td>
+                        <td>PF = rₚ × max{0, (NAV<sub>current</sub> – max(High-Water Mark, Reference Hurdle))}<br>rₚ = performance fee rate; NAV<sub>current</sub> = current NAV before fees</td>
+                    </tr>
+                    <tr>
+                        <td>CAGR (Compound Annual Growth Rate)</td>
+                        <td>Measures the annualized growth rate of an investment over a period (accounting for compounding).</td>
+                        <td>CAGR = (Ending Value / Beginning Value)^(1/n) - 1<br>n = number of years</td>
+                    </tr>
+                    <tr>
+                        <td>Sharpe Ratio</td>
+                        <td>Evaluates the risk‑adjusted return relative to total portfolio volatility.</td>
+                        <td>Sharpe Ratio = (Rₚ - R₍f₎) / σₚ<br>Rₚ = portfolio return; R₍f₎ = risk‑free rate; σₚ = portfolio standard deviation</td>
+                    </tr>
+                    <tr>
+                        <td>Treynor Ratio</td>
+                        <td>Measures the excess return per unit of systematic risk (non-diversifiable risk).</td>
+                        <td>Treynor Ratio = (Rₚ - R₍f₎) / β<br>β = portfolio beta</td>
+                    </tr>
+                    <tr>
+                        <td>Maximum Drawdown (MDD)</td>
+                        <td>Measures the largest peak-to-trough decline in portfolio value.</td>
+                        <td>MDD = ((Peak Value - Trough Value) / Peak Value) × 100%</td>
+                    </tr>
+                    <tr>
+                        <td>DPI (Distributions to Paid-In Capital)</td>
+                        <td>Indicates the proportion of invested capital that has been returned to investors.</td>
+                        <td>DPI = Total Distributions / Total Capital Contributions</td>
+                    </tr>
+                    <tr>
+                        <td>RVPI (Residual Value to Paid-In-Capital)</td>
+                        <td>Shows the unrealized value (remaining assets) relative to total invested capital.</td>
+                        <td>RVPI = Residual Value (or AUM) / Total Capital Contributions</td>
+                    </tr>
+                    <tr>
+                        <td>TVPI (Total Value to Paid-In Capital)</td>
+                        <td>Represents the total value created by the fund (realized plus unrealized).</td>
+                        <td>TVPI = DPI + RVPI</td>
+                    </tr>
+                    <tr>
+                        <td>IRR (Internal Rate of Return)</td>
+                        <td>The discount rate at which the net present value (NPV) of all cash flows is zero.</td>
+                        <td>Find IRR such that Σ (CF<sub>t</sub> / (1 + IRR)<sup>t</sup>) = 0<br>CF<sub>t</sub> = cash flow at time t</td>
+                    </tr>
+                    <tr>
+                        <td>CAPM (Capital Asset Pricing Model)</td>
+                        <td>Calculates the expected return based on systematic risk.</td>
+                        <td>E(R) = R₍f₎ + β × (Rₘ - R₍f₎); α = Actual Return - E(R)<br>R₍f₎ = risk‑free rate; Rₘ = market return</td>
+                    </tr>
+                    <tr>
+                        <td>Standard Deviation</td>
+                        <td>Measures the volatility of returns (the average deviation from the mean).</td>
+                        <td>σ = √[Σ (R<sub>i</sub> - μ)² / n]<br>R<sub>i</sub> = individual return; μ = mean return; n = number of observations</td>
+                    </tr>
+                    <tr>
+                        <td>Mean Return</td>
+                        <td>The average return over a set period.</td>
+                        <td>Mean = (Σ R<sub>i</sub>) / n</td>
+                    </tr>
+                    <tr>
+                        <td>Skewness</td>
+                        <td>Measures the asymmetry of the return distribution around the mean.</td>
+                        <td>Skewness = [n / ((n-1)(n-2))] × Σ ((R<sub>i</sub> - μ)/σ)³</td>
+                    </tr>
+                    <tr>
+                        <td>Kurtosis</td>
+                        <td>Measures the “peakedness” of the distribution relative to a normal distribution.</td>
+                        <td>Kurtosis = [n(n+1)/((n-1)(n-2)(n-3))] × Σ ((R<sub>i</sub> - μ)/σ)⁴ - [3(n-1)²/((n-2)(n-3))]</td>
+                    </tr>
+                </tbody>
+            </table>
+        `
+            }
         }
 
 
