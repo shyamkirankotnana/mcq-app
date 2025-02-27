@@ -901,6 +901,127 @@
                 <p>9. <strong>Foreign Investment Framework:</strong> – “FDI for long-haul, FPI for flexibility” helps separate the two investment routes and their conditions.</p>
                 <p>10. <strong>Capital Issuance Norms:</strong> – “Lock, List, and Launch” reinforces the importance of lock-in and disclosure standards under ICDR.</p>
                 <p>11. <strong>Application of Regulations through Sample Questions:</strong> – Use sample questions to self-test your understanding of legal structures, leverage limits, and disclosure requirements.</p>
+
+                <h3>5.9 Fee Calculation Methods and Their Rationale</h3>
+            <p>This section outlines how fees charged by Category III AIFs are computed and why these mechanisms align the interests of managers and investors.</p>
+            <ul>
+                <li><strong>Management Fee:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> The management fee compensates the fund manager for overseeing the fund’s investments, typically charged as a percentage of the committed or invested capital.</li>
+                        <li><strong>Key Formula:</strong> MF = rₘ × C, where rₘ is the management fee rate and C is the base capital (committed or invested).</li>
+                        <li><strong>Intuition:</strong> This formula ensures the manager’s compensation scales appropriately as the fund’s capital grows.</li>
+                        <li><strong>Memory Aid:</strong> “Manage = Rate × Capital” emphasizes that management fees are proportional to the fund size.</li>
+                    </ul>
+                </li>
+                <li><strong>Performance Fee & Hurdle Rate Mechanism:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> Performance fees apply only when the fund exceeds a pre-defined minimum return (hurdle rate), protecting investors from paying fees on subpar performance. Managers earn extra only when value is added.</li>
+                        <li><strong>Key Formula:</strong> PF = rₚ × max{0, (NAV_current – NAV_threshold)}, with NAV_threshold defined as NAV_previous × (1 + Hurdle Rate).</li>
+                        <li><strong>High-Water Mark (HWM):</strong> HWM_new = max{HWM_old, NAV_current}. This ensures fees are charged only on net new gains beyond previous peak levels.</li>
+                        <li><strong>Intuition:</strong> The hurdle rate and high-water mark incentivize consistent performance and protect investors from repeated fee charges on the same gains.</li>
+                        <li><strong>Memory Aid:</strong> “Exceed, then update your peak” reminds you to exceed the hurdle and update the high-water mark before performance fees apply.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5.10 NAV and Return Calculations</h3>
+            <p>This section focuses on assessing the fund’s value and returns over a specific period for Category III AIFs.</p>
+            <ul>
+                <li><strong>Net Asset Value (NAV):</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> NAV represents the per-unit value of the fund, calculated by subtracting liabilities from total assets, then dividing by total outstanding units.</li>
+                        <li><strong>Key Formula:</strong> NAV = (Total Assets – Total Liabilities) / Number of Outstanding Units.</li>
+                        <li><strong>Intuition:</strong> This breaks down the fund’s net worth per share, enabling investors to compare current value against past performance.</li>
+                        <li><strong>Memory Aid:</strong> “Assets minus Liabilities per unit gives your value” simplifies recalling the NAV calculation.</li>
+                    </ul>
+                </li>
+                <li><strong>Return Calculation:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> The overall return factors in distributions (e.g., dividends, interest) along with the change in NAV.</li>
+                        <li><strong>Key Formula:</strong> Return % = [(Ending NAV – Beginning NAV + Distributions) / Beginning NAV] × 100.</li>
+                        <li><strong>Intuition:</strong> Including distributions ensures a complete picture of total benefits derived from the fund.</li>
+                        <li><strong>Memory Aid:</strong> “Change, add income, compare to start” encapsulates the return calculation method.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5.11 Risk Metrics: Evaluating Performance Against the Market</h3>
+            <p>This section covers essential risk metrics for comparing a Category III AIF’s performance and risk profile against market benchmarks.</p>
+            <ul>
+                <li><strong>Alpha (α):</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> Alpha indicates excess return over the benchmark, adjusted for market risk, measuring the fund manager’s ability to outperform a passive index.</li>
+                        <li><strong>Key Formula:</strong> α = Rₚ – [R_f + β × (Rₘ – R_f)], where Rₚ is portfolio return, R_f is risk-free rate, Rₘ is market return, and β is market sensitivity.</li>
+                        <li><strong>Intuition:</strong> Positive alpha suggests superior performance relative to the benchmark.</li>
+                        <li><strong>Memory Aid:</strong> “Alpha adds extra return” highlights the manager’s skill in generating excess returns.</li>
+                    </ul>
+                </li>
+                <li><strong>Beta (β):</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> Beta measures fund volatility relative to the market; >1 implies greater sensitivity, <1 indicates lower volatility.</li>
+                        <li><strong>Key Formula:</strong> β = Cov(Rₚ, Rₘ) / Var(Rₘ).</li>
+                        <li><strong>Intuition:</strong> This helps investors understand how fund returns change with market shifts.</li>
+                        <li><strong>Memory Aid:</strong> “Beta equals market dependency” reminds you of its role in assessing market correlation.</li>
+                    </ul>
+                </li>
+                <li><strong>Drawdown:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> Drawdown quantifies the decline from a fund’s peak NAV to a trough over a defined period.</li>
+                        <li><strong>Key Formula:</strong> Drawdown % = [(Peak NAV – Trough NAV) / Peak NAV] × 100.</li>
+                        <li><strong>Intuition:</strong> It’s a critical risk measure showing worst potential loss in adverse conditions.</li>
+                        <li><strong>Memory Aid:</strong> “Drawdown shows the drop” focuses on maximum loss measurement.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5.12 Advanced Regulatory Calculation Considerations</h3>
+            <p>This section explains nuanced calculation methods ensuring regulatory compliance and effective fund management for Category III AIFs.</p>
+            <ul>
+                <li><strong>Hurdle Rate Adjustments Over Multiple Periods:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> Adjusting the hurdle rate for compounding over periods maintains a consistent minimum performance target throughout the investment horizon.</li>
+                        <li><strong>Example Formula:</strong> Effective Minimum NAV = NAV_previous × (1 + h)ⁿ, where h is the annual hurdle rate and n is the number of periods.</li>
+                        <li><strong>Intuition:</strong> This accounts for compound returns, setting a realistic benchmark for performance fees.</li>
+                    </ul>
+                </li>
+                <li><strong>Exit Load Calculation:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> An exit load is a fee on early redemptions to discourage premature withdrawals and protect fund stability.</li>
+                        <li><strong>Key Formula:</strong> Exit Load = Exit Load Rate × NAV at redemption.</li>
+                        <li><strong>Intuition:</strong> It disincentivizes early exits, aligning with the fund’s long-term strategy.</li>
+                    </ul>
+                </li>
+                <li><strong>Capital Deployment & Drawdown Scheduling:</strong>
+                    <ul>
+                        <li><strong>Explanation:</strong> Scheduling capital calls ensures efficient deployment per the strategy, measured as Drawdown % at time t = (Capital Called by t / Total Committed Capital) × 100.</li>
+                        <li><strong>Intuition:</strong> This monitors the pace of capital deployment for strategic alignment.</li>
+                    </ul>
+                </li>
+                <li><strong>Regulatory Perspective:</strong>
+                    <ul>
+                        <li>These calculations are mathematical and critical for regulatory compliance, creating transparency, facilitating audits, and ensuring fair investor returns in leveraged environments.</li>
+                        <li>They align with protecting investor interests under SEBI regulations.</li>
+                    </ul>
+                </li>
+                <li><strong>Memory Aid:</strong> “Thresholds and timers” links hurdle rates (thresholds for fees), exit loads (timers discouraging early exits), and drawdown schedules (timing capital deployment).</li>
+            </ul>
+
+            <h3>Final Revision and Concept Integration</h3>
+            <p>Beyond individual formulas, this document emphasizes:</p>
+            <ul>
+                <li><strong>Alignment with Regulatory Objectives:</strong> Calculations ensure fair treatment, transparency, and investor protection.</li>
+                <li><strong>Standardization:</strong> Standardized fee, return, and risk measures enable consistency for comparisons across funds, benefiting managers and SEBI.</li>
+                <li><strong>Practical Application:</strong> Sample formulas and examples provide a toolkit for real-world application, verifying fund performance integrity for managers, auditors, and investors.</li>
+            </ul>
+            <p><strong>Overall Memory Aids and Takeaways:</strong></p>
+            <ul>
+                <li>“Manage = Rate × Capital” for management fees.</li>
+                <li>“Exceed, then update your peak” for performance fees with hurdle and HWM.</li>
+                <li>“Assets minus Liabilities per unit gives your value” for NAV.</li>
+                <li>“Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop” for risk metrics.</li>
+                <li>“Thresholds and timers” for advanced regulatory calculations.</li>
+            </ul>
+            
             `
             }
 
@@ -3163,9 +3284,189 @@
                     options: ["True", "False"],
                     correct: "False",
                     explanation: "Page 164 (Sample Question 5) states that SEBI provides only observations on the PPM and does not approve the document, as clarified in Page 107."
+                },
+                // New MCQs for Extended Sections 5.9 to 5.12 and Final Revision (15 questions)
+                {
+                    question: "What memory aid is provided in Section 5.9 to recall the management fee calculation for a Category III AIF?",
+                    options: ["‘Exceed, then update your peak’", "‘Manage = Rate × Capital’", "‘Assets minus Liabilities per unit gives your value’", "‘Thresholds and timers’"],
+                    correct: "‘Manage = Rate × Capital’",
+                    explanation: "Section 5.9 provides the memory aid ‘Manage = Rate × Capital’ to emphasize that management fees (MF = rₘ × C) are proportional to the size of the fund’s committed or invested capital."
+                },
+                {
+                    question: "According to Section 5.9, what does the high-water mark (HWM) prevent in performance fee calculations for Category III AIFs?",
+                    options: ["Charging fees on subpar performance", "Charging fees on net new gains beyond previous peak NAV levels", "Increasing the management fee rate", "Reducing the hurdle rate"],
+                    correct: "Charging fees on net new gains beyond previous peak NAV levels",
+                    explanation: "Section 5.9 explains that HWM_new = max{HWM_old, NAV_current} prevents performance fees from being charged on gains already realized, protecting investors by ensuring fees apply only to new peaks (HWM_new)."
+                },
+                {
+                    question: "What is the intuition behind including distributions in the return calculation for a Category III AIF, as per Section 5.10?",
+                    options: ["To increase the management fee", "To provide a complete picture of the total benefit derived from the fund, including dividends or interest", "To adjust the hurdle rate", "To calculate the exit load"],
+                    correct: "To provide a complete picture of the total benefit derived from the fund, including dividends or interest",
+                    explanation: "Section 5.10 states that the return formula includes distributions (Return % = [(Ending NAV – Beginning NAV + Distributions) / Beginning NAV] × 100) to ensure a comprehensive view of investor benefits."
+                },
+                {
+                    question: "What memory aid is used in Section 5.10 to remember the NAV calculation for a Category III AIF?",
+                    options: ["‘Exceed, then update your peak’", "‘Assets minus Liabilities per unit gives your value’", "‘Manage = Rate × Capital’", "‘Thresholds and timers’"],
+                    correct: "‘Assets minus Liabilities per unit gives your value’",
+                    explanation: "Section 5.10 provides the memory aid ‘Assets minus Liabilities per unit gives your value’ to recall the NAV formula: NAV = (Total Assets – Total Liabilities) / Number of Outstanding Units."
+                },
+                {
+                    question: "What does a beta (β) less than 1 indicate for a Category III AIF, as per Section 5.11?",
+                    options: ["Higher volatility than the market", "Lower volatility than the market, indicating less sensitivity to market movements", "No correlation with market movements", "Negative correlation with the market"],
+                    correct: "Lower volatility than the market, indicating less sensitivity to market movements",
+                    explanation: "Section 5.11 explains that a beta < 1 indicates the fund has lower volatility than the market, calculated as β = Cov(Rₚ, Rₘ) / Var(Rₘ), showing less sensitivity to market shifts."
+                },
+                {
+                    question: "According to Section 5.11, what is the primary purpose of the alpha (α) metric for a Category III AIF?",
+                    options: ["To measure fund volatility", "To measure the fund manager’s ability to generate returns beyond a passive index, adjusted for market risk", "To calculate the exit load", "To determine the hurdle rate"],
+                    correct: "To measure the fund manager’s ability to generate returns beyond a passive index, adjusted for market risk",
+                    explanation: "Section 5.11 states that alpha (α = Rₚ – [R_f + β × (Rₘ – R_f)]) measures excess return over the benchmark, reflecting the manager’s skill in outperforming a passive index."
+                },
+                {
+                    question: "What memory aid is provided in Section 5.11 for risk metrics like alpha, beta, and drawdown?",
+                    options: ["‘Manage = Rate × Capital’", "‘Exceed, then update your peak’", "‘Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop’", "‘Assets minus Liabilities per unit gives your value’"],
+                    correct: "‘Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop’",
+                    explanation: "Section 5.11 provides the memory aid ‘Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop’ to recall the purposes of these risk metrics for Category III AIFs."
+                },
+                {
+                    question: "What is the purpose of adjusting the hurdle rate over multiple periods, as described in Section 5.12?",
+                    options: ["To increase management fees", "To maintain a consistent minimum performance target throughout the investment horizon, accounting for compounding", "To calculate the NAV", "To reduce drawdown risk"],
+                    correct: "To maintain a consistent minimum performance target throughout the investment horizon, accounting for compounding",
+                    explanation: "Section 5.12 explains that hurdle rate adjustments (Effective Minimum NAV = NAV_previous × (1 + h)ⁿ) ensure a realistic performance benchmark by accounting for compounding over multiple periods."
+                },
+                {
+                    question: "How is the capital deployment drawdown percentage calculated for a Category III AIF, as per Section 5.12?",
+                    options: ["(Peak NAV – Trough NAV) / Peak NAV × 100", "(Capital Called by t / Total Committed Capital) × 100", "(Ending NAV – Beginning NAV + Distributions) / Beginning NAV × 100", "Exit Load Rate × NAV at redemption"],
+                    correct: "(Capital Called by t / Total Committed Capital) × 100",
+                    explanation: "Section 5.12 describes the drawdown percentage as (Capital Called by t / Total Committed Capital) × 100, measuring the pace of capital deployment for efficient strategy alignment."
+                },
+                {
+                    question: "What memory aid is suggested in Section 5.12 for advanced regulatory calculations like hurdle rate, exit load, and capital drawdown?",
+                    options: ["‘Manage = Rate × Capital’", "‘Exceed, then update your peak’", "‘Thresholds and timers’", "‘Assets minus Liabilities per unit gives your value’"],
+                    correct: "‘Thresholds and timers’",
+                    explanation: "Section 5.12 provides the memory aid ‘Thresholds and timers’ to recall how advanced calculations (hurdle rate as a threshold, exit loads as timers, drawdown as deployment timing) function in regulatory compliance."
+                },
+                {
+                    question: "According to the Final Revision, what is a key regulatory objective of the calculation methods for Category III AIFs?",
+                    options: ["Maximizing manager profits", "Ensuring fair treatment, transparency, and investor protection through standardized fee, return, and risk measures", "Reducing NAV volatility", "Increasing leverage limits"],
+                    correct: "Ensuring fair treatment, transparency, and investor protection through standardized fee, return, and risk measures",
+                    explanation: "The Final Revision emphasizes that calculations (e.g., fees, NAV, risks) align with regulatory objectives to ensure fairness, transparency, and investor protection, as standardized by SEBI."
+                },
+                {
+                    question: "What does the Final Revision highlight as a benefit of standardizing fee, return, and risk calculations for Category III AIFs?",
+                    options: ["Reducing management fees", "Enabling consistency for comparisons across funds, benefiting managers and regulators", "Increasing drawdown risks", "Limiting investor access"],
+                    correct: "Enabling consistency for comparisons across funds, benefiting managers and regulators",
+                    explanation: "The Final Revision stresses that standardization of calculations ensures consistency, allowing managers, regulators (like SEBI), and investors to compare fund performance fairly."
+                },
+                {
+                    question: "How does the Final Revision describe the practical application of the sample formulas in Chapter 5?",
+                    options: ["As theoretical exercises only", "As a practical toolkit for managers, auditors, and investors to verify fund performance integrity in real-world scenarios", "As regulatory restrictions", "As investor marketing tools"],
+                    correct: "As a practical toolkit for managers, auditors, and investors to verify fund performance integrity in real-world scenarios",
+                    explanation: "The Final Revision notes that sample formulas and examples provide a practical toolkit for applying concepts, enabling verification of fund performance integrity by managers, auditors, and investors."
+                },
+                {
+                    question: "What overall memory aid is suggested in the Final Revision for recalling the key takeaways of Chapter 5’s calculations?",
+                    options: ["‘Manage = Rate × Capital’", "‘Thresholds and timers’", "‘Assets minus Liabilities per unit gives your value’", "‘Exceed, then update your peak’"],
+                    correct: "‘Thresholds and timers’",
+                    explanation: "The Final Revision and Section 5.12 suggest ‘Thresholds and timers’ as an overarching memory aid for advanced calculations, linking hurdle rates, exit loads, and drawdown schedules to regulatory and practical contexts."
+                },
+                {
+                    question: "According to the Final Revision, how do the calculation methods in Chapter 5 support SEBI’s regulatory goals?",
+                    options: ["By increasing fund leverage", "By ensuring transparency, standardization, and investor protection through fair computation of fees, returns, and risks", "By reducing investor reporting", "By limiting NAV disclosures"],
+                    correct: "By ensuring transparency, standardization, and investor protection through fair computation of fees, returns, and risks",
+                    explanation: "The Final Revision emphasizes that calculations (e.g., fees, NAV, risks) support SEBI’s goals by ensuring transparency, standardization, and investor protection in highly leveraged, dynamic environments."
+                },
+                {
+                    question: "What memory aid is provided in Section 5.9 to recall the management fee calculation for a Category III AIF?",
+                    options: ["‘Exceed, then update your peak’", "‘Manage = Rate × Capital’", "‘Assets minus Liabilities per unit gives your value’", "‘Thresholds and timers’"],
+                    correct: "‘Manage = Rate × Capital’",
+                    explanation: "Section 5.9 provides the memory aid ‘Manage = Rate × Capital’ to emphasize that management fees (MF = rₘ × C) are proportional to the size of the fund’s committed or invested capital."
+                },
+                {
+                    question: "According to Section 5.9, what does the high-water mark (HWM) prevent in performance fee calculations for Category III AIFs?",
+                    options: ["Charging fees on subpar performance", "Charging fees on net new gains beyond previous peak NAV levels", "Increasing the management fee rate", "Reducing the hurdle rate"],
+                    correct: "Charging fees on net new gains beyond previous peak NAV levels",
+                    explanation: "Section 5.9 explains that HWM_new = max{HWM_old, NAV_current} prevents performance fees from being charged on gains already realized, protecting investors by ensuring fees apply only to new peaks (HWM_new)."
+                },
+                {
+                    question: "What is the intuition behind including distributions in the return calculation for a Category III AIF, as per Section 5.10?",
+                    options: ["To increase the management fee", "To provide a complete picture of the total benefit derived from the fund, including dividends or interest", "To adjust the hurdle rate", "To calculate the exit load"],
+                    correct: "To provide a complete picture of the total benefit derived from the fund, including dividends or interest",
+                    explanation: "Section 5.10 states that the return formula includes distributions (Return % = [(Ending NAV – Beginning NAV + Distributions) / Beginning NAV] × 100) to ensure a comprehensive view of investor benefits."
+                },
+                {
+                    question: "What memory aid is used in Section 5.10 to remember the NAV calculation for a Category III AIF?",
+                    options: ["‘Exceed, then update your peak’", "‘Assets minus Liabilities per unit gives your value’", "‘Manage = Rate × Capital’", "‘Thresholds and timers’"],
+                    correct: "‘Assets minus Liabilities per unit gives your value’",
+                    explanation: "Section 5.10 provides the memory aid ‘Assets minus Liabilities per unit gives your value’ to recall the NAV formula: NAV = (Total Assets – Total Liabilities) / Number of Outstanding Units."
+                },
+                {
+                    question: "What does a beta (β) less than 1 indicate for a Category III AIF, as per Section 5.11?",
+                    options: ["Higher volatility than the market", "Lower volatility than the market, indicating less sensitivity to market movements", "No correlation with market movements", "Negative correlation with the market"],
+                    correct: "Lower volatility than the market, indicating less sensitivity to market movements",
+                    explanation: "Section 5.11 explains that a beta < 1 indicates the fund has lower volatility than the market, calculated as β = Cov(Rₚ, Rₘ) / Var(Rₘ), showing less sensitivity to market shifts."
+                },
+                {
+                    question: "According to Section 5.11, what is the primary purpose of the alpha (α) metric for a Category III AIF?",
+                    options: ["To measure fund volatility", "To measure the fund manager’s ability to generate returns beyond a passive index, adjusted for market risk", "To calculate the exit load", "To determine the hurdle rate"],
+                    correct: "To measure the fund manager’s ability to generate returns beyond a passive index, adjusted for market risk",
+                    explanation: "Section 5.11 states that alpha (α = Rₚ – [R_f + β × (Rₘ – R_f)]) measures excess return over the benchmark, reflecting the manager’s skill in outperforming a passive index."
+                },
+                {
+                    question: "What memory aid is provided in Section 5.11 for risk metrics like alpha, beta, and drawdown?",
+                    options: ["‘Manage = Rate × Capital’", "‘Exceed, then update your peak’", "‘Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop’", "‘Assets minus Liabilities per unit gives your value’"],
+                    correct: "‘Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop’",
+                    explanation: "Section 5.11 provides the memory aid ‘Alpha adds extra return, Beta shows market dependency, Drawdown shows the drop’ to recall the purposes of these risk metrics for Category III AIFs."
+                },
+                {
+                    question: "What is the purpose of adjusting the hurdle rate over multiple periods, as described in Section 5.12?",
+                    options: ["To increase management fees", "To maintain a consistent minimum performance target throughout the investment horizon, accounting for compounding", "To calculate the NAV", "To reduce drawdown risk"],
+                    correct: "To maintain a consistent minimum performance target throughout the investment horizon, accounting for compounding",
+                    explanation: "Section 5.12 explains that hurdle rate adjustments (Effective Minimum NAV = NAV_previous × (1 + h)ⁿ) ensure a realistic performance benchmark by accounting for compounding over multiple periods."
+                },
+                {
+                    question: "How is the capital deployment drawdown percentage calculated for a Category III AIF, as per Section 5.12?",
+                    options: ["(Peak NAV – Trough NAV) / Peak NAV × 100", "(Capital Called by t / Total Committed Capital) × 100", "(Ending NAV – Beginning NAV + Distributions) / Beginning NAV × 100", "Exit Load Rate × NAV at redemption"],
+                    correct: "(Capital Called by t / Total Committed Capital) × 100",
+                    explanation: "Section 5.12 describes the drawdown percentage as (Capital Called by t / Total Committed Capital) × 100, measuring the pace of capital deployment for efficient strategy alignment."
+                },
+                {
+                    question: "What memory aid is suggested in Section 5.12 for advanced regulatory calculations like hurdle rate, exit load, and capital drawdown?",
+                    options: ["‘Manage = Rate × Capital’", "‘Exceed, then update your peak’", "‘Thresholds and timers’", "‘Assets minus Liabilities per unit gives your value’"],
+                    correct: "‘Thresholds and timers’",
+                    explanation: "Section 5.12 provides the memory aid ‘Thresholds and timers’ to recall how advanced calculations (hurdle rate as a threshold, exit loads as timers, drawdown as deployment timing) function in regulatory compliance."
+                },
+                {
+                    question: "According to the Final Revision, what is a key regulatory objective of the calculation methods for Category III AIFs?",
+                    options: ["Maximizing manager profits", "Ensuring fair treatment, transparency, and investor protection through standardized fee, return, and risk measures", "Reducing NAV volatility", "Increasing leverage limits"],
+                    correct: "Ensuring fair treatment, transparency, and investor protection through standardized fee, return, and risk measures",
+                    explanation: "The Final Revision emphasizes that calculations (e.g., fees, NAV, risks) align with regulatory objectives to ensure fairness, transparency, and investor protection, as standardized by SEBI."
+                },
+                {
+                    question: "What does the Final Revision highlight as a benefit of standardizing fee, return, and risk calculations for Category III AIFs?",
+                    options: ["Reducing management fees", "Enabling consistency for comparisons across funds, benefiting managers and regulators", "Increasing drawdown risks", "Limiting investor access"],
+                    correct: "Enabling consistency for comparisons across funds, benefiting managers and regulators",
+                    explanation: "The Final Revision stresses that standardization of calculations ensures consistency, allowing managers, regulators (like SEBI), and investors to compare fund performance fairly."
+                },
+                {
+                    question: "How does the Final Revision describe the practical application of the sample formulas in Chapter 5?",
+                    options: ["As theoretical exercises only", "As a practical toolkit for managers, auditors, and investors to verify fund performance integrity in real-world scenarios", "As regulatory restrictions", "As investor marketing tools"],
+                    correct: "As a practical toolkit for managers, auditors, and investors to verify fund performance integrity in real-world scenarios",
+                    explanation: "The Final Revision notes that sample formulas and examples provide a practical toolkit for applying concepts, enabling verification of fund performance integrity by managers, auditors, and investors."
+                },
+                {
+                    question: "What overall memory aid is suggested in the Final Revision for recalling the key takeaways of Chapter 5’s calculations?",
+                    options: ["‘Manage = Rate × Capital’", "‘Thresholds and timers’", "‘Assets minus Liabilities per unit gives your value’", "‘Exceed, then update your peak’"],
+                    correct: "‘Thresholds and timers’",
+                    explanation: "The Final Revision and Section 5.12 suggest ‘Thresholds and timers’ as an overarching memory aid for advanced calculations, linking hurdle rates, exit loads, and drawdown schedules to regulatory and practical contexts."
+                },
+                {
+                    question: "According to the Final Revision, how do the calculation methods in Chapter 5 support SEBI’s regulatory goals?",
+                    options: ["By increasing fund leverage", "By ensuring transparency, standardization, and investor protection through fair computation of fees, returns, and risks", "By reducing investor reporting", "By limiting NAV disclosures"],
+                    correct: "By ensuring transparency, standardization, and investor protection through fair computation of fees, returns, and risks",
+                    explanation: "The Final Revision emphasizes that calculations (e.g., fees, NAV, risks) support SEBI’s goals by ensuring transparency, standardization, and investor protection in highly leveraged, dynamic environments."
                 }
             ]
-            
         };
 
 
