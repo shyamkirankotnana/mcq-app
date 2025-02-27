@@ -244,6 +244,7 @@
                 <option value="chapter1">Chapter 1: Overview of Alternative Investments</option>
                 <option value="chapter2">Chapter 2: Growth of AIFs and Category III AIFs</option>
                 <option value="chapter3">Chapter 3: Category III AIF Ecosystem</option>
+                <option value="chapter4">Chapter 4: Category III AIF: Fund Structures and Service Providers</option>
             </select>
         </div>
     </div>
@@ -1595,7 +1596,331 @@
                     correct: "Sources of alpha",
                     explanation: "Section 3.7 notes that return attribution identifies sources of alpha, aiding future investment decisions and portfolio construction."
                 }
+            ],
+            chapter4: [
+                // 4.1 Fund Structures of a Category III AIF
+                {
+                    question: "Which of the following is NOT a legal structure under which a Category III AIF can be registered as per SEBI regulations?",
+                    options: ["Trust", "Company", "Partnership Firm", "Limited Liability Partnership (LLP)"],
+                    correct: "Partnership Firm",
+                    explanation: "As per SEBI (Alternative Investment Funds) Regulations, a Category III AIF can be registered as a Trust, Company, Limited Liability Partnership (LLP), or Body Corporate. A general Partnership Firm is not listed as an option."
+                },
+                {
+                    question: "Who initiates the formation of a Category III AIF by providing a minimum contribution?",
+                    options: ["Trustee", "Sponsor", "Investment Manager", "Custodian"],
+                    correct: "Sponsor",
+                    explanation: "The Sponsor forms the Category III AIF with a minimum contribution and adequate skin-in-the-game, as seen in Figure 4.1."
+                },
+                {
+                    question: "In a Category III AIF structured as a Trust, who appoints the Trustee?",
+                    options: ["SEBI", "Sponsor", "Investors", "Investment Manager"],
+                    correct: "Sponsor",
+                    explanation: "The Sponsor appoints the Trustee by signing the Trust Deed in a Category III AIF structured as a Trust."
+                },
+                {
+                    question: "What document does the Sponsor sign to appoint the Investment Manager in a Category III AIF?",
+                    options: ["Trust Deed", "Investment Management Agreement", "Contribution Agreement", "Subscription Agreement"],
+                    correct: "Investment Management Agreement",
+                    explanation: "The Sponsor signs the Investment Management Agreement to appoint the Manager, forming part of the Category III AIF structure."
+                },
+                {
+                    question: "Which entity must a Category III AIF apply to for registration?",
+                    options: ["RBI", "SEBI", "FIPB", "FEMA"],
+                    correct: "SEBI",
+                    explanation: "Once formed, a Category III AIF applies for registration with SEBI, as per the SEBI (Alternative Investment Funds) Regulations."
+                },
+                {
+                    question: "In an LLP structure for a Category III AIF, who is the Sponsor typically designated as?",
+                    options: ["General Partner", "Limited Partner", "Designated Partner", "Trustee"],
+                    correct: "Designated Partner",
+                    explanation: "In a Limited Liability Partnership (LLP) structure, the Sponsor is the Designated Partner, responsible for statutory compliances."
+                },
+                {
+                    question: "In foreign jurisdictions, what is the Manager of a Category III AIF commonly known as?",
+                    options: ["General Partner (GP)", "Limited Partner (LP)", "Designated Partner", "Trust Settlor"],
+                    correct: "General Partner (GP)",
+                    explanation: "In most foreign jurisdictions, the Manager of the fund is known as the General Partner (GP), while investors are Limited Partners (LPs)."
+                },
+                {
+                    question: "Which fund structure allows investors to buy or sell units at any time?",
+                    options: ["Open-ended", "Closed-ended", "Master-Feeder", "Parallel"],
+                    correct: "Open-ended",
+                    explanation: "In an Open-ended fund structure, investors can buy or sell units continuously, making the corpus variable."
+                },
+                {
+                    question: "What is a key feature of a Closed-ended Category III AIF?",
+                    options: ["Continuous unit offerings", "Variable corpus", "Capital commitment within 3-5 years", "Monthly redemptions"],
+                    correct: "Capital commitment within 3-5 years",
+                    explanation: "Closed-ended funds require capital commitments within a specified period, typically 3-5 years, as stated in the Placement Memorandum."
+                },
+                {
+                    question: "What is the typical lock-in period for a Closed-ended Category III AIF?",
+                    options: ["1 year", "2 years", "3 years", "5 years"],
+                    correct: "2 years",
+                    explanation: "Most Category III AIFs have a lock-in period of 2 years, after which investors can redeem capital with an exit load."
+                },
+                {
+                    question: "In the example provided, how long is the tenure of the closed-ended Category III AIF scheme?",
+                    options: ["2 years", "3 years", "5 years", "7 years"],
+                    correct: "5 years",
+                    explanation: "The example states a closed-ended scheme runs for 5 years with a 2-year lock-in period."
+                },
+                {
+                    question: "What must investors pay to exit a closed-ended Category III AIF after the lock-in period?",
+                    options: ["Management Fee", "Exit Load", "Performance Fee", "Subscription Fee"],
+                    correct: "Exit Load",
+                    explanation: "Post lock-in, investors can exit by paying an Exit Load, as per the Redemption Gates in the Private Placement Memorandum."
+                },
+
+                // 4.1.1 Offshore and Onshore Funds
+                {
+                    question: "What is the primary goal of selecting a jurisdiction with 'Tax Neutrality' for a Category III AIF?",
+                    options: ["Avoid SEBI registration", "Ensure no higher taxes than direct investment", "Increase management fees", "Reduce lock-in period"],
+                    correct: "Ensure no higher taxes than direct investment",
+                    explanation: "Tax Neutrality ensures investors are not subject to higher taxes than if they invested directly, a key factor in jurisdiction selection."
+                },
+                {
+                    question: "Why are offshore fund structures used for offshore investors in India?",
+                    options: ["To simplify SEBI registration", "To avoid double taxation", "To increase lock-in periods", "To pool domestic capital"],
+                    correct: "To avoid double taxation",
+                    explanation: "Offshore fund structures help offshore investors avoid double taxation on capital gains due to India’s source-based taxation."
+                },
+                {
+                    question: "Which agreement allows offshore funds to offer reliefs like capital repatriation?",
+                    options: ["FDI Policy", "LRS", "BIPA", "FEMA"],
+                    correct: "BIPA",
+                    explanation: "Offshore Funds in countries with Bilateral Investment Promotion and Protection Agreements (BIPA) with India provide reliefs like capital repatriation."
+                },
+                {
+                    question: "What is the maximum annual remittance limit per person under the Liberalised Remittance Scheme (LRS)?",
+                    options: ["USD 100,000", "USD 250,000", "USD 500,000", "USD 1,000,000"],
+                    correct: "USD 250,000",
+                    explanation: "The LRS allows Indian residents to remit up to USD 250,000 per financial year, subject to FEMA conditions."
+                },
+                {
+                    question: "Where are Offshore Funds typically domiciled?",
+                    options: ["India", "USA", "Mauritius or Singapore", "Japan"],
+                    correct: "Mauritius or Singapore",
+                    explanation: "Offshore Funds are often domiciled in jurisdictions like Mauritius or Singapore to avoid domestic pooling and taxation."
+                },
+                {
+                    question: "Who manages an Onshore Category III AIF?",
+                    options: ["Offshore Investment Manager", "Domestic Investment Manager", "General Partner", "Custodian"],
+                    correct: "Domestic Investment Manager",
+                    explanation: "An Onshore Fund, domiciled in India, is created and managed by a Domestic Investment Manager."
+                },
+                {
+                    question: "What must an Onshore Fund file with SEBI through a merchant banker?",
+                    options: ["Trust Deed", "Investment Management Agreement", "Private Placement Memorandum (PPM)", "Subscription Agreement"],
+                    correct: "Private Placement Memorandum (PPM)",
+                    explanation: "Onshore Funds must file the Private Placement Memorandum (PPM) with SEBI through a merchant banker for registration."
+                },
+
+                // 4.1.2 Unified and Co-Investment Structures
+                {
+                    question: "In a Unified Structure, where are commitments from domestic and offshore investors pooled?",
+                    options: ["Offshore Fund", "Domestic pooling vehicle", "Feeder Fund", "Master Fund"],
+                    correct: "Domestic pooling vehicle",
+                    explanation: "A Unified Structure pools commitments from both domestic and offshore investors into a domestic pooling vehicle (Onshore AIF)."
+                },
+                {
+                    question: "What is an advantage of the Unified Structure for Foreign Portfolio Investors (FPIs)?",
+                    options: ["Higher tax benefits", "No FIPB approval required", "Direct investment in investee companies", "Lower lock-in period"],
+                    correct: "No FIPB approval required",
+                    explanation: "The Unified Structure requires no Foreign Investment Promotion Board (FIPB) approval for FPIs, per the FDI Policy’s automatic route."
+                },
+                {
+                    question: "In a Unified Structure, can the Offshore Fund invest directly in investee companies?",
+                    options: ["Yes", "No", "Only with SEBI approval", "Only in India"],
+                    correct: "No",
+                    explanation: "The Offshore Fund in a Unified Structure invests in the Onshore Category III AIF, not directly in investee companies."
+                },
+                {
+                    question: "What distinguishes the Co-Investment Structure from the Unified Structure?",
+                    options: ["Single pooling vehicle", "Separate domestic and offshore pools", "No SEBI registration", "Direct offshore investment in AIF"],
+                    correct: "Separate domestic and offshore pools",
+                    explanation: "The Co-Investment Structure creates separate pooling vehicles for domestic and offshore investors, unlike the single pool in a Unified Structure."
+                },
+                {
+                    question: "Who provides recommendations in a Co-Investment Structure?",
+                    options: ["Offshore Investment Manager", "Domestic Investment Manager", "Custodian", "SEBI"],
+                    correct: "Domestic Investment Manager",
+                    explanation: "The India-based Domestic Investment Manager enters an Investment Advisory Arrangement with the Offshore Manager to provide recommendations."
+                },
+
+                // 4.1.3 Master Feeder and Parallel Structures
+                {
+                    question: "In a Master-Feeder Structure, what invests in the domestic master fund?",
+                    options: ["Direct investors only", "Feeder funds", "Offshore investors directly", "Custodians"],
+                    correct: "Feeder funds",
+                    explanation: "Offshore investors invest through feeder funds, which in turn invest in the domestic master fund in a Master-Feeder Structure."
+                },
+                {
+                    question: "Where are management fees typically charged in a Master-Feeder Structure?",
+                    options: ["Feeder fund level", "Master fund level", "Both levels equally", "Investor level"],
+                    correct: "Master fund level",
+                    explanation: "Management fees are typically charged at the master fund level, with a symbolic amount at the feeder fund level."
+                },
+                {
+                    question: "What is a key feature of the Parallel Structure?",
+                    options: ["Feeder funds invest in a master fund", "Direct investment in investee companies by feeder funds", "Single pooling vehicle", "No SEBI registration"],
+                    correct: "Direct investment in investee companies by feeder funds",
+                    explanation: "In a Parallel Structure, feeder funds invest directly in investee companies alongside the Onshore AIF, not in a master fund."
+                },
+                {
+                    question: "Why might the fee structure in a Parallel Structure be higher than in a Master-Feeder Structure?",
+                    options: ["Fewer investors", "Investment Manager services at feeder level", "No SEBI oversight", "Lower tax benefits"],
+                    correct: "Investment Manager services at feeder level",
+                    explanation: "The fee structure is higher because the Investment Manager at the feeder fund level provides management services to its investors."
+                },
+                {
+                    question: "What is a primary advantage of the Parallel Structure?",
+                    options: ["Simplified fee structure", "Beneficial tax treatment", "Direct SEBI registration", "Reduced lock-in period"],
+                    correct: "Beneficial tax treatment",
+                    explanation: "The primary advantage of the Parallel Structure is the beneficial tax treatment received by offshore investors through feeder funds."
+                },
+
+                // 4.2 Service Providers in the Category III AIF Industry
+                {
+                    question: "Why do Category III AIFs appoint external service providers?",
+                    options: ["To increase fund size", "Due to small team bandwidth", "To avoid SEBI registration", "For tax neutrality"],
+                    correct: "Due to small team bandwidth",
+                    explanation: "With small teams (5-10 employees), Category III AIFs rely on external service providers for operational activities."
+                },
+                {
+                    question: "Who files the Private Placement Memorandum (PPM) with SEBI for a Category III AIF?",
+                    options: ["Custodian", "Merchant Banker", "Fund Administrator", "Legal Advisor"],
+                    correct: "Merchant Banker",
+                    explanation: "Merchant Bankers file the PPM with SEBI during registration or scheme launches."
+                },
+                {
+                    question: "What restriction applies to a Merchant Banker appointed by a Category III AIF?",
+                    options: ["Must be SEBI-registered", "Cannot be an associate of the AIF", "Must handle audits", "Cannot file PPM"],
+                    correct: "Cannot be an associate of the AIF",
+                    explanation: "A Merchant Banker must not be an associate of the AIF, its sponsor, manager, or trustee, per SEBI regulations."
+                },
+                {
+                    question: "What is a key responsibility of the Registrar and Transfer Agent (RTA)?",
+                    options: ["Safekeeping securities", "Overseeing subscriptions and redemptions", "Drafting legal agreements", "Computing NAV"],
+                    correct: "Overseeing subscriptions and redemptions",
+                    explanation: "RTAs oversee subscriptions, unit transfers, redemptions, and stamp duty collection."
+                },
+                {
+                    question: "Why is the appointment of RTAs compulsory for Category III AIFs?",
+                    options: ["To manage taxes", "To collect stamp duty", "To safekeep securities", "To provide investment advice"],
+                    correct: "To collect stamp duty",
+                    explanation: "RTAs are mandatory to collect stamp duty on the issue, transfer, and sale of AIF units, per SEBI regulations."
+                },
+                {
+                    question: "What is a primary function of the Custodian in a Category III AIF?",
+                    options: ["Drafting PPM", "Safekeeping securities", "Distributing units", "Conducting audits"],
+                    correct: "Safekeeping securities",
+                    explanation: "Custodians are responsible for safekeeping securities and settling transactions."
+                },
+                {
+                    question: "When must a Custodian be appointed for a Category III AIF scheme?",
+                    options: ["After the first investment", "Prior to the first investment", "At fund closure", "During SEBI registration"],
+                    correct: "Prior to the first investment",
+                    explanation: "Custodians must be appointed prior to the first investment of the scheme, as per SEBI guidelines."
+                },
+                {
+                    question: "Which of the following is NOT a support function of Fund Administrators?",
+                    options: ["NAV calculation", "Tax reporting", "Safekeeping securities", "Preparing financial reports"],
+                    correct: "Safekeeping securities",
+                    explanation: "Safekeeping securities is a Custodian function, not a Fund Administrator role."
+                },
+                {
+                    question: "What is a key technology platform used by Category III AIFs for trade execution?",
+                    options: ["Bloomberg Terminal", "Order Management Systems (OMS)", "Reuters Database", "All of the above"],
+                    correct: "All of the above",
+                    explanation: "OMS, real-time price terminals, and databases like Bloomberg and Reuters are commonly used for trade execution."
+                },
+                {
+                    question: "What role do Distributors play in the Category III AIF industry?",
+                    options: ["Safekeeping securities", "Marketing AIF products", "Drafting legal agreements", "Conducting audits"],
+                    correct: "Marketing AIF products",
+                    explanation: "Distributors market and distribute Category III AIF products and raise investor awareness."
+                },
+                {
+                    question: "What type of investors do Distributors target for Category III AIFs?",
+                    options: ["Low-risk investors", "Sophisticated investors with high risk appetite", "Retail investors", "Government entities"],
+                    correct: "Sophisticated investors with high risk appetite",
+                    explanation: "AIF investors are sophisticated with a higher risk appetite, requiring Distributors to understand risk-return profiles."
+                },
+                {
+                    question: "What is the primary purpose of Tax Advisors in a Category III AIF?",
+                    options: ["Drafting PPM", "Advising on fund domiciliation", "Safekeeping securities", "Computing NAV"],
+                    correct: "Advising on fund domiciliation",
+                    explanation: "Tax Advisors advise on domiciling funds to ensure tax neutrality and assist with deal structuring."
+                },
+                {
+                    question: "Which document drafted by Legal Advisors serves as the offer document for a Category III AIF?",
+                    options: ["Investment Management Agreement", "Private Placement Memorandum (PPM)", "Contribution Agreement", "Indenture of Trust"],
+                    correct: "Private Placement Memorandum (PPM)",
+                    explanation: "The PPM is the offer document used at both onshore and offshore levels to attract capital commitments."
+                },
+                {
+                    question: "What onshore document appoints the Investment Manager?",
+                    options: ["Subscription Agreement", "Investment Management Agreement", "Wrapper", "Advisory Agreement"],
+                    correct: "Investment Management Agreement",
+                    explanation: "The Investment Management Agreement is signed by the trustee to appoint the Investment Manager for the trust."
+                },
+                {
+                    question: "What does the Indenture of Trust determine for a Category III AIF?",
+                    options: ["Fee structure", "Nature of the Trust (determinate/indeterminate)", "Investment strategy", "NAV calculation"],
+                    correct: "Nature of the Trust (determinate/indeterminate)",
+                    explanation: "The Indenture of Trust ascertains whether the Trust is determinate or indeterminate, impacting tax treatment."
+                },
+                {
+                    question: "What offshore document sets out an investor’s capital commitment?",
+                    options: ["Subscription Agreement", "Advisory Agreement", "Wrapper", "Contribution Agreement"],
+                    correct: "Subscription Agreement",
+                    explanation: "The Subscription Agreement sets out the terms and conditions of an investor’s capital commitment to an offshore fund."
+                },
+                {
+                    question: "What is the purpose of a Wrapper in a Unified Structure?",
+                    options: ["Appointing the Investment Manager", "Ensuring compliance for offshore private placement", "Safekeeping securities", "Collecting stamp duty"],
+                    correct: "Ensuring compliance for offshore private placement",
+                    explanation: "A Wrapper is a supplement to the PPM to achieve compliance with offshore private placement requirements."
+                },
+                {
+                    question: "Who conducts the annual audit of a Category III AIF’s books of accounts?",
+                    options: ["Merchant Bankers", "Statutory and Independent Auditors", "Fund Administrators", "Tax Advisors"],
+                    correct: "Statutory and Independent Auditors",
+                    explanation: "Statutory and Independent Auditors are compulsorily appointed to audit the AIF’s books annually."
+                },
+                {
+                    question: "Within how many months must audit findings be communicated to SEBI?",
+                    options: ["3 months", "6 months", "9 months", "12 months"],
+                    correct: "6 months",
+                    explanation: "Audit findings must be communicated to the Trustee, Board, and SEBI within 6 months from the financial year-end."
+                },
+                {
+                    question: "Which type of AIF is exempt from PPM audit requirements if it has a minimum capital commitment of Rs. 70 crores per investor?",
+                    options: ["Open-ended Funds", "Closed-ended Funds", "Large Value Funds", "Master-Feeder Funds"],
+                    correct: "Large Value Funds",
+                    explanation: "Large Value Funds with a minimum capital commitment of Rs. 70 crores per investor are exempt from certain audit requirements."
+                },
+                {
+                    question: "What is a key scope of the PPM audit?",
+                    options: ["Drafting legal agreements", "Reviewing compliance with investment strategy", "Marketing AIF products", "Safekeeping securities"],
+                    correct: "Reviewing compliance with investment strategy",
+                    explanation: "The PPM audit reviews compliance with the investment strategy, among other aspects like fund flows and fees."
+                },
+                {
+                    question: "Who provides non-binding investment advice to offshore funds?",
+                    options: ["Custodians", "Domestic Investment Advisors", "Merchant Bankers", "Distributors"],
+                    correct: "Domestic Investment Advisors",
+                    explanation: "Domestic Investment Advisors provide non-binding advice to offshore funds for domestic market investments."
+                },
+                {
+                    question: "What type of fees do Investment Advisors receive for their services?",
+                    options: ["Management Fees", "Performance Fees", "Advisory Fees", "Exit Load"],
+                    correct: "Advisory Fees",
+                    explanation: "Investment Advisors are paid advisory fees by the Investment Manager for their services."
+                }
             ]
+            // Total: 60 questions
         };
 
 
