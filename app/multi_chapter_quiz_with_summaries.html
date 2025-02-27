@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz App - Multi-Chapter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .menu {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .menu div {
+            flex: 1;
+            text-align: center;
+        }
+
+        .quiz-container,
+        .review-container,
+        .summary-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .summary-container {
+            background-color: #f9fafc;
+            /* Light gray-blue for softness */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: none;
+            color: #2d3748;
+            /* Dark slate for text */
+            line-height: 1.7;
+        }
+
+        .summary-container h2 {
+            font-size: 2em;
+            color: #1a202c;
+            /* Almost black for emphasis */
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .summary-container h3 {
+            font-size: 1.5em;
+            color: #3182ce;
+            /* Bright yet soothing blue */
+            margin: 25px 0 15px;
+            font-weight: 500;
+        }
+
+        .summary-container p {
+            font-size: 1.15em;
+            margin: 15px 0;
+        }
+
+        .summary-container ul {
+            list-style-type: disc;
+            margin: 15px 0 15px 25px;
+        }
+
+        .summary-container li {
+            font-size: 1.15em;
+            margin: 8px 0;
+            color: #4a5568;
+            /* Medium slate for bullets */
+        }
+
+        .summary-container .example {
+            font-size: 1.1em;
+            color: #2f855a;
+            /* Forest green for examples */
+            margin: 15px 0;
+            padding: 10px 15px;
+            background-color: #edf7f2;
+            /* Light green background */
+            border-left: 4px solid #38a169;
+            /* Green border */
+            border-radius: 4px;
+        }
+
+        .summary-container .tip {
+            font-size: 1.1em;
+            color: #744210;
+            /* Warm brown for tips */
+            margin: 15px 0;
+            padding: 10px 15px;
+            background-color: #fefcbf;
+            /* Pale yellow background */
+            border-left: 4px solid #ecc94b;
+            /* Yellow border */
+            border-radius: 4px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            height: 20px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+
+        .progress-text,
+        .timer {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option.selected {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .option.correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .option.incorrect {
+            background-color: #F44336;
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1976D2;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .explanation {
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .score {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 1em;
+            width: 80%;
+            margin-top: 5px;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div>
+            <h2>Summary</h2>
+            <select id="summarySelect">
+                <option value="">Select a Summary</option>
+                <option value="chapter1">Chapter 1: Overview of Alternative Investments</option>
+                <option value="chapter2">Chapter 2: Growth of AIFs and Category III AIFs</option>
+                <option value="chapter3">Chapter 3: Category III AIF Ecosystem</option>
+                <option value="chapter4">Chapter 4: Category III AIF: Fund Structures and Service Providers</option>
+            </select>
+        </div>
+        <div>
+            <h2>MCQs</h2>
+            <select id="mcqSelect">
+                <option value="">Select a Chapter</option>
+                <option value="chapter1">Chapter 1: Overview of Alternative Investments</option>
+                <option value="chapter2">Chapter 2: Growth of AIFs and Category III AIFs</option>
+                <option value="chapter3">Chapter 3: Category III AIF Ecosystem</option>
+            </select>
+        </div>
+    </div>
+    <div class="summary-container" id="summaryContainer">
+    </div>
+    <div class="quiz-container" id="quizContainer">
+        <div class="progress-text" id="progressText"></div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="timer" id="timer"></div>
+        <div id="question" class="question"></div>
+        <div id="options" class="options"></div>
+        <div class="button-container">
+            <button id="prevBtn" disabled>Previous</button>
+            <button id="nextBtn">Next Question</button>
+        </div>
+        <div id="result" class="result"></div>
+        <div id="score" class="score"></div>
+    </div>
+    <div class="review-container" id="reviewContainer">
+        <h2>Review Your Answers</h2>
+        <div id="reviewContent"></div>
+        <button onclick="location.reload()">Restart Quiz</button>
+    </div>
+
+    <script>
+        // Placeholder for summaries and quizData (to be retained from your existing code)
+
+        const summaries = {
+            chapter1: {
+                title: "Chapter 1: Overview of Alternative Investments",
+                text: `
+            <h3>Introduction to Alternative Investments</h3>
+            <p><strong>Key Concepts:</strong> Alternative investments are financial assets that lie outside the conventional categories of stocks, bonds, and cash. In other words, they are investments other than typical market-traded securities. They are primarily designed for sophisticated investors—such as institutional investors and high net-worth individuals (HNIs)—who seek opportunities that promise higher returns in exchange for accepting higher and often more complex risks. Traditional investments (like publicly traded equities, bonds, mutual funds, etc.) are generally highly liquid, meaning they’re easy to buy or sell. By contrast, many alternative investments can be illiquid and involve more intricate structuring.</p>
+            <div class="example">Example & Memory Tip: Imagine two types of meals: a “fast-food” option (traditional investments that are quick to trade) versus a “gourmet meal” (alternative investments which require time, expertise, and a longer commitment). This helps recall that alternatives are not as immediately liquid as traditional ones.</div>
+
+            <h3>Definition of Alternative Investment Fund (AIF)</h3>
+            <p><strong>Key Points:</strong> Under the SEBI (Alternative Investment Funds) Regulations, 2012, an AIF is defined as a privately pooled investment vehicle. It is specifically structured for a select group of investors. Only sophisticated investors (for example, institutions and HNIs) who understand the nuances of higher risk, complex investment arrangements, and potential illiquidity are eligible. Funds that are open to the general public (such as mutual funds), family trusts, ESOPs, or those regulated by bodies like the RBI or IRDAI are not considered AIFs.</p>
+            <div class="tip">Memory Aid: Think of an AIF as an “elite club” where only those who meet strict criteria (in terms of risk tolerance, expertise, and investment amount) are admitted.</div>
+
+            <h3>Investors in AIF</h3>
+            <p><strong>Key Points:</strong> The primary investors include large institutional funds (such as pension funds, insurance companies, endowment funds), accredited investors, family offices, and HNIs. These investors are not only looking for growth opportunities but also for diversification – adding alternative, non-traditional asset classes can enhance the overall risk-adjusted returns of a portfolio.</p>
+            <div class="tip">Memory Tip: The phrase “big money needs big ideas” serves as a reminder that sophisticated institutional players and wealthy individuals typically turn to alternative investments for diversification and potential high reward.</div>
+
+            <h3>Avenues for Alternative Investments</h3>
+            <p>This section explains the different types of alternative assets available, each with its own risk and return characteristics:</p>
+
+            <h3>Venture Capital (VC)</h3>
+            <p><strong>Concept:</strong> Involves direct investment in early-stage companies or start-ups that may be based around innovative products, new technologies, or disruptive business models. <strong>Risk & Return:</strong> High risk due to the unproven nature of the businesses, but the potential for high returns makes them attractive.</p>
+            <div class="example">Example: Think of investing in a “seed” company that has the potential to grow into a robust “tree” of success.</div>
+            <div class="tip">Tip: “Seed to tree” can help recall that early investments in start-ups may yield exponential returns—but only if the company grows well.</div>
+
+            <h3>Private Equity (PE)</h3>
+            <p><strong>Concept:</strong> Focuses on investing in unlisted companies that are more mature than start-ups, typically providing growth capital or acquiring controlling interests. <strong>Difference from VC:</strong> While venture capital is essentially the “seed” stage, private equity targets later stages involving established businesses.</p>
+            <div class="tip">Tip: Remember, “VC is for the seed, PE is for the scaling-up.”</div>
+
+            <h3>Hedge Funds</h3>
+            <p><strong>Concept:</strong> Pooled investment vehicles that deploy complex strategies such as arbitrage, derivative trading, long-short positions, and leverage. <strong>Risk Profile:</strong> These funds are inherently more speculative and can be highly volatile.</p>
+            <div class="tip">Tip: Visualize hedge funds as high-octane vehicles that take both long and short positions—“the action heroes” of investment.</div>
+
+            <h3>Real Estate and Infrastructure</h3>
+            <p><strong>Concept:</strong> Investments in property development, real estate funds, REITs (Real Estate Investment Trusts), and InvITs (Infrastructure Investment Trusts). <strong>Characteristics:</strong> Often associated with longer gestation periods and illiquidity; however, some instruments (like REITs) may trade on exchanges.</p>
+            <div class="tip">Tip: Think “Brick and Click” – “brick” represents hard, physical property investments and “click” the more liquid, exchange-traded instruments.</div>
+
+            <h3>Commodities</h3>
+            <p><strong>Concept:</strong> Involves investing in tangible assets such as precious metals (gold, silver), energy resources, or agricultural commodities. <strong>Purpose:</strong> Often used as a hedge against inflation.</p>
+            <div class="tip">Tip: Remember “gold as a shield” to recall that commodities can protect against inflation.</div>
+
+            <h3>Others</h3>
+            <p><strong>Concept:</strong> Encompasses a range of objects like gems and precious stones, art, antiques, film funds, vintage wines, stamps, and collectible items. <strong>Emerging Trends:</strong> FinTech platforms are increasingly facilitating investments in these nontraditional assets.</p>
+            <div class="tip">Tip: Use the phrase “not just money but also culture” to remember that alternative investments can also be about collecting art, antiques, and other niche assets.</div>
+
+            <h3>Alternative Investments – Antecedents and Growth</h3>
+            <p><strong>Historical Evolution:</strong> Early Beginnings: After the Industrial Revolution, as business operations expanded dramatically, traditional bank financing was no longer sufficient for large-scale corporate needs. Emergence of Venture Capital: Early forms of risk financing emerged with wealthy individuals and merchant banks stepping in to support ventures that were considered too risky by conventional banks. Development of Modern Portfolio Theory: From the mid-20th century onward, diversification strategies evolved to include alternative assets, enabling institutional investors to lower overall portfolio risk by mixing in high-risk, high-return opportunities. Phases of Growth: The industry saw significant developments—from early venture capital in the 1940s–50s, through the growth of private equity and later-stage investments, to post-2008 market dynamics where alternative investments offered a way out of stagnating traditional returns.</p>
+            <div class="tip">Memory Tip: Picture a timeline where investment strategies evolve like an “investment ladder” – starting from basic bank loans, moving into the era of venture capital, and finally maturing into a diversified portfolio including multiple alternative asset classes.</div>
+
+            <h3>Role of Alternative Investments in Portfolio Management</h3>
+            <p><strong>Benefits:</strong> Diversification: Adding non-traditional assets helps spread risk across a portfolio. Even if individual alternative investments are risky, they often have low correlation with traditional asset classes, thereby reducing overall portfolio volatility. Risk-Adjusted Returns: They provide opportunities for higher returns that can improve the overall risk-return profile of a well-diversified portfolio. Complementary Function: Alternative investments can serve as a counterbalance when traditional avenues may be producing modest returns.</p>
+            <p><strong>Challenges:</strong> Complexity and Illiquidity: Many alternative investments require a deeper understanding and may involve complex structures or long lock-in periods. Documentation and Transparency: More detailed documentation, professional management, and due diligence are necessary compared to traditional investments.</p>
+            <div class="tip">Tip for Remembering: The classic adage “Don’t put all your eggs in one basket” can be adapted here. By blending traditional (liquid) investments and alternative (potentially high-return but less liquid) investments, investors can build a more robust, diversified portfolio.</div>
+        `
+            },
+            chapter2: {
+                title: "Chapter 2: Growth of AIFs and Category III AIFs",
+                text: `
+            <h3>Evolution and Growth of Category III AIFs in India</h3>
+            <p><strong>Historical Context and Early Growth:</strong> The journey begins with the international evolution of hedge funds (e.g., A.W. Jones & Co. as one of the first hedge funds), which used incentive fees, short selling, and leverage. During the 1990s, as the Indian capital markets grew, regulatory measures for portfolio managers and mutual funds started shaping the asset management space.</p>
+            <p><strong>Foreign Investment and Early Hurdles:</strong> Offshore hedge funds and funds-of-funds began channeling investments into India through mechanisms like Overseas Derivative Instruments (ODIs) and through Foreign Institutional Investors (FIIs). Regulatory restrictions and limited channels (such as strict RBI guidelines and lack of full capital account convertibility) initially hindered the direct marketing of these products to Indian investors.</p>
+            <p><strong>Regulatory Transformation:</strong> With the introduction of the Liberalised Remittance Scheme (LRS) in 2004, individual Indian investors could participate in overseas investments—though with relatively low ceilings compared to the high minimum requirements of foreign funds. A major turning point came post-2012 with the issuance of the SEBI (Alternative Investment Funds) Regulations. This set a clear framework that not only regulated but also spurred domestic growth, paving the way for a new breed of funds, particularly those employing complex, aggressive strategies (the Category III funds).</p>
+            <div class="tip">Memory Aid: “From offshore trials to local regulations”—think of the evolution as an initial testing phase with foreign funds, followed by a regulatory “green light” in 2012 that paved the way for robust domestic growth.</div>
+
+            <h3>Types of Alternative Investment Funds (AIFs)</h3>
+            <p><strong>Overview:</strong> SEBI categorizes funds based on their investment strategy and asset focus. This section outlines various types of AIFs, each engineered to meet distinct investor needs.</p>
+            <p><strong>Key Types:</strong></p>
+            <ul>
+                <li>Venture Capital Fund (VCF): Focuses on start-ups and early-stage ventures (typically following initial angel investments).</li>
+                <li>Angel Fund: A subset of venture capital that pools money from experienced angel investors, generally following specific net asset and experience criteria.</li>
+                <li>Private Equity Fund: Typically invests in later-stage unlisted companies requiring substantial growth capital or control acquisitions.</li>
+                <li>Debt Fund: Invests primarily in debt securities (whether listed or unlisted) and securitized instruments, often chosen due to their bit more atypical liquidity profile.</li>
+                <li>Infrastructure Fund: Allocates capital to long-term infrastructure projects that tend to offer stable, though illiquid, cash flows.</li>
+                <li>SME Fund: Focused on investing in small and medium enterprises, guided by government definitions and aimed at fostering entrepreneurship.</li>
+                <li>Hedge Fund (Category III): Employs dynamic and complex trading strategies such as arbitrage, leverage, long-short positions, and derivatives. This group is noted for its higher risk profile.</li>
+                <li>Social Impact Fund: Invests in initiatives generating measurable social or environmental benefits.</li>
+                <li>Special Situations Fund: Targets distressed assets or companies undergoing restructuring.</li>
+                <li>Corporate Debt Market Development Fund: Designed to invest in corporate debt securities especially during periods of market dislocation.</li>
+            </ul>
+            <p><strong>Classification by SEBI Categories:</strong> Category I: Funds addressing sectors with high societal or economic impact (e.g., VCFs, SME Funds, Social Impact Funds). Category II: More conventional private equity and debt funds not employing significant leverage. Category III: Funds (such as hedge funds) that use diverse and potentially leveraged or speculative strategies.</p>
+            <div class="example">Example & Tip: Think “seed to tree” where the initial risk is high but has potential for exponential growth (for VCF).</div>
+            <div class="tip">Memory Aid: “VC for the seed, PE to scale, Hedge to hustle”—a quick mnemonic to remember that early-stage funds focus on growth potential, while later-stage funds and leveraged hedge funds target complex opportunities.</div>
+
+            <h3>Comparison of AIF Categories</h3>
+            <p><strong>Key Differentiators:</strong></p>
+            <p><strong>Risk & Strategy:</strong> Category I: Invests in early-stage, socially or economically desirable sectors; often accepts higher risk due to high growth potential but may mitigate risk through smaller tranches. Category II: Focus is on later-stage investments in unlisted companies or debt funds; these avoid the use of leverage. Category III: Employs aggressive, levered, and complex trading strategies across various asset classes; these are the riskiest but offer the potential for superior alpha.</p>
+            <p><strong>Regulatory Incentives:</strong> Category I funds often enjoy government incentives, whereas Category III funds do not receive such concessions and are subject to strict operational norms.</p>
+            <div class="tip">Memory Aid: “I for Impact, II for Intermediate, III for Intensely Involved”—helps recall that Category III funds are complex and require a deep understanding of trading dynamics and risk.</div>
+
+            <h3>Suitability and Enablers for Category III AIFs in India</h3>
+            <p><strong>Investor Suitability:</strong> Category III AIFs are best suited for institutional investors and ultra-high net worth individuals (UHNI) because of their aggressive return-seeking strategies and the ability to absorb higher risks. Typical investors in these funds are those with a long-term view and capacity for illiquidity, as many Category III funds have longer lock-in periods (e.g., minimum tenure of 3 years with often an additional 2-year lock-in).</p>
+            <p><strong>Enabling Factors and Regulatory Drivers:</strong> Regulatory changes—such as the SEBI (AIF) Regulations, liberalization of foreign investment channels, and initiatives like the establishment of International Financial Services Centres (e.g., in Gujarat)—have been instrumental in developing this market. Improvements in the tax regime and risk monitoring practices have also played a critical role.</p>
+            <p><strong>Asset Allocation Considerations:</strong> Investors like HNIs must carefully balance exposure. For instance, an HNI re-allocating assets into Category III AIFs must respect their portfolio concentration limits and liquidity preferences.</p>
+            <div class="tip">Memory Aid: “Risk only the bold and the prepared”—a reminder that Category III AIFs are ideal only for those who fully understand and can manage the risks of complex strategies and illiquidity.</div>
+
+            <h3>Current Market Status of Category III AIFs</h3>
+            <p><strong>Growth Metrics:</strong> Since the formal introduction of the SEBI (AIF) Regulations in 2012, the market has ballooned. For example, by December 31, 2024, over 1,465 AIFs were registered with SEBI. The cumulative capital commitments (across all AIF categories) have surpassed significant thresholds—with Category III AIFs alone attracting capital in the tens of thousands of crores.</p>
+            <p><strong>Market Trends:</strong> The dramatic growth underscores both enhanced investor appetite for alternatives and the effectiveness of regulatory reforms in establishing transparency and market discipline.</p>
+            <div class="tip">Memory Aid: “From 21 funds to over 1,465—think exponential growth in alternative investments.”</div>
+        `
+            },
+            chapter3: {
+                title: "Chapter 3: Category III AIF Ecosystem",
+                text: `
+            <h3>Investments under Category III AIF</h3>
+            <p><strong>Key Points:</strong> Definition & Mandate: Category III Alternative Investment Funds (AIFs) are pooled investment vehicles that deploy a diversified mandate. They can invest across multiple asset classes such as equities, fixed income securities, derivatives, and even commodities. Investment Strategies: Managers are permitted to take both long and short positions, use leverage through futures and options, structured products, credit default swaps, and arbitrage strategies. The use of such dynamic strategies aims either at generating speculative profits or hedging current exposures.</p>
+            <div class="example">Examples: The chapter cites investments via PIPE (Private Investment in Public Equity) transactions, hedge-fund–like strategies, and other models that use complex trading approaches.</div>
+            <div class="tip">Exam Tip: Think of Category III AIFs as “the high-octane vehicles” of alternative investments—they use dynamic, sometimes aggressive strategies involving leverage and derivatives to obtain returns.</div>
+
+            <h3>Characteristics of Category III AIF</h3>
+            <p><strong>Key Points:</strong> Private Placement Memorandum (PPM): The PPM is a crucial document that sets out the investment strategy, risk factors, fee structure, distribution waterfall, taxation, liquidity provisions, and other operational details. It acts as the “blueprint” for the fund. Investment Details: The chapter describes how the fund’s investment style (value, growth, or GARP), stock selection, asset allocation, and targeted industries (such as small-cap or mid-cap stocks) are specified. Fund Structure & Liquidity: Category III AIFs may be structured as open-ended or closed-ended funds. Closed-ended funds often feature a minimum lock-in period (typically around 2 to 3 years) to allow managers to execute complex strategies without frequent redemptions. Manager Expertise & Fee Structure: Managers of Category III AIFs are required to demonstrate strong market acumen, often backed by professional certifications. Their compensation includes a fixed management fee and, when performance exceeds a defined hurdle rate, an incentive or performance fee.</p>
+            <div class="tip">Exam Tip: Remember that the PPM is like the “constitution” of the fund—it spells out everything from the investment methodology to the fee and redemption terms.</div>
+
+            <h3>Concepts Prevalent in the Category III AIF Industry</h3>
+            <h4>Category III AIF Ecosystem</h4>
+            <p><strong>Players & Their Roles:</strong></p>
+            <ul>
+                <li>Investors: Typically institutional investors, high-net-worth individuals (HNIs), family offices, and fund-of-funds that provide the capital.</li>
+                <li>Sponsors: The entities or individuals responsible for the formation and registration of the fund. They sometimes also act as the investment manager.</li>
+                <li>Trustees: Appointed to safeguard the assets, ensure compliance, and maintain transparency. Trustees must adhere to a strict code of conduct.</li>
+                <li>Investment Managers: Experts who execute the fund’s strategy. They are responsible for making investment decisions, managing portfolio risks, and communicating with investors.</li>
+            </ul>
+            <div class="tip">Memory Aid: Keep in mind the mnemonic I–S–T–M (Investors, Sponsors, Trustees, Managers) to recall the main components of the AIF ecosystem.</div>
+
+            <h4>Capital Commitment and Sponsor Commitment</h4>
+            <p><strong>Key Points:</strong> Capital Commitment: The total funds pledged by investors over the life of the fund. There are minimum commitment thresholds (e.g., Rs. 1 crore per investor or Rs. 25 lakhs for employees/directors in some cases) and an overall minimum corpus for the fund. Sponsor Commitment: To align interests, the sponsor or manager is required to invest at least 5% of the fund’s corpus (or a specified monetary amount, for example, Rs. 10 crore, whichever is lower) directly in the fund.</p>
+            <div class="tip">Exam Tip: Think of capital commitment as the “promise” from investors and the sponsor commitment as the “skin in the game” from the fund’s initiators.</div>
+
+            <h4>Drawdown and Capital Invested</h4>
+            <p><strong>Key Points:</strong> Drawdown Process: Capital during the commitment period is “called” by the investment manager on a scheduled basis, matching the needs of the fund’s investment strategy. Capital Invested: This is the actual amount that has been deployed for making investments. Drawdowns may be less than total commitments if market opportunities are limited.</p>
+            <div class="tip">Memory Aid: Visualize drawdown like “ordering on credit” where funds are called as and when needed.</div>
+
+            <h4>Due Diligence</h4>
+            <p><strong>Key Points:</strong> Two-Level Process: Due diligence is conducted both at the fund level (examining operational, market, regulatory, and strategy risks) and at the investee company level (detailed analysis of financial and business viability).</p>
+            <div class="tip">Exam Tip: “Do your homework” is a good reminder to always perform thorough due diligence when evaluating alternative investments.</div>
+
+            <h4>Environmental, Social, and Governance (ESG)</h4>
+            <p><strong>Key Points:</strong> ESG Integration: ESG considerations are increasingly integral to the fund’s investment process. Funds are expected to follow SEBI’s Stewardship Code, which includes monitoring investee companies on financial performance, governance, and sustainability matters.</p>
+            <div class="tip">Exam Tip: Remember that ESG is not just about “doing good” but is also a strategy to manage long-term risks and add value.</div>
+
+            <h4>First Close and Final Close</h4>
+            <p><strong>Key Points:</strong> Fundraising Milestones: The “first close” is when the initial minimum corpus is achieved, usually within 12 months of SEBI communication, while the “final close” marks the deadline for raising additional investor commitments.</p>
+            <div class="tip">Memory Tip: Think of “first close” as the soft launch and “final close” as the end of the fundraising period.</div>
+
+            <h4>Fees and Expenses in Category III AIFs</h4>
+            <p><strong>Key Points:</strong> Lock-in Period & Exit Load: Managers may impose a lock-in period (often 2 years for closed-ended funds) and an exit load (typically 0–5% of NAV) on early redemptions. Management Fees: Generally around 1–2% of committed capital during the commitment period and then adjusted based on invested capital or asset value. Additional fees, such as GST, are applied. Set-up and Operational Costs: One-time set-up fees and recurring expenses are borne by the fund, with clear caps often disclosed in the PPM. Hurdle Rate & Performance Fees: The fee structure usually includes a hurdle rate (the minimum benchmark return) that must be exceeded before managers earn a performance fee. A high-water mark ensures that fees are only levied on new profits. Distribution Waterfall: This structure defines the order of return distribution—first returning capital, then paying a preferred (hurdle) return to investors, followed by a catch-up for managers, and finally sharing remaining profits.</p>
+            <div class="tip">Exam Tip: Use the mnemonic “Hurdle, High-water mark, Catch-up” to remember the key performance fee concepts.</div>
+
+            <h3>Investments by Category III AIFs</h3>
+            <p><strong>Key Points:</strong> Asset Classes: Although their primary focus is on public equities (across large-cap, mid-cap, and small-cap stocks), these funds may also engage in derivative instruments and commodities. Strategies: They deploy diverse strategies including long–short positions, arbitrage opportunities, and investing in PIPE transactions to capture mispricing before or during market events. Liquidity Management: To manage liquidity needs and operational flexibility, Category III AIFs might keep portions of the portfolio in marketable securities such as treasury bills or commercial papers.</p>
+            <div class="tip">Exam Tip: Think “active deployment with breadth” – these funds are not limited to one asset class but can swing between equities, derivatives, and even commodities to optimize returns.</div>
+
+            <h3>Comparison between Category III AIFs and Traditional Investment Vehicles</h3>
+            <p><strong>Key Comparisons:</strong></p>
+            <p><strong>Against Portfolio Management Services (PMS):</strong> PMS accounts are individually managed (with separate demat accounts) and allow flexible redemptions, whereas Category III AIFs pool funds collectively and impose lock-in periods with stricter investor caps.</p>
+            <p><strong>Against Mutual Funds:</strong> Mutual funds offer lower minimum investments, higher liquidity, and generally less complex strategies. In contrast, Category III AIFs require high minimum investments (typically Rs.1 crore), utilize leverage, and have specialized fee structures.</p>
+            <div class="tip">Exam Tip: Use comparison tables in your notes to highlight differences in liquidity, fund pooling, minimum corpus requirements, fee structures, and investor eligibility.</div>
+
+            <h3>Hedge Funds: Global Market Overview</h3>
+            <p><strong>Key Points:</strong> Global Parallels: Investment strategies used by Category III AIFs in India closely mimic those of hedge funds worldwide. These include high leverage, multi-strategy approaches, and investments in non-traditional assets. Broader Investment Scope: Global hedge funds may invest in assets such as intellectual property, film funds, sports-related investments, green bonds, and more, thereby diversifying the portfolio’s risk profile. Additional Structures: In various markets, Fund of Funds and Multi-Strategy Funds play significant roles in providing diversified exposure despite layers of fees.</p>
+            <div class="tip">Exam Tip: Remember the phrase “global hedge funds = high leverage + diverse strategies” to relate the Indian Category III AIF approach with global trends.</div>
+
+            <h3>Category III AIF as a Risk Management Tool</h3>
+            <p><strong>Key Points:</strong> Risk Identification: A Category III AIF must identify material risks such as concentration risk, foreign exchange risk, leverage risk, and even extra-financial risks (like ESG factors). Alpha Management: The objective is to generate “alpha” (excess returns over a specified benchmark) through active management and the identification of mispriced securities. Advanced techniques, including the use of algorithms and machine learning, are sometimes employed. Beta Management: Alongside seeking alpha, managers also monitor “beta” (the sensitivity of the portfolio to market movements) to maintain controlled volatility. Adjustments in portfolio weighting and risk positioning are used to manage systematic risk.</p>
+            <div class="example">Practical Example: The chapter presents an example where an institutional investor reallocates funds from large-cap assets to a Category III AIF to potentially boost returns from small-cap and mid-cap segments while controlling overall portfolio beta.</div>
+            <div class="tip">Exam Tip: Remember “Alpha for outperformance; Beta for risk control” to capture the essence of how Category III AIFs function as risk management tools.</div>
+        `
+            },
+            chapter4: {
+                title: "Chapter 4: Category III AIF: Fund Structures and Service Providers",
+                text: `
+                <h3>Learning Objectives</h3>
+                <p><strong>By the end of this chapter, you should be able to:</strong> Understand the different fund structures for Category III AIFs, including onshore versus offshore arrangements and various pooling models such as Unified, Co-investment, Master–Feeder, and Parallel Structures. Identify and explain the roles of service providers (e.g., fund administrators, custodian, merchant bankers, registrars, tax and legal advisors, auditors, distributors) in the Category III AIF industry. Recognize the key documentation required at both onshore and offshore levels.</p>
+
+                <h3>4.1 Fund Structures of a Category III AIF</h3>
+                <h3>4.1.1 Basic Entity Forms and Overall Structure</h3>
+                <p><strong>Entity Options:</strong> A Category III AIF may be registered under SEBI as a Trust, Company, Limited Liability Partnership (LLP), or Body Corporate.</p>
+                <p><strong>Key Components (Refer to Figure 4.1):</strong></p>
+                <p>- <strong>Investors:</strong> Domestic and/or offshore investors commit capital.</p>
+                <p>- <strong>Sponsor:</strong> Provides the minimum contribution (skin-in-the-game) and initiates the fund.</p>
+                <p>- <strong>Trustee Company:</strong> Ensures compliance and safekeeping if the fund is structured as a trust.</p>
+                <p>- <strong>SEBI Registration:</strong> The fund must be registered with SEBI.</p>
+                <p>- <strong>Investment Management Company:</strong> Appointed to manage the fund’s investments.</p>
+                <p>- <strong>Service Providers:</strong> Include fund administrators, custodians, registrar & transfer agents, auditors, legal advisors, etc.</p>
+                <p>- <strong>Investee Companies:</strong> The ultimate targets for the fund’s investments.</p>
+                <div class="tip">Memory Aid: Think of the fund structure as a “corporate puzzle” where every piece—from the sponsor to various service providers—must interlock perfectly to meet regulatory and operational requirements.</div>
+
+                <h3>4.1.2 Open-ended Vs. Closed-ended Fund Structures</h3>
+                <p><strong>Open-ended Fund Structure:</strong></p>
+                <p>- <strong>Features:</strong> Investors contribute capital continuously; units are offered on an ongoing basis.</p>
+                <p>- <strong>Flexibility:</strong> Investors can redeem units at set intervals (monthly, quarterly, or semi-annually), resulting in a variable fund corpus.</p>
+                <p><strong>Closed-ended Fund Structure:</strong></p>
+                <p>- <strong>Features:</strong> Capital is committed during a specified period (commonly 3-5 years).</p>
+                <p>- <strong>Lock-in and Exit:</strong> Typically includes a lock-in period (around 2 years). Post lock-in, redemptions are allowed through exit load mechanisms, as detailed in the fund’s Private Placement Memorandum (PPM).</p>
+                <div class="example">Example: A closed-ended Category III AIF might run for 5 years with a 2-year lock-in period, after which investors can exit by paying an exit load as per set redemption gates.</div>
+                <div class="tip">Exam Tip: Understand that open-ended funds offer liquidity on a periodic basis, while closed-ended funds lock in capital for a predetermined duration, enhancing the manager’s ability to implement complex strategies.</div>
+
+                <h3>4.1.3 Offshore and Onshore Funds</h3>
+                <p><strong>Tax Neutrality:</strong> A key factor in selecting a jurisdiction is ensuring that investors do not face a higher tax burden than if they invested directly.</p>
+                <p><strong>Offshore Funds:</strong></p>
+                <p>- <strong>Purpose:</strong> Designed for offshore investors to avoid domestic taxation on capital gains.</p>
+                <p>- <strong>Jurisdictions:</strong> Often domiciled in countries like Mauritius or Singapore that have Bilateral Investment Protection Agreements (BIPA) with India.</p>
+                <p><strong>Onshore Funds:</strong></p>
+                <p>- <strong>Structure:</strong> Domiciled in India, pooling capital from both domestic and foreign investors.</p>
+                <p>- <strong>Regulation:</strong> Must register with SEBI and follow domestic guidelines, including filing a PPM.</p>
+                <p><strong>Note on LRS:</strong> The Liberalised Remittance Scheme (LRS) enables Indian residents to invest abroad under prescribed limits.</p>
+                <div class="tip">Memory Aid: Think “Offshore for tax-friendliness; Onshore for domestic pooling,” which helps you separate the objectives of each fund type.</div>
+
+                <h3>4.1.4 Unified and Co-Investment Structures</h3>
+                <p><strong>Unified Structure:</strong></p>
+                <p>- <strong>Overview:</strong> Combines domestic and offshore investor commitments into a single onshore pooling vehicle.</p>
+                <p>- <strong>Advantages:</strong> No need for Foreign Investment Promotion Board (FIPB) approval for Foreign Portfolio Investors (FPIs); simplifies fee structure by centralizing management.</p>
+                <p><strong>Co-Investment Structure:</strong></p>
+                <p>- <strong>Overview:</strong> Creates separate pooling vehicles for domestic and offshore investors.</p>
+                <p>- <strong>Flexibility:</strong> Allows offshore investors greater control by letting them directly choose investee companies independently from the domestic fund.</p>
+                <div class="tip">Exam Tip: Remember “Unified means one pool; Co-investment means parallel pools,” highlighting the integration versus separation of investor funds.</div>
+
+                <h3>4.1.5 Master Feeder and Parallel Structures</h3>
+                <p><strong>Master–Feeder Structure:</strong></p>
+                <p>- <strong>Mechanism:</strong> Offshore investors invest via feeder funds that subsequently invest in a domestic master fund.</p>
+                <p>- <strong>Fee Arrangement:</strong> The master fund levies management fees, which are passed to feeder fund managers based on the allocated NAV.</p>
+                <p><strong>Parallel Structure:</strong></p>
+                <p>- <strong>Mechanism:</strong> Separate feeder funds (each for different jurisdictions) invest directly in investee companies alongside a registered onshore Category III AIF.</p>
+                <p>- <strong>Advantages:</strong> Provides tax benefits and allows each investor group to exercise independent selection of investments.</p>
+                <p>- <strong>Considerations:</strong> May result in a higher overall fee structure compared to the Master–Feeder model.</p>
+                <div class="tip">Memory Aid: Visualize the master–feeder as a “parent–child” structure where all funds converge into one master fund, while the parallel structure represents “side-by-side” vehicles operating independently.</div>
+
+                <h3>4.2 Service Providers in the Category III AIF Industry</h3>
+                <p><strong>Overview:</strong> Given that the core team of a Category III AIF is typically small (about 5–10 employees), a range of external service providers is appointed to handle specialized functions.</p>
+
+                <h3>4.2.1 Merchant Bankers</h3>
+                <p><strong>Role:</strong></p>
+                <p>- File the fund’s Private Placement Memorandum (PPM) with SEBI.</p>
+                <p>- Conduct independent due diligence and ensure that regulatory comments on the PPM are incorporated.</p>
+                <p><strong>Important Note:</strong> A merchant banker must not be an associate of the fund’s sponsor, manager, or trustee.</p>
+
+                <h3>4.2.2 Registrar and Transfer Agents (RTA)</h3>
+                <p><strong>Responsibilities:</strong></p>
+                <p>- Oversee subscriptions, unit transfers, and redemptions.</p>
+                <p>- Handle payment of exit loads and collect applicable stamp duty as mandated by SEBI regulations.</p>
+                <div class="tip">Exam Tip: Remember that RTAs ensure proper unit accounting—a critical function in maintaining investor records.</div>
+
+                <h3>4.2.3 Custodian</h3>
+                <p><strong>Key Functions:</strong></p>
+                <p>- Safekeeping of securities and timely settlement of transactions.</p>
+                <p>- Perform additional activities like tax withholding, proxy voting, and tracking corporate actions (dividends, rights issues).</p>
+                <p><strong>Mandatory Requirement:</strong> Custodians must be registered under SEBI regulations and appointed regardless of the fund’s corpus.</p>
+
+                <h3>4.2.4 Fund Administrators (Fund Accountants)</h3>
+                <p><strong>Support Functions:</strong></p>
+                <p>- Maintain books and records, compute NAV, and perform valuation and risk reporting.</p>
+                <p>- Coordinate with auditors and handle tax and regulatory reporting.</p>
+                <p><strong>Note:</strong> In some cases, custodians might also provide these services.</p>
+
+                <h3>4.2.5 Fund Infrastructure</h3>
+                <p><strong>Technology Needs:</strong></p>
+                <p>- Robust trading platforms such as Order Management Systems (OMS) and real-time data terminals.</p>
+                <p>- Reliance on databases (Bloomberg, Reuters, etc.) to support speedy execution and accurate data dissemination.</p>
+                <div class="tip">Exam Tip: The strength of a Category III AIF’s infrastructure can be likened to a “state-of-the-art engine” that drives timely and efficient trade execution.</div>
+
+                <h3>4.2.6 Distributors and Placement Agents</h3>
+                <p><strong>Role:</strong></p>
+                <p>- Market and distribute Category III AIF products.</p>
+                <p>- Increase awareness among sophisticated investors and tailor product distribution based on investor risk profiles.</p>
+                <p><strong>Observation:</strong> Their expertise is critical, as these funds target investors with a higher appetite for risk.</p>
+
+                <h3>4.2.7 Tax Advisors</h3>
+                <p><strong>Purpose:</strong></p>
+                <p>- Advise on domiciliation to ensure tax neutrality.</p>
+                <p>- Assist in deal structuring and compliance, especially for foreign investors.</p>
+                <div class="tip">Memory Aid: Think “Tax Advisors keep it tax-neutral” to ensure investors are not overburdened by cascading taxation.</div>
+
+                <h3>4.2.8 Legal Advisors</h3>
+                <p><strong>Core Responsibilities:</strong></p>
+                <p>- Draft and finalize all legal documentation essential to the fund’s operation.</p>
+                <p>- <strong>Key documents include:</strong> the Private Placement Memorandum (PPM), Investment Management Agreement, Indenture of Trust, Contribution Agreement, Investor Side Letters (for onshore funds) and the Subscription Agreement, Advisory Agreement, and Wrapper (for offshore funds).</p>
+                <div class="tip">Exam Tip: The PPM is the “blueprint” of the fund, detailing everything from investment strategy to fee structure and risk factors.</div>
+
+                <h3>4.2.9 Auditors and Mandatory Audit Requirements</h3>
+                <p><strong>Auditors:</strong></p>
+                <p>- Statutory and independent auditors conduct annual audits of the AIF’s books of accounts.</p>
+                <p><strong>Audit Requirements:</strong></p>
+                <p>- The audit covers compliance with the PPM, review of fund flows, capital commitments, fee structures, and overall adherence to investment strategy.</p>
+                <p>- Findings, along with any corrective action, must be communicated to the trustee/board and SEBI within six months after the financial year-end.</p>
+                <p><strong>Note:</strong> Some exceptions apply for Large Value Funds with high minimum capital commitments.</p>
+                <div class="tip">Memory Aid: Picture the audit as an “annual health check-up” for the AIF, ensuring all parts of the fund are operating as per the prescribed regulatory standards.</div>
+            `
+            }
+
+        };
+
+        const quizData = {
+            chapter1: [
+                {
+                    question: "Alternative investments are best defined as:",
+                    options: ["Only real estate investments", "Financial assets not in conventional categories", "Only government securities", "Only mutual fund investments"],
+                    correct: "Financial assets not in conventional categories",
+                    explanation: "Section 1.1 defines alternative investments as financial assets that do not fall into conventional categories like stocks, bonds, and cash, per Investopedia’s definition."
+                },
+                {
+                    question: "Which of these best describes traditional investments?",
+                    options: ["Listed stocks, bonds, and mutual funds", "Private equity and hedge funds", "Complex structured products", "Unlisted real estate ventures"],
+                    correct: "Listed stocks, bonds, and mutual funds",
+                    explanation: "Section 1.1 states that traditional investments are confined to financial securities like stocks, bonds, mutual funds, and ETFs from capital markets."
+                },
+                {
+                    question: "What distinguishes alternative investments from traditional investments?",
+                    options: ["Higher liquidity", "Complex structures and lower liquidity", "Simple structures", "Only government securities"],
+                    correct: "Complex structures and lower liquidity",
+                    explanation: "Section 1.1 and Table 1.1 highlight that alternative investments feature complex structures and illiquidity, unlike the liquidity of traditional investments."
+                },
+                {
+                    question: "Who are the typical investors in alternative investments?",
+                    options: ["Only retail investors", "Sophisticated investors like institutions and HNIs", "Only government entities", "Only banks"],
+                    correct: "Sophisticated investors like institutions and HNIs",
+                    explanation: "Section 1.1 notes that alternative investments cater to sophisticated investors like institutional investors and High Net-worth Individuals (HNIs) with higher risk tolerance."
+                },
+                {
+                    question: "What is the primary purpose of alternative investments?",
+                    options: ["Only high returns", "Only risk reduction", "Portfolio diversification and improved risk-adjusted returns", "Guaranteed returns"],
+                    correct: "Portfolio diversification and improved risk-adjusted returns",
+                    explanation: "Section 1.1 explains that alternative investments complement traditional investments by improving risk-adjusted returns over the long term."
+                },
+                {
+                    question: "Which of these is an example of an alternative investment avenue?",
+                    options: ["Investment in AAA listed bonds", "Purchase of commercial real estate", "Government securities", "Exchange-traded futures"],
+                    correct: "Purchase of commercial real estate",
+                    explanation: "Section 1.2.4 and the sample question identify real estate as an alternative investment, unlike listed bonds, government securities, or futures, which are traditional."
+                },
+                {
+                    question: "What is the main focus of venture capital investments?",
+                    options: ["Later-stage unlisted companies", "Infant start-up companies", "Listed public equities", "Government bonds"],
+                    correct: "Infant start-up companies",
+                    explanation: "Section 1.2.1 describes venture capital as direct investment in infant companies or start-ups with high growth potential."
+                },
+                {
+                    question: "What does private equity primarily provide to companies?",
+                    options: ["Debt financing only", "Growth capital to later-stage unlisted companies", "Short-term loans", "Public equity shares"],
+                    correct: "Growth capital to later-stage unlisted companies",
+                    explanation: "Section 1.2.2 states that private equity conventionally provides growth capital to later-stage unlisted companies."
+                },
+                {
+                    question: "What distinguishes hedge funds from other AIFs?",
+                    options: ["Investing only in unlisted securities", "Using complex strategies and leverage", "Focusing on low-risk assets", "Avoiding derivatives"],
+                    correct: "Using complex strategies and leverage",
+                    explanation: "Section 1.2.3 highlights that hedge funds use complex strategies, leverage, and long/short positions, differentiating them from other AIFs."
+                },
+                {
+                    question: "What is a key characteristic of Real Estate Investment Trusts (REITs)?",
+                    options: ["High illiquidity", "Listed and liquid securities", "Only unlisted investments", "No cash flow"],
+                    correct: "Listed and liquid securities",
+                    explanation: "Section 1.2.4 notes that REITs are listed securities offering underlying cash flow from rent-yielding properties, making them liquid."
+                },
+                {
+                    question: "Which commodity type do alternative investors typically focus on?",
+                    options: ["Soft commodities like cotton", "Hard commodities like oil and metals", "Only agricultural produce", "Only precious gems"],
+                    correct: "Hard commodities like oil and metals",
+                    explanation: "Section 1.2.5 states that alternative investors usually look for opportunities in hard commodities such as oil, gas, and metals."
+                },
+                {
+                    question: "Which of these is considered an alternative investment asset class?",
+                    options: ["Exchange-traded funds (ETFs)", "Arts and antiques", "Listed corporate bonds", "Open-ended mutual funds"],
+                    correct: "Arts and antiques",
+                    explanation: "Section 1.2.6 lists arts and antiques among alternative investment asset classes, unlike traditional options like ETFs and bonds."
+                },
+                {
+                    question: "When did venture capital begin as a risk financing model?",
+                    options: ["Post-Industrial Revolution", "1920s", "1950s", "1980s"],
+                    correct: "Post-Industrial Revolution",
+                    explanation: "Section 1.3 notes that venture capital emerged after the Industrial Revolution as a risk financing model by wealthy individuals."
+                },
+                {
+                    question: "What event in 1958 boosted the US venture capital industry?",
+                    options: ["Dotcom bust", "Small Business Investment Act", "Modern portfolio theory", "Post-2008 financial crisis"],
+                    correct: "Small Business Investment Act",
+                    explanation: "Section 1.3 states that the Small Business Investment Act of 1958 provided recognition and tax breaks, boosting the VC industry in the US."
+                },
+                {
+                    question: "When did alternative investments see significant growth due to limited traditional opportunities?",
+                    options: ["Pre-1950s", "1960s-1970s", "Post-2008", "1980s"],
+                    correct: "Post-2008",
+                    explanation: "Section 1.3 explains that alternative investments leaped post-2008 as traditional investment opportunities became harder to find."
+                },
+                {
+                    question: "What was the total AUM of alternative assets globally as of December 2023?",
+                    options: ["USD 10 trillion", "USD 15 trillion", "USD 22 trillion", "USD 30 trillion"],
+                    correct: "USD 22 trillion",
+                    explanation: "Section 1.3 reports that alternative assets reached USD 22 trillion in AUM across all managers globally as of December 2023."
+                },
+                {
+                    question: "What is a key reason for including alternative investments in portfolios?",
+                    options: ["Only high returns", "Portfolio diversification benefits", "Only low risk", "Guaranteed returns"],
+                    correct: "Portfolio diversification benefits",
+                    explanation: "Section 1.4 and Figure 1.2 emphasize that alternative investments provide diversification to improve risk-adjusted returns."
+                },
+                {
+                    question: "What is a major challenge for portfolio managers in the 21st century regarding alternative investments?",
+                    options: ["Focusing only on traditional assets", "Deciding which new assets to include or exclude", "Avoiding all investments", "Investing only in bonds"],
+                    correct: "Deciding which new assets to include or exclude",
+                    explanation: "Section 1.4 notes that a key challenge is deciding which new types of assets to include or exclude in portfolios."
+                },
+                {
+                    question: "Which approach is recommended for portfolio diversification in alternative investments?",
+                    options: ["Only empirical analysis", "Only economic reasoning", "Both empirical analysis and economic reasoning", "Neither analysis nor reasoning"],
+                    correct: "Both empirical analysis and economic reasoning",
+                    explanation: "Section 1.4 states that both empirical analysis and economic reasoning must be considered equally for diversification choices."
+                },
+                {
+                    question: "What is a key risk limitation of alternative investments?",
+                    options: ["High liquidity", "Illiquidity risk", "Simple return methods", "Regular income"],
+                    correct: "Illiquidity risk",
+                    explanation: "Table 1.2 lists illiquidity as a main disadvantage due to the long investment cycles of alternative investments."
+                },
+                {
+                    question: "What benefit do alternative investments offer over traditional investments?",
+                    options: ["Guaranteed returns", "Alpha return generation", "High liquidity", "Simple structures"],
+                    correct: "Alpha return generation",
+                    explanation: "Table 1.2 highlights that alternative investments generate alpha returns through off-market strategies."
+                },
+                {
+                    question: "What does SEBI define an AIF as under the 2012 regulations?",
+                    options: ["A publicly pooled investment vehicle", "A privately pooled investment vehicle", "A government-backed fund", "A mutual fund scheme"],
+                    correct: "A privately pooled investment vehicle",
+                    explanation: "Section 1.1.1 defines an AIF as a privately pooled investment vehicle under the SEBI (AIF) Regulations 2012."
+                },
+                {
+                    question: "Which of these is NOT typically an AIF investor?",
+                    options: ["Pension funds", "Family offices", "Retail investors", "Fund of funds"],
+                    correct: "Retail investors",
+                    explanation: "Section 1.1.2 lists AIF investors as institutional funds, HNIs, and fund of funds, not typically retail investors."
+                },
+                {
+                    question: "What is a key trend affecting alternative investments in modern times?",
+                    options: ["Declining technology use", "Growing importance of ESG factors", "Reduced portfolio diversification", "Increased liquidity"],
+                    correct: "Growing importance of ESG factors",
+                    explanation: "Section 1.4 mentions environmental concerns as a challenge, implying the growing importance of ESG factors in modern times."
+                },
+                {
+                    question: "Which factor drove the growth of private equity in the 1980s?",
+                    options: ["Dotcom bust", "Strong IPO market", "Post-2008 crisis", "Bank restrictions"],
+                    correct: "Strong IPO market",
+                    explanation: "Section 1.3 notes that a strong primary market for IPOs in the 1980s triggered growth in private equity financing."
+                },
+                {
+                    question: "Alternative investment is defined as a ______ that does not fall into one of the conventional investment categories.",
+                    options: ["Mutual fund", "Financial asset", "Personal property", "Financial planning"],
+                    correct: "Financial asset",
+                    explanation: "Sample question 1 aligns with Section 1.1, defining alternative investments as financial assets outside conventional categories."
+                },
+                {
+                    question: "The following is an example of an alternative investment:",
+                    options: ["Investment in AAA listed bond", "Investment in government securities", "Purchase of commercial real estate", "Investment in exchange-traded futures"],
+                    correct: "Purchase of commercial real estate",
+                    explanation: "Sample question 2 and Section 1.2.4 identify commercial real estate as an alternative investment, unlike the traditional options listed."
+                },
+                {
+                    question: "The SEBI (AIF) Regulations, 2012 define an AIF as a ______ structure.",
+                    options: ["Financial", "NBFC", "Corporate", "Privately pooled"],
+                    correct: "Privately pooled",
+                    explanation: "Sample question 3 and Section 1.1.1 confirm that SEBI defines an AIF as a privately pooled investment vehicle."
+                },
+                {
+                    question: "A securitisation company floated by a bank is NOT an AIF under SEBI (AIF) Regulations, 2012. True or False?",
+                    options: ["True", "False"],
+                    correct: "True",
+                    explanation: "Sample question 4 and Section 1.1.1 note that securitisation companies are explicitly excluded from the AIF definition under SEBI regulations."
+                },
+                {
+                    question: "Alternative investment funds provide risk capital to businesses with a very high probability of failure due to complex technologies. True or False?",
+                    options: ["True", "False"],
+                    correct: "True",
+                    explanation: "Sample question 5 and Section 1.2.1 state that venture capital (an AIF type) invests in risky start-ups with high mortality rates due to complex technologies."
+                },
+                {
+                    question: "What characteristic makes traditional investments highly liquid?",
+                    options: ["Complex structures", "Off-market opportunities", "Market trading mechanism", "Long investment cycles"],
+                    correct: "Market trading mechanism",
+                    explanation: "Section 1.1 and footnote 2 explain that traditional investments provide high liquidity through the capital market trading mechanism."
+                },
+                {
+                    question: "Which of these is excluded from the SEBI definition of an AIF?",
+                    options: ["Hedge funds", "Family trusts", "Venture capital funds", "Private equity funds"],
+                    correct: "Family trusts",
+                    explanation: "Section 1.1.1 lists family trusts as explicitly excluded from the AIF definition under SEBI (AIF) Regulations 2012."
+                },
+                {
+                    question: "Which investor type is NOT typically associated with AIFs internationally?",
+                    options: ["Endowment funds", "Investment banks", "General retail investors", "Fund of funds"],
+                    correct: "General retail investors",
+                    explanation: "Section 1.1.2 identifies AIF investors as large institutional funds, HNIs, and fund of funds, not general retail investors."
+                },
+                {
+                    question: "What is the minimum age limit for a start-up to qualify for venture capital under DPIIT guidelines?",
+                    options: ["5 years", "10 years", "15 years", "20 years"],
+                    correct: "10 years",
+                    explanation: "Section 1.2.1 states that the Government of India’s DPIIT defines a start-up as a business not more than 10 years old."
+                },
+                {
+                    question: "What type of transactions do private equity buyouts often involve?",
+                    options: ["Short-term loans", "Control acquisitions", "Public offerings", "Fixed income securities"],
+                    correct: "Control acquisitions",
+                    explanation: "Section 1.2.2 notes that private equity participates in complex transactions like control acquisitions or buyouts, acquiring 51% or more of a company."
+                },
+                {
+                    question: "What leverage strategy is unique to hedge funds among AIFs?",
+                    options: ["Borrowing at fund level", "Investing in unlisted securities", "Providing growth capital", "Long-term loans"],
+                    correct: "Borrowing at fund level",
+                    explanation: "Section 1.2.3 and footnote 3 highlight that hedge funds use leveraging at the fund level to generate arbitrage returns, increasing risk."
+                },
+                {
+                    question: "Which investors prefer Infrastructure Investment Trusts (InvITs) for their low risk?",
+                    options: ["Hedge funds", "Pension funds", "Venture capitalists", "Retail investors"],
+                    correct: "Pension funds",
+                    explanation: "Section 1.2.4 states that InvITs, with steady returns and lower risk, are preferred by low risk-taking investors like pension funds."
+                },
+                {
+                    question: "What role did merchant banks play in early alternative investments?",
+                    options: ["Regulated mutual funds", "First institutional venture financiers", "Issued government bonds", "Managed retail portfolios"],
+                    correct: "First institutional venture financiers",
+                    explanation: "Section 1.3 notes that early merchant banks in the UK were the first institutional financiers of venture capital."
+                },
+                {
+                    question: "What theory in the 1950s-60s advanced the case for diversification in portfolios?",
+                    options: ["Efficient Market Hypothesis", "Modern Portfolio Theory", "Capital Asset Pricing Model", "Behavioral Finance"],
+                    correct: "Modern Portfolio Theory",
+                    explanation: "Section 1.3 states that modern portfolio theory in the 1950s-60s established the mechanics and advantages of diversification."
+                },
+                {
+                    question: "What setback did the alternative investment industry face in 2001?",
+                    options: ["IPO market crash", "Dotcom bust", "Post-2008 crisis", "Regulatory ban"],
+                    correct: "Dotcom bust",
+                    explanation: "Section 1.3 mentions the dotcom bust in 2001 as a setback due to astronomical valuations of internet businesses."
+                },
+                {
+                    question: "What modern challenge makes forecasting winners and losers difficult in alternative investments?",
+                    options: ["Stable technology", "Rapid technological change", "Consistent regulations", "High liquidity"],
+                    correct: "Rapid technological change",
+                    explanation: "Section 1.4 notes that the pace of technological change and disruption trends make forecasting winners and losers harder."
+                },
+                {
+                    question: "Which benefit of alternative investments supports businesses unable to attract bank financing?",
+                    options: ["High liquidity", "Growth capital provision", "Regular income", "Simple structures"],
+                    correct: "Growth capital provision",
+                    explanation: "Table 1.2 states that alternative investments provide growth capital to businesses that cannot attract conventional financing like bank loans."
+                },
+                {
+                    question: "What limitation of alternative investments requires constant professional support?",
+                    options: ["High liquidity", "Complex contractual terms", "Regular income", "Simple returns"],
+                    correct: "Complex contractual terms",
+                    explanation: "Table 1.2 lists complex contractual terms and tedious documentation as a limitation requiring ongoing professional support."
+                },
+                {
+                    question: "What modern economic challenge impacts alternative investment returns?",
+                    options: ["Stable markets", "Volatile capital markets", "Low interest rates", "Fixed regulations"],
+                    correct: "Volatile capital markets",
+                    explanation: "Section 1.4 mentions volatile capital markets as a 21st-century challenge affecting investor sentiment and returns."
+                },
+                {
+                    question: "Which type of alternative investment includes Over-the-Counter (OTC) derivatives?",
+                    options: ["Venture capital", "Hedge funds", "Real estate", "Commodities"],
+                    correct: "Hedge funds",
+                    explanation: "Table 1.1 classifies complex structured products like OTC derivatives under hedge funds as alternative investments."
+                },
+                {
+                    question: "What dual-class investment offers stable cash flow and liquidity?",
+                    options: ["Private equity", "REITs", "Hedge funds", "Distressed asset funds"],
+                    correct: "REITs",
+                    explanation: "Table 1.1 places REITs in the dual category, offering stable cash flow and liquidity due to their listed status."
+                },
+                {
+                    question: "What historical period saw institutional investing shift to professional management?",
+                    options: ["1920s", "1940-50s", "1970s", "2000s"],
+                    correct: "1940-50s",
+                    explanation: "Section 1.3 notes that institutional investing became professionalized around the 1940-50s to manage large pools of funds."
+                },
+                {
+                    question: "What is a key advantage of alternative investments in emerging markets?",
+                    options: ["High liquidity", "Stellar early-mover returns", "Guaranteed income", "Simple structures"],
+                    correct: "Stellar early-mover returns",
+                    explanation: "Section 1.4 highlights that emerging markets offer opportunities for stellar early or first-mover returns in alternative investments."
+                },
+                {
+                    question: "Which risk do alternative investments help diversify in portfolios?",
+                    options: ["Liquidity risk", "Business risk", "Interest rate risk", "Currency risk"],
+                    correct: "Business risk",
+                    explanation: "Section 1.3 and 1.4 note that alternative investments lower total portfolio risk by diversifying business risk through varied asset classes."
+                },
+                {
+                    question: "What modern geopolitical factor poses a risk to alternative investments?",
+                    options: ["Stable trade policies", "Trade wars", "Fixed interest rates", "Consistent growth"],
+                    correct: "Trade wars",
+                    explanation: "Section 1.4 lists geo-political risks like trade wars as a modern challenge dampening investor sentiment in alternative investments."
+                },
+                {
+                    question: "Which type of AIF investor is defined by a regulatory authority like the SEC?",
+                    options: ["Pension funds", "Accredited investors", "Family offices", "HNIs"],
+                    correct: "Accredited investors",
+                    explanation: "Section 1.1.2 lists accredited investors, regulated by authorities like the SEC, as a key international AIF investor type."
+                },
+                {
+                    question: "What motivates insurance companies to invest in Category III AIFs?",
+                    options: ["Short-term gains", "Long-term corpus management", "Tax benefits", "High liquidity"],
+                    correct: "Long-term corpus management",
+                    explanation: "Section 1.1.2 notes that insurance companies, with large long-term corpuses, seek varied options like AIFs for portfolio management."
+                },
+                {
+                    question: "What hybrid structure does mezzanine capital use in private equity?",
+                    options: ["Equity only", "Debt and equity features", "Fixed income only", "Derivatives only"],
+                    correct: "Debt and equity features",
+                    explanation: "Section 1.2.2 defines mezzanine capital as a hybrid structure with features of both debt and equity in private equity transactions."
+                },
+                {
+                    question: "Which alternative investment avenue includes financing sports leagues?",
+                    options: ["Real estate", "Commodities", "Others (e.g., sports)", "Hedge funds"],
+                    correct: "Others (e.g., sports)",
+                    explanation: "Section 1.2.6 lists sports among alternative asset classes, alongside arts, antiques, and film funds."
+                },
+                {
+                    question: "What was the primary investment focus of institutional investors until the 1920s?",
+                    options: ["Unlisted stocks", "Government securities", "Hedge funds", "Commodities"],
+                    correct: "Government securities",
+                    explanation: "Section 1.3 states that until the 1920s, institutional investors focused on safety with investments in government securities and mortgages."
+                },
+                {
+                    question: "What post-dotcom bust trend refined the venture capital model?",
+                    options: ["Focus on tech start-ups", "Shift to safety", "Increased bank financing", "Reduced IPOs"],
+                    correct: "Focus on tech start-ups",
+                    explanation: "Section 1.3 notes that post-2001 dotcom bust, the VC model refined itself as risk capital for early-stage technology companies."
+                },
+                {
+                    question: "According to Figure 1.2, which AIF type scores poorly on reliable income streams?",
+                    options: ["Infrastructure funds", "Private equity funds", "Hedge funds", "Debt funds"],
+                    correct: "Private equity funds",
+                    explanation: "Section 1.4’s Figure 1.2 explains that private equity funds score poorly on 'Reliable Income Stream' as they focus on growth, not dividends."
+                },
+                {
+                    question: "What modern war-related challenge impacts alternative investment returns?",
+                    options: ["Stable trade", "War scenarios", "Low volatility", "Fixed regulations"],
+                    correct: "War scenarios",
+                    explanation: "Section 1.4 lists war scenarios among 21st-century challenges like geo-political issues affecting alternative investment returns."
+                }
+            ],
+            chapter2: [
+                {
+                    question: "When was the term 'hedge funds' first used, marking the launch of the first hedge fund by A.W. Jones & Co.?",
+                    options: ["1929", "1949", "1969", "1989"],
+                    correct: "1949",
+                    explanation: "The term 'hedge funds' first came into use in 1949 when Alfred Winslow Jones's company, A.W. Jones & Co., launched the first hedge fund, as noted in Section 2.1."
+                },
+                {
+                    question: "What was a key characteristic of hedge funds as described by Alfred Winslow Jones in 1949?",
+                    options: ["Investing only in fixed income securities", "Using incentive fees, short selling, and leverage", "Focusing solely on long-term investments", "Avoiding all forms of leverage"],
+                    correct: "Using incentive fees, short selling, and leverage",
+                    explanation: "Section 2.1 states that hedge funds, as launched by A.W. Jones & Co., were described as using incentive fees, short selling, and leverage to maximize returns."
+                },
+                {
+                    question: "By March 2004, what percentage of the market value of total assets held by FIIs in India did hedge funds account for?",
+                    options: ["2 percent", "5 percent", "10 percent", "15 percent"],
+                    correct: "5 percent",
+                    explanation: "Section 2.1 notes that as of the end of March 2004, hedge funds accounted for about 5 percent of the market value of total assets held by Foreign Institutional Investors (FIIs) in India."
+                },
+                {
+                    question: "Why were offshore hedge funds unable to offer their products to Indian investors within India before 2012?",
+                    options: ["Lack of investor interest", "No regulatory regime for hedge funds in India", "High tax rates", "Ban on foreign investments"],
+                    correct: "No regulatory regime for hedge funds in India",
+                    explanation: "Section 2.1 explains that offshore hedge funds could not offer products within India pre-2012 because there was no regulatory regime for hedge funds to be set up or marketed in India."
+                },
+                {
+                    question: "What was the initial investment limit per year for Indian resident individuals under the Liberalised Remittance Scheme introduced by RBI in 2004?",
+                    options: ["USD 10,000", "USD 25,000", "USD 50,000", "USD 100,000"],
+                    correct: "USD 25,000",
+                    explanation: "Section 2.1 states that on February 4, 2004, RBI introduced the Liberalised Remittance Scheme, permitting Indian resident individuals to invest up to USD 25,000 per year."
+                },
+                {
+                    question: "When did SEBI introduce the SEBI (Alternative Investment Funds) Regulations?",
+                    options: ["May 21, 2008", "May 21, 2010", "May 21, 2012", "May 21, 2014"],
+                    correct: "May 21, 2012",
+                    explanation: "Section 2.1 and the Chapter 2 sample questions confirm that SEBI introduced the SEBI (Alternative Investment Funds) Regulations on May 21, 2012."
+                },
+                {
+                    question: "Which category of AIFs under SEBI regulations includes hedge funds?",
+                    options: ["Category I AIFs", "Category II AIFs", "Category III AIFs", "Category IV AIFs"],
+                    correct: "Category III AIFs",
+                    explanation: "Section 2.1 states that post-2012, SEBI identified hedge funds under 'Category III AIF,' which employ diverse and complex investment strategies."
+                },
+                {
+                    question: "What type of AIF primarily invests in unlisted securities of start-ups and early-stage ventures?",
+                    options: ["Hedge Fund", "Venture Capital Fund", "Private Equity Fund", "Debt Fund"],
+                    correct: "Venture Capital Fund",
+                    explanation: "Section 2.2.1 defines a Venture Capital Fund as an AIF that invests primarily in unlisted securities of start-ups and early-stage ventures."
+                },
+                {
+                    question: "What is the minimum net tangible assets required for an individual to qualify as an angel investor in an Angel Fund?",
+                    options: ["INR 1 crore", "INR 2 crore", "INR 5 crore", "INR 10 crore"],
+                    correct: "INR 2 crore",
+                    explanation: "Section 2.2.2 specifies that an angel investor must have net tangible assets of at least INR 2 crore, excluding the value of their principal residence."
+                },
+                {
+                    question: "Which AIF type invests primarily in equity or equity-linked instruments of later-stage companies?",
+                    options: ["Venture Capital Fund", "Private Equity Fund", "Debt Fund", "Hedge Fund"],
+                    correct: "Private Equity Fund",
+                    explanation: "Section 2.2.3 defines a Private Equity Fund as an AIF that invests primarily in equity or equity-linked instruments of later-stage investee companies."
+                },
+                {
+                    question: "Alternative Investment Funds that primarily invest in debt securities of listed or unlisted investee companies are known as:",
+                    options: ["Venture Capital Funds", "Debt Funds", "Angel Funds", "Infrastructure Funds"],
+                    correct: "Debt Funds",
+                    explanation: "Section 2.2.4 and the Chapter 2 sample questions define Debt Funds as AIFs that invest primarily in debt securities of listed or unlisted investee companies."
+                },
+                {
+                    question: "Which AIF category includes funds that invest in socially or economically desirable sectors like start-ups and infrastructure?",
+                    options: ["Category I AIFs", "Category II AIFs", "Category III AIFs", "Category IV AIFs"],
+                    correct: "Category I AIFs",
+                    explanation: "Section 2.2.11 explains that Category I AIFs invest in start-ups, early-stage ventures, social ventures, SMEs, infrastructure, and other socially or economically desirable sectors."
+                },
+                {
+                    question: "Which AIF category does NOT undertake leverage except for day-to-day operational needs?",
+                    options: ["Category I AIFs", "Category II AIFs", "Category III AIFs", "All AIF Categories"],
+                    correct: "Category II AIFs",
+                    explanation: "Section 2.2.11 states that Category II AIFs do not undertake leverage or borrowing other than to meet day-to-day operational requirements."
+                },
+                {
+                    question: "What is a key feature distinguishing Category III AIFs from other AIF categories?",
+                    options: ["Investing only in unlisted securities", "Employing complex trading strategies and leverage", "Focusing solely on early-stage ventures", "Avoiding all derivative investments"],
+                    correct: "Employing complex trading strategies and leverage",
+                    explanation: "Section 2.2.11 and 2.4.1 note that Category III AIFs employ diverse or complex trading strategies and may use leverage, including through listed or unlisted derivatives."
+                },
+                {
+                    question: "Which investor group is Category III AIF most suitable for, based on its risk-return profile?",
+                    options: ["Retail investors", "Risk-averse individuals", "Institutional investors and UHNI", "Government entities only"],
+                    correct: "Institutional investors and UHNI",
+                    explanation: "Section 2.4.1 states that Category III AIFs are most suited for institutional investors and ultra-high net worth individuals (UHNI) due to their high-risk, high-return profile."
+                },
+                {
+                    question: "Which section of the Private Placement Memorandum (PPM) provides details on the prior experience of the Category III AIF Investment Manager?",
+                    options: ["Investment Objective and Strategy", "Term of the Fund/Scheme", "Redemption", "Manager"],
+                    correct: "Manager",
+                    explanation: "Section 2.4.1 and the Chapter 2 sample questions indicate that the 'Manager' section of the PPM details the prior experience of the Investment Manager."
+                },
+                {
+                    question: "What was the total capital commitment raised by all registered AIFs in India as of September 30, 2024?",
+                    options: ["Rs. 5.43 lakh crores", "Rs. 8.43 lakh crores", "Rs. 12.43 lakh crores", "Rs. 15.43 lakh crores"],
+                    correct: "Rs. 12.43 lakh crores",
+                    explanation: "Section 2.5 reports that capital commitments raised by all registered AIFs surpassed Rs. 12.43 lakh crores as of September 30, 2024."
+                },
+                {
+                    question: "How much capital had Category III AIFs alone raised by September 30, 2024?",
+                    options: ["Rs. 1.84 lakh crores", "Rs. 2.84 lakh crores", "Rs. 3.84 lakh crores", "Rs. 4.84 lakh crores"],
+                    correct: "Rs. 1.84 lakh crores",
+                    explanation: "Section 2.5 states that out of the total capital commitment, Rs. 1.84 lakh crores had been raised by Category III AIFs alone as of September 30, 2024."
+                },
+                {
+                    question: "What event in 2015 aided the growth of Category III AIFs by allowing NRIs and FPIs to invest in AIFs?",
+                    options: ["SEBI (IFSC) Guidelines", "FEMA Notification No. 355/2015-RB", "Insolvency and Bankruptcy Code", "Liberalised Remittance Scheme"],
+                    correct: "FEMA Notification No. 355/2015-RB",
+                    explanation: "Section 2.4 notes that the FEMA Notification No. 355/2015-RB dated November 16, 2015, liberalised investment restrictions for NRIs and FPIs to invest in AIFs."
+                },
+                {
+                    question: "Are Category III AIFs in India investing funds faster to generate alpha using diverse trading strategies?",
+                    options: ["True", "False"],
+                    correct: "True",
+                    explanation: "The Chapter 2 sample question 5 states that Category III AIFs in India have been investing funds faster to generate alpha by employing diverse trading strategies, which aligns with their purpose as described in Section 2.4.1."
+                },
+                {
+                    question: "What restriction prevented hedge funds from being offered to the public in India pre-2012?",
+                    options: ["High tax rates", "Offering to 50+ persons required a prospectus", "Lack of SEBI approval", "Ban on foreign funds"],
+                    correct: "Offering to 50+ persons required a prospectus",
+                    explanation: "Section 2.1 notes that offering shares to at least 50 persons constituted a public offering, requiring a prospectus, which restricted hedge funds pre-2012."
+                },
+                {
+                    question: "What was the base value of the Eurekahedge India Long Short Equities Hedge Fund Index in December 1999?",
+                    options: ["50", "100", "150", "200"],
+                    correct: "100",
+                    explanation: "Section 2.1 states that the Eurekahedge India Long Short Equities Hedge Fund Index is base weighted at 100 as of December 1999."
+                },
+                {
+                    question: "Which RBI circular required banks to seek approval to market offshore hedge funds in India pre-2012?",
+                    options: ["Circular No. 80, March 18, 2004", "Circular No. 39, February 4, 2004", "Circular No. 106, June 1, 2015", "Circular No. 61, June 21, 2017"],
+                    correct: "Circular No. 80, March 18, 2004",
+                    explanation: "Section 2.1 cites RBI Circular No. 80 dated March 18, 2004, requiring prior approval for banks acting as agents for offshore funds."
+                },
+                {
+                    question: "What was the maximum investment limit for Indian mutual funds in foreign securities pre-2012?",
+                    options: ["5% of net assets", "10% of net assets", "15% of net assets", "20% of net assets"],
+                    correct: "10% of net assets",
+                    explanation: "Section 2.1 states that Indian mutual funds could invest only up to 10 percent of their net assets in foreign securities pre-2012."
+                },
+                {
+                    question: "Which IOSCO-suggested characteristic identifies hedge funds?",
+                    options: ["Fixed income focus", "Non-applicability of leverage restrictions", "Daily redemption", "Low-risk investments"],
+                    correct: "Non-applicability of leverage restrictions",
+                    explanation: "Section 2.1 lists non-applicability of borrowing and leverage restrictions as a characteristic IOSCO used to identify hedge funds."
+                },
+                {
+                    question: "What minimum institutional investor contribution was required for hedge funds to register as FIIs in 2004?",
+                    options: ["10%", "20%", "30%", "40%"],
+                    correct: "20%",
+                    explanation: "Section 2.1 states that SEBI required at least 20 percent of a hedge fund’s corpus to be contributed by institutional investors for FII registration in 2004."
+                },
+                {
+                    question: "What was the updated LRS limit for Indian resident individuals in June 2015?",
+                    options: ["USD 50,000", "USD 100,000", "USD 250,000", "USD 500,000"],
+                    correct: "USD 250,000",
+                    explanation: "Section 2.1 notes that the Liberalised Remittance Scheme ceiling was increased to USD 250,000 per individual per financial year in June 2015."
+                },
+                {
+                    question: "Which entity chaired the SEBI Alternative Investment Policy Advisory Committee post-2012?",
+                    options: ["Narayan Murthy", "Alfred Winslow Jones", "SEBI Chairman", "RBI Governor"],
+                    correct: "Narayan Murthy",
+                    explanation: "Section 2.1 mentions that the AIPAC, headed by Shri Narayan Murthy, made recommendations to improve the tax regime for Category III AIFs."
+                },
+                {
+                    question: "What type of AIF invests in unlisted securities of infrastructure projects?",
+                    options: ["Venture Capital Fund", "Infrastructure Fund", "Debt Fund", "Hedge Fund"],
+                    correct: "Infrastructure Fund",
+                    explanation: "Section 2.2.5 defines an Infrastructure Fund as an AIF that invests primarily in unlisted securities or debt of infrastructure project SPVs."
+                },
+                {
+                    question: "Which AIF type focuses on SMEs listed or proposed to be listed on SME exchanges?",
+                    options: ["Social Impact Fund", "SME Fund", "Special Situations Fund", "Private Equity Fund"],
+                    correct: "SME Fund",
+                    explanation: "Section 2.2.6 defines an SME Fund as an AIF that invests primarily in unlisted or SME exchange-listed securities of small and medium enterprises."
+                },
+                {
+                    question: "What is a key feature of a Social Impact Fund?",
+                    options: ["Invests in listed equities", "Focuses on social welfare ventures", "Uses high leverage", "Targets short-term gains"],
+                    correct: "Focuses on social welfare ventures",
+                    explanation: "Section 2.2.8 states that a Social Impact Fund invests in securities of social ventures aimed at promoting social welfare or solving social problems."
+                },
+                {
+                    question: "Which AIF can act as a resolution applicant under the Insolvency and Bankruptcy Code?",
+                    options: ["Hedge Fund", "Special Situations Fund", "Debt Fund", "Venture Capital Fund"],
+                    correct: "Special Situations Fund",
+                    explanation: "Section 2.2.9 defines a Special Situations Fund as an AIF that invests in special situation assets and may act as a resolution applicant under the IBC."
+                },
+                {
+                    question: "What is the tenure of the Corporate Debt Market Development Fund?",
+                    options: ["10 years", "15 years", "20 years", "25 years"],
+                    correct: "15 years",
+                    explanation: "Section 2.2.10 specifies that the Corporate Debt Market Development Fund is a close-ended AIF with a 15-year tenure."
+                },
+                {
+                    question: "Which category of AIFs is open-ended and trades for short-term returns?",
+                    options: ["Category I AIFs", "Category II AIFs", "Category III AIFs", "All Categories"],
+                    correct: "Category III AIFs",
+                    explanation: "Section 2.2.11 notes that Category III AIFs, like hedge funds, are open-ended and trade with a view to make short-term returns."
+                },
+                {
+                    question: "What economic event spurred the growth of Category III AIFs post-liberalisation?",
+                    options: ["Dotcom bust", "Global Financial Crisis", "Economic prosperity", "Trade wars"],
+                    correct: "Economic prosperity",
+                    explanation: "Section 2.4 states that India’s economic prosperity post-liberalisation created high-net-worth investors, boosting Category III AIF growth."
+                },
+                {
+                    question: "Which 2015 initiative established India’s first International Financial Service Centre?",
+                    options: ["GIFT City", "SEBI IFSC Guidelines", "FEMA Notification", "IBC 2016"],
+                    correct: "GIFT City",
+                    explanation: "Section 2.4 mentions the establishment of Gujarat International Financial Tec-City (GIFT City) in 2015 as India’s first IFSC."
+                },
+                {
+                    question: "What legal framework created opportunities for special situation funds in 2016?",
+                    options: ["SEBI (AIF) Regulations", "Insolvency and Bankruptcy Code", "FEMA Notification", "LRS Expansion"],
+                    correct: "Insolvency and Bankruptcy Code",
+                    explanation: "Section 2.4 notes that the Insolvency and Bankruptcy Code 2016 created a new space for special situation funds in distressed assets."
+                },
+                {
+                    question: "What is the minimum tenure of a closed-ended Category III AIF?",
+                    options: ["1 year", "2 years", "3 years", "5 years"],
+                    correct: "3 years",
+                    explanation: "Section 2.4.1 states that closed-ended Category III AIFs have a minimum tenure of 3 years, often with a 2-year lock-in."
+                },
+                {
+                    question: "What PPM section outlines the targeted securities and investment style of a Category III AIF?",
+                    options: ["Redemption", "Manager", "Investment Objective and Strategy", "Term of the Fund"],
+                    correct: "Investment Objective and Strategy",
+                    explanation: "Section 2.4.1 notes that the 'Investment Objective and Strategy' section elaborates on targeted securities, style, and geographic focus."
+                },
+                {
+                    question: "What is the maximum allocation limit Mr. X set for any asset class in his portfolio?",
+                    options: ["20%", "30%", "40%", "50%"],
+                    correct: "40%",
+                    explanation: "Section 2.4.2 states that Mr. X capped exposure to any asset class at a maximum of 40% in his Rs. 100 crore portfolio."
+                },
+                {
+                    question: "Which Category III AIF strategy focuses on overseas listed securities in Mr. X’s example?",
+                    options: ["Long-short strategy", "Market-neutral strategy", "Arbitrage strategy", "Event-based strategy"],
+                    correct: "Market-neutral strategy",
+                    explanation: "Section 2.4.2 describes Category III AIF 'B' as following a market-neutral strategy, investing 50% in overseas listed securities."
+                },
+                {
+                    question: "How many AIFs were registered with SEBI as of December 31, 2024?",
+                    options: ["565", "965", "1465", "1965"],
+                    correct: "1465",
+                    explanation: "Section 2.5 reports that 1465 AIFs were registered with SEBI as of December 31, 2024."
+                },
+                {
+                    question: "What was the starting number of AIFs in India in 2012?",
+                    options: ["11", "21", "31", "41"],
+                    correct: "21",
+                    explanation: "Section 2.5 states that the AIF industry started with just 21 funds in 2012."
+                },
+                {
+                    question: "Which investor type drove Category III AIF growth post-2012?",
+                    options: ["Retail investors", "Ultra-rich billionaires", "Government banks", "Foreign retail investors"],
+                    correct: "Ultra-rich billionaires",
+                    explanation: "Section 2.1 notes that the AIF industry, including Category III, caught the fancy of ultra-rich billionaires post-2012."
+                },
+                {
+                    question: "What new investment opportunity did Category III AIFs identify post-2012?",
+                    options: ["Government bonds", "Commodity futures", "Fixed deposits", "Mutual fund units"],
+                    correct: "Commodity futures",
+                    explanation: "Section 2.1 states that Category III AIFs grew by taking exposures in exchange-traded commodity futures and options post-2012."
+                },
+                {
+                    question: "What special situation strategy do some Category III AIFs focus on?",
+                    options: ["Long-short equity", "Merger arbitrage", "Venture debt", "Infrastructure financing"],
+                    correct: "Merger arbitrage",
+                    explanation: "Section 2.1 mentions that some Category III AIFs focus on special situations like merger arbitrage, buybacks, and delistings."
+                },
+                {
+                    question: "What pre-2012 rule allowed hedge funds to invest in India via FII sub-accounts?",
+                    options: ["Fit and proper criteria", "No regulation", "Public offering", "RBI approval"],
+                    correct: "Fit and proper criteria",
+                    explanation: "Section 2.1 notes that hedge funds could invest through a sub-account if sponsored by a registered FII meeting 'fit and proper' requirements."
+                },
+                {
+                    question: "What characterized the 2012-2019 period for Category III AIFs in India?",
+                    options: ["Decline", "Consolidation and transformation", "Stagnation", "Rapid decline"],
+                    correct: "Consolidation and transformation",
+                    explanation: "Section 2.1 describes 2012-2019 as a consolidation and transformation phase for Category III AIFs, marked by reforms and growth."
+                },
+                {
+                    question: "What experience qualifies an individual as an angel investor under SEBI?",
+                    options: ["5 years in banking", "Early-stage investment experience", "10 years in retail", "Mutual fund management"],
+                    correct: "Early-stage investment experience",
+                    explanation: "Section 2.2.2 lists early-stage investment experience as a condition for an individual to qualify as an angel investor."
+                },
+                {
+                    question: "What type of financing do some debt funds provide to distressed companies?",
+                    options: ["Equity upside", "Short-term loans", "Insolvency resolution", "Fixed income"],
+                    correct: "Insolvency resolution",
+                    explanation: "Section 2.2.4 notes that distressed debt financing through private debt funds supports insolvency resolution under the IBC."
+                },
+                {
+                    question: "What lock-in period constraint affects HNI suitability for closed-ended Category III AIFs?",
+                    options: ["1 year", "2 years", "3 years", "5 years"],
+                    correct: "2 years",
+                    explanation: "Section 2.4.1 states that closed-ended Category III AIFs often have a 2-year lock-in, impacting suitability for HNIs with shorter horizons."
+                },
+                {
+                    question: "According to Table 2.1, what risk mitigation strategy do Category I AIFs use?",
+                    options: ["High leverage", "Smaller tranches", "Long-short positions", "Large investments"],
+                    correct: "Smaller tranches",
+                    explanation: "Table 2.1 notes that Category I AIFs mitigate high mortality risk in early-stage ventures by investing in smaller tranches."
+                },
+                {
+                    question: "What trend marked the growth of Category III AIFs post-2012?",
+                    options: ["Fewer fund launches", "Increased fund houses", "Decline in HNIs", "Reduced SEBI oversight"],
+                    correct: "Increased fund houses",
+                    explanation: "Section 2.1 states that post-2012, several new fund houses set up Category III AIFs, marking industry growth."
+                },
+                {
+                    question: "What regulatory change encouraged mutual fund managers to launch Category III AIFs?",
+                    options: ["FEMA liberalization", "TER rationalization", "IBC introduction", "GIFT City"],
+                    correct: "TER rationalization",
+                    explanation: "Section 2.1 notes that rationalization of Total Expense Ratio (TER) amendments encouraged mutual fund managers to launch Category III AIFs."
+                },
+                {
+                    question: "What additional regulatory body oversees Category III AIFs alongside SEBI?",
+                    options: ["RBI", "IRDAI", "FEMA", "IOSCO"],
+                    correct: "RBI",
+                    explanation: "Section 2.1 mentions that the Reserve Bank of India (RBI) Circular No. 80 in 2004 required banks to seek approval for marketing offshore hedge funds, indicating RBI's regulatory role alongside SEBI for Category III AIFs."
+                }
+            ],
+            chapter3: [
+                {
+                    question: "What is a key feature of Category III AIFs that distinguishes them from traditional investments like mutual funds?",
+                    options: ["Investing only in unlisted securities", "Using leverage and complex trading strategies", "Focusing solely on long-term gains", "Avoiding all derivative investments"],
+                    correct: "Using leverage and complex trading strategies",
+                    explanation: "Section 3.1 states that Category III AIFs are permitted to take leverage positions through futures, options, and other strategies, distinguishing them from traditional counterparts like mutual funds."
+                },
+                {
+                    question: "Which type of fund commonly uses the Category III AIF structure to invest in listed company securities at a discount?",
+                    options: ["Venture Capital Funds", "Private Equity Funds", "PIPE Funds", "Debt Funds"],
+                    correct: "PIPE Funds",
+                    explanation: "Section 3.1 notes that PIPE (Private Investment in Public Equity) Funds, which purchase securities of publicly traded stocks at a discount, commonly use the Category III AIF structure."
+                },
+                {
+                    question: "What does the 'Unit' in a Category III AIF represent?",
+                    options: ["The manager’s fee", "Beneficial interest of investors in the AIF", "The total corpus of the fund", "A fixed income security"],
+                    correct: "Beneficial interest of investors in the AIF",
+                    explanation: "Section 3.2 defines 'Unit' as the beneficial interest of investors in the AIF or its scheme, which may be fully or partly paid-up."
+                },
+                {
+                    question: "What document outlines the investment strategy and terms of a Category III AIF?",
+                    options: ["Contribution Agreement", "Private Placement Memorandum (PPM)", "Stewardship Code", "Due Diligence Report"],
+                    correct: "Private Placement Memorandum (PPM)",
+                    explanation: "Section 3.2 explains that the PPM sets out the terms, conditions, and investment strategy of the Category III AIF, issued to prospective investors."
+                },
+                {
+                    question: "What is the typical range of management fees charged by Category III AIF managers?",
+                    options: ["0.5% to 1%", "1% to 2%", "2% to 3%", "3% to 4%"],
+                    correct: "1% to 2%",
+                    explanation: "Section 3.2 states that managers charge a fixed management fee, generally 1% to 2% on the Net Asset Value of the funds for that year."
+                },
+                {
+                    question: "Which type of investors would least likely invest in a Category III AIF?",
+                    options: ["Public Pension Funds", "Risk-averse Retail Investors", "Insurance Companies", "Sovereign Wealth Funds"],
+                    correct: "Risk-averse Retail Investors",
+                    explanation: "Section 3.2 and the Chapter 3 sample question 1 indicate that Category III AIFs involve high risk and illiquidity, making them unsuitable for risk-averse retail investors."
+                },
+                {
+                    question: "As per the SEBI (Alternative Investment Funds) Regulations, 2012, the Sponsor or Manager of a Category III AIF shall have a minimum capital commitment of:",
+                    options: ["1% of the amount raised in a scheme or Rs. 50 lakhs", "5% of the corpus or Rs. 10 crores", "2.5% of the corpus or Rs. 5 crores", "No minimum required"],
+                    correct: "5% of the corpus or Rs. 10 crores",
+                    explanation: "Section 3.3.2 and the Chapter 3 sample question 2 state that the sponsor or manager must have a continuing interest of not less than 5% of the corpus or Rs. 10 crores, whichever is lower."
+                },
+                {
+                    question: "What is the minimum investment amount an investor must commit to a Category III AIF?",
+                    options: ["Rs. 25 lakhs", "Rs. 50 lakhs", "Rs. 1 crore", "Rs. 2 crore"],
+                    correct: "Rs. 1 crore",
+                    explanation: "Section 3.3.2 specifies that a Category III AIF shall not accept a capital commitment less than Rs. 1 crore from an investor, except for certain exceptions."
+                },
+                {
+                    question: "What term describes the process of calling capital commitments from investors as needed?",
+                    options: ["Drawdown", "Capital Invested", "First Close", "Distribution"],
+                    correct: "Drawdown",
+                    explanation: "Section 3.3.3 defines drawdown as the process by which the manager calls capital commitments from investors, known as 'capital calls.'"
+                },
+                {
+                    question: "What is the purpose of conducting due diligence at the fund level for Category III AIFs?",
+                    options: ["To assess the manager’s salary", "To evaluate operational and market risks", "To determine the fund’s tax rate", "To select investee companies"],
+                    correct: "To evaluate operational and market risks",
+                    explanation: "Section 3.3.4 states that due diligence at the fund level is necessary to assess operational risks, market risks, regulatory risks, and other factors faced by the AIF."
+                },
+                {
+                    question: "What does ESG stand for in the context of Category III AIF investments?",
+                    options: ["Economic Stability Goals", "Environmental, Social, and Governance", "Equity Selection Guidelines", "Enhanced Security Growth"],
+                    correct: "Environmental, Social, and Governance",
+                    explanation: "Section 3.3.5 defines ESG as Environmental, Social, and Governance, a protocol for evaluating corporate behavior in alternative investments."
+                },
+                {
+                    question: "What is the maximum time allowed to declare the first close of a Category III AIF after SEBI records the PPM?",
+                    options: ["6 months", "12 months", "18 months", "24 months"],
+                    correct: "12 months",
+                    explanation: "Section 3.3.6 notes that the first close must be declared within 12 months from the date SEBI takes the PPM on record."
+                },
+                {
+                    question: "What fee is charged to investors for redemptions made after the lock-in period but before the fund tenure ends?",
+                    options: ["Exit Load", "Incentive Fee", "Redemption Gate", "Hurdle Rate"],
+                    correct: "Exit Load",
+                    explanation: "Section 3.3.7.1 and the Chapter 3 sample question 3 define Exit Load as the fee charged on redemptions after the lock-in period but before the fund tenure expires."
+                },
+                {
+                    question: "What is the typical range of exit load charged by Category III AIF managers after the lock-in period?",
+                    options: ["0% to 2%", "0% to 5%", "5% to 10%", "10% to 15%"],
+                    correct: "0% to 5%",
+                    explanation: "Section 3.3.7.1 states that after the lock-in period, the exit load charged can range between 0% to 5% of the NAV of the fund."
+                },
+                {
+                    question: "Which fee is charged by managers for outperforming the hurdle rate in a Category III AIF?",
+                    options: ["Exit Load", "High Water Mark", "Management Fees", "Performance Fees"],
+                    correct: "Performance Fees",
+                    explanation: "Section 3.3.8 and the Chapter 3 sample question 4 explain that Performance Fees are charged as an incentive for managers to maximize returns above the hurdle rate."
+                },
+                {
+                    question: "What is the common performance fee percentage in a '2-20' Category III AIF structure?",
+                    options: ["10%", "15%", "20%", "25%"],
+                    correct: "20%",
+                    explanation: "Section 3.3.8 notes that a '2-20' structure implies a 2% management fee and 20% performance fee on additional returns."
+                },
+                {
+                    question: "Do managers of AIFs prefer to include a catch-up clause with a high catch-up rate in the Contribution Agreement?",
+                    options: ["True", "False"],
+                    correct: "True",
+                    explanation: "Section 3.3.9 and the Chapter 3 sample question 5 state that managers prefer a catch-up clause with a high rate to receive a larger share of residual profits."
+                },
+                {
+                    question: "What is the first step in a typical distribution waterfall for a Category III AIF?",
+                    options: ["Payment of hurdle return", "Return of capital contribution", "Payment of catch-up rate", "Distribution of excess profits"],
+                    correct: "Return of capital contribution",
+                    explanation: "Section 3.3.9 outlines the distribution waterfall, starting with the return of capital contribution to investors."
+                },
+                {
+                    question: "Which investment strategy involves Category III AIFs taking both long and short positions in equities?",
+                    options: ["Market-neutral", "Arbitrage", "Event-based", "Pre-IPO deals"],
+                    correct: "Market-neutral",
+                    explanation: "Section 3.4 mentions that Category III AIFs can take market-neutral equity positions, including both long and short positions."
+                },
+                {
+                    question: "What is the minimum lock-in period for Category III AIF investments in pre-IPO deals?",
+                    options: ["3 months", "6 months", "9 months", "12 months"],
+                    correct: "6 months",
+                    explanation: "Section 3.4 states that investments in pre-IPO deals by Category III AIFs are subject to a minimum lock-in period of 6 months."
+                },
+                {
+                    question: "How does a Category III AIF differ from a PMS regarding fund pooling?",
+                    options: ["Both pool funds", "PMS pools funds, AIF does not", "AIF pools funds, PMS does not", "Neither pools funds"],
+                    correct: "AIF pools funds, PMS does not",
+                    explanation: "Section 3.5.1 explains that Category III AIFs pool investor funds collectively, while PMS does not pool funds, maintaining separate accounts for each investor."
+                },
+                {
+                    question: "What is the minimum investment amount for a PMS compared to a Category III AIF?",
+                    options: ["Rs. 25 lakhs for PMS, Rs. 1 crore for AIF", "Rs. 50 lakhs for PMS, Rs. 1 crore for AIF", "Rs. 1 crore for both", "Rs. 50 lakhs for both"],
+                    correct: "Rs. 50 lakhs for PMS, Rs. 1 crore for AIF",
+                    explanation: "Section 3.5.1 states that PMS requires a minimum of Rs. 50 lakhs, while Section 3.3.2 notes Rs. 1 crore for Category III AIFs (except for certain exceptions)."
+                },
+                {
+                    question: "Unlike mutual funds, what can Category III AIFs do that mutual funds cannot?",
+                    options: ["Invest in equities", "Use leverage", "Offer daily NAV", "Pool funds"],
+                    correct: "Use leverage",
+                    explanation: "Section 3.5.2 highlights that Category III AIFs can use leverage, while mutual funds are not allowed to, as per their regulatory framework."
+                },
+                {
+                    question: "What does 'alpha' measure in the context of Category III AIFs?",
+                    options: ["Systematic risk", "Excess return over the benchmark", "Portfolio volatility", "Market correlation"],
+                    correct: "Excess return over the benchmark",
+                    explanation: "Section 3.7.1 defines alpha as the excess return generated by the Category III AIF manager over the benchmark."
+                },
+                {
+                    question: "What does 'beta' measure in a Category III AIF portfolio?",
+                    options: ["Excess return", "Systematic risk", "Diversification benefit", "Illiquidity risk"],
+                    correct: "Systematic risk",
+                    explanation: "Section 3.7.2 defines beta as a measure of systematic risk, reflecting the portfolio’s sensitivity to market risk factors."
+                },
+                {
+                    question: "What type of securities can Category III AIFs invest in beyond direct company investments?",
+                    options: ["Only government bonds", "Units of other Category I and II AIFs", "Only listed equities", "Mutual fund shares"],
+                    correct: "Units of other Category I and II AIFs",
+                    explanation: "Section 3.1 states that Category III AIFs can invest in units of other Category I and II AIFs registered with SEBI, broadening their investment scope."
+                },
+                {
+                    question: "What investment style combines value and growth investing in Category III AIFs?",
+                    options: ["Long-short", "GARP", "Market-neutral", "Arbitrage"],
+                    correct: "GARP",
+                    explanation: "Section 3.2 notes that Category III AIFs may use a GARP (Growth at a Reasonable Price) style, combining tenets of value and growth investing."
+                },
+                {
+                    question: "What is the maximum percentage of investable funds a Category III AIF can allocate to one investee company?",
+                    options: ["5%", "10%", "15%", "20%"],
+                    correct: "10%",
+                    explanation: "Section 3.2 specifies that managers can invest a maximum of 10 percent of investable funds in one investee company, unless it’s a large value fund."
+                },
+                {
+                    question: "What minimum investment defines a 'Large Value Fund for Accredited Investors' in Category III AIFs?",
+                    options: ["Rs. 25 crore", "Rs. 50 crore", "Rs. 70 crore", "Rs. 100 crore"],
+                    correct: "Rs. 70 crore",
+                    explanation: "Section 3.2 defines a Large Value Fund as one where each accredited investor invests not less than Rs. 70 crore."
+                },
+                {
+                    question: "Which investor type uses Category III AIFs to manage long-term corpuses with principal protection?",
+                    options: ["Hedge funds", "Endowments", "Retail investors", "Venture capitalists"],
+                    correct: "Endowments",
+                    explanation: "Section 3.3.1.1 states that endowments, with long-term horizons and principal protection objectives, are key investors in the hedge fund industry."
+                },
+                {
+                    question: "What regulatory cap limits Insurance Companies’ investment in Category III AIFs in India?",
+                    options: ["No cap", "Exposure to unlisted assets", "10% of AUM", "20% of corpus"],
+                    correct: "Exposure to unlisted assets",
+                    explanation: "Section 3.3.1.1 notes that Insurance Companies face regulatory caps on unlisted asset exposures, limiting their role in Category III AIF growth."
+                },
+                {
+                    question: "What is the minimum investment amount for employees or directors of a Category III AIF?",
+                    options: ["Rs. 10 lakhs", "Rs. 25 lakhs", "Rs. 50 lakhs", "Rs. 1 crore"],
+                    correct: "Rs. 25 lakhs",
+                    explanation: "Section 3.3.2 specifies that the minimum investment value for employees or directors of the AIF or manager is Rs. 25 lakhs."
+                },
+                {
+                    question: "What is the minimum corpus size for each scheme of a Category III AIF?",
+                    options: ["Rs. 10 crore", "Rs. 20 crore", "Rs. 30 crore", "Rs. 50 crore"],
+                    correct: "Rs. 20 crore",
+                    explanation: "Section 3.3.2 states that each scheme of a Category III AIF must have a total corpus of not less than Rs. 20 crore."
+                },
+                {
+                    question: "What term refers to the undrawn capital commitment in a Category III AIF?",
+                    options: ["Dry Powder", "Invested Capital", "Catch-up", "Hurdle Rate"],
+                    correct: "Dry Powder",
+                    explanation: "Section 3.3.3 defines the undrawn amount of capital commitment (e.g., Rs. 350 crore in an example) as 'Dry Powder.'"
+                },
+                {
+                    question: "What type of due diligence assesses investment risks in Category III AIF investee companies?",
+                    options: ["Operational", "Financial and Business", "Regulatory", "Reputational"],
+                    correct: "Financial and Business",
+                    explanation: "Section 3.3.4 notes that financial and business due diligence is significant at the investee company level to understand investment risks."
+                },
+                {
+                    question: "When was the UN Principles for Responsible Investment (PRI) launched to promote ESG?",
+                    options: ["1990", "2006", "2012", "2020"],
+                    correct: "2006",
+                    explanation: "Section 3.3.5 states that the UN launched the PRI in 2006 to integrate ESG practices into investment decisions."
+                },
+                {
+                    question: "Which SEBI code mandates Category III AIFs to monitor investee companies’ ESG risks?",
+                    options: ["Stewardship Code", "Conflict of Interest Policy", "Risk Management Framework", "Operational Guidelines"],
+                    correct: "Stewardship Code",
+                    explanation: "Section 3.3.5 notes that SEBI’s Stewardship Code requires Category III AIFs to monitor investee companies, including ESG risks."
+                },
+                {
+                    question: "What expense can Category III AIF managers NOT charge to the fund?",
+                    options: ["Legal fees for fund setup", "Office maintenance costs", "Custodian fees", "Audit costs"],
+                    correct: "Office maintenance costs",
+                    explanation: "Section 3.3.7.2 states that associated costs like office maintenance must be borne by the manager, not charged to the fund."
+                },
+                {
+                    question: "What is the purpose of a hurdle rate in a Category III AIF?",
+                    options: ["Guarantee returns", "Set a threshold for manager fees", "Limit investor withdrawals", "Cap fund expenses"],
+                    correct: "Set a threshold for manager fees",
+                    explanation: "Section 3.3.7.4 defines the hurdle rate as the threshold return investors must receive before managers earn additional returns."
+                },
+                {
+                    question: "What does the high-water mark ensure in Category III AIF fee calculations?",
+                    options: ["Minimum investor returns", "Highest NAV for performance fees", "Fixed management fees", "Daily NAV updates"],
+                    correct: "Highest NAV for performance fees",
+                    explanation: "Section 3.3.7.4 notes that the high-water mark is the highest NAV achieved, used to compute incremental returns for performance fees."
+                },
+                {
+                    question: "What percentage range can performance fees reach in Category III AIFs?",
+                    options: ["0-10%", "0-20%", "0-30%", "0-40%"],
+                    correct: "0-30%",
+                    explanation: "Section 3.3.8 states that performance fees can range from 0 to 30 percent of additional returns, depending on fund specifics."
+                },
+                {
+                    question: "What is the ideal catch-up rate preferred by Category III AIF managers?",
+                    options: ["50%", "75%", "100%", "125%"],
+                    correct: "100%",
+                    explanation: "Section 3.3.9 notes that managers prefer a 100% catch-up rate, distributing all residual profits to them until their predetermined share is met."
+                },
+                {
+                    question: "Which Category III AIF strategy seeks to exploit mispricing between related securities?",
+                    options: ["Market-neutral", "Arbitrage", "Event-based", "Pre-IPO deals"],
+                    correct: "Arbitrage",
+                    explanation: "Section 3.4 states that Category III AIFs explore arbitrage opportunities from potential mispricing of related equity and debt securities."
+                },
+                {
+                    question: "What type of corporate event do Category III AIFs target for short-term gains?",
+                    options: ["IPO launches", "Mergers", "Dividend payouts", "Bond issuances"],
+                    correct: "Mergers",
+                    explanation: "Section 3.4 notes that Category III AIFs invest during corporate restructuring events like mergers to benefit from short-term mispricing."
+                },
+                {
+                    question: "What is the key difference in ownership between Category III AIFs and PMS?",
+                    options: ["AIF investors own securities", "PMS investors own units", "AIF investors own units", "Both own securities"],
+                    correct: "AIF investors own units",
+                    explanation: "Section 3.5.1 explains that AIF investors own 'units' of the fund, while PMS investors directly own the securities purchased."
+                },
+                {
+                    question: "What is the maximum number of investors allowed in a Category III AIF?",
+                    options: ["500", "1000", "1500", "2000"],
+                    correct: "1000",
+                    explanation: "Section 3.5.2 states that the maximum number of investors in a Category III AIF cannot exceed 1000."
+                },
+                {
+                    question: "Which global hedge fund strategy uses algorithms to track price movements?",
+                    options: ["Multi-strategy", "Managed Futures", "Fund of Funds", "Equity-based"],
+                    correct: "Managed Futures",
+                    explanation: "Section 3.6 notes that Commodity Trading Advisors (CTAs) use a Managed Futures strategy with systematic algorithms to track price movements."
+                },
+                {
+                    question: "What is the maximum investment limit in one commodity for Category III AIFs?",
+                    options: ["5% of investable funds", "10% of investable funds", "15% of investable funds", "20% of investable funds"],
+                    correct: "10% of investable funds",
+                    explanation: "Section 3.6 states that Category III AIFs can invest up to 10 percent of investable funds in one underlying commodity."
+                },
+                {
+                    question: "What risk must Category III AIFs report quarterly to investors?",
+                    options: ["Liquidity risk only", "Concentration risk", "Interest rate risk only", "Taxation risk"],
+                    correct: "Concentration risk",
+                    explanation: "Section 3.7 lists concentration risk among material risks Category III AIFs must report quarterly within 60 days."
+                },
+                {
+                    question: "In the XYZ Investments example, what percentage of the portfolio was re-allocated to a Category III AIF?",
+                    options: ["10%", "20%", "30%", "40%"],
+                    correct: "20%",
+                    explanation: "Section 3.7’s Example 2 states that XYZ Investments re-allocated 20% of its portfolio (half of the 40% in large-cap stocks) to a Category III AIF."
+                },
+                {
+                    question: "What qualification is prohibited for a Category III AIF trustee?",
+                    options: ["Financial expertise", "Manager role", "Integrity", "Industry experience"],
+                    correct: "Manager role",
+                    explanation: "Section 3.3.1.3 states that a trustee cannot be the manager, director, or employee of the investment management company."
+                },
+                {
+                    question: "What mandatory action must Category III AIF sponsors take for transparency?",
+                    options: ["Appoint a custodian", "Publish daily NAV", "Limit investors to 500", "Avoid leverage"],
+                    correct: "Appoint a custodian",
+                    explanation: "Section 3.3.1.2 requires sponsors or managers to appoint a SEBI-registered custodian for safekeeping securities."
+                },
+                {
+                    question: "What potential conflict must Category III AIF managers disclose?",
+                    options: ["Portfolio returns", "Co-investments", "Daily NAV", "Tax rates"],
+                    correct: "Co-investments",
+                    explanation: "Section 3.3.1.2 lists conflicts within co-investments as an example that managers must disclose to investors."
+                },
+                {
+                    question: "What marketable security can Category III AIFs use for liquidity?",
+                    options: ["Corporate bonds", "Treasury bills", "Unlisted stocks", "Private debt"],
+                    correct: "Treasury bills",
+                    explanation: "Section 3.4 notes that Category III AIFs can invest in marketable securities like treasury bills for additional liquidity."
+                },
+                {
+                    question: "Why do Fund of Funds charge higher fees in global hedge fund markets?",
+                    options: ["Single-strategy focus", "Multiple fund investments", "Low diversification", "Fixed returns"],
+                    correct: "Multiple fund investments",
+                    explanation: "Section 3.6 explains that Fund of Funds charge higher fees due to investing in multiple hedge funds, adding a layer of management fees."
+                },
+                {
+                    question: "What benefit do multi-strategy funds offer over Fund of Funds globally?",
+                    options: ["Higher leverage", "Controlled fees", "Single asset focus", "Guaranteed returns"],
+                    correct: "Controlled fees",
+                    explanation: "Section 3.6 states that multi-strategy funds control fee payouts by deploying multiple strategies within one fund, unlike Fund of Funds."
+                },
+                {
+                    question: "What extra-financial risk must Category III AIFs monitor?",
+                    options: ["Market risk", "ESG risk", "Liquidity risk", "Currency risk"],
+                    correct: "ESG risk",
+                    explanation: "Section 3.7 lists ESG risk among extra-financial risks that Category III AIFs must report quarterly to investors."
+                },
+                {
+                    question: "What does return attribution help Category III AIF managers identify?",
+                    options: ["Tax liabilities", "Sources of alpha", "Fund expenses", "Investor withdrawals"],
+                    correct: "Sources of alpha",
+                    explanation: "Section 3.7 notes that return attribution identifies sources of alpha, aiding future investment decisions and portfolio construction."
+                }
+            ]
+        };
+
+
+
+        let currentQuizData = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        let answerSubmitted = false;
+        let timerInterval = null;
+        let timeLeft = 60; // 60 seconds per question
+
+        // DOM elements
+        const summarySelect = document.getElementById('summarySelect');
+        const mcqSelect = document.getElementById('mcqSelect');
+        const summaryContainer = document.getElementById('summaryContainer');
+        const quizContainer = document.getElementById('quizContainer');
+        const reviewContainer = document.getElementById('reviewContainer');
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const resultEl = document.getElementById('result');
+        const scoreEl = document.getElementById('score');
+        const progressEl = document.getElementById('progress');
+        const progressTextEl = document.getElementById('progressText');
+        const timerEl = document.getElementById('timer');
+        const reviewContentEl = document.getElementById('reviewContent');
+
+        // Summary selection with HTML formatting
+        summarySelect.addEventListener('change', () => {
+            const selectedSummary = summarySelect.value;
+            quizContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+
+            if (selectedSummary === '') {
+                summaryContainer.style.display = 'none';
+            } else {
+                summaryContainer.style.display = 'block';
+                summaryContainer.innerHTML = `
+            <h2>${summaries[selectedSummary].title}</h2>
+            ${summaries[selectedSummary].text}
+        `;
+            }
+            mcqSelect.value = ''; // Reset MCQ dropdown
+        });
+
+
+        // MCQ selection (unchanged)
+        mcqSelect.addEventListener('change', () => {
+            const selectedChapter = mcqSelect.value;
+            summaryContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+
+            if (selectedChapter === '') {
+                quizContainer.style.display = 'none';
+            } else {
+                currentQuizData = quizData[selectedChapter];
+                userAnswers = new Array(currentQuizData.length).fill(null);
+                currentQuestion = 0;
+                score = 0;
+                quizContainer.style.display = 'block';
+                loadQuestion();
+            }
+            summarySelect.value = ''; // Reset Summary dropdown
+        });
+
+        // Load question (unchanged)
+        function loadQuestion() {
+            clearInterval(timerInterval);
+            timeLeft = 60;
+            timerEl.textContent = `Time Left: ${timeLeft}s`;
+            startTimer();
+
+            const currentQuiz = currentQuizData[currentQuestion];
+            questionEl.textContent = `${currentQuestion + 1}. ${currentQuiz.question}`;
+            optionsEl.innerHTML = '';
+            answerSubmitted = userAnswers[currentQuestion] !== null && userAnswers[currentQuestion].submitted;
+
+            currentQuiz.options.forEach(option => {
+                const optionEl = document.createElement('div');
+                optionEl.classList.add('option');
+                optionEl.textContent = option;
+                if (userAnswers[currentQuestion] && userAnswers[currentQuestion].answer === option) {
+                    optionEl.classList.add('selected');
+                }
+                if (answerSubmitted) {
+                    if (option === currentQuiz.correct) {
+                        optionEl.classList.add('correct');
+                    } else if (option === userAnswers[currentQuestion].answer) {
+                        optionEl.classList.add('incorrect');
+                    }
+                    optionEl.style.pointerEvents = 'none';
+                } else {
+                    optionEl.addEventListener('click', () => selectAnswer(option, optionEl));
+                }
+                optionsEl.appendChild(optionEl);
+            });
+
+            progressTextEl.textContent = `Question ${currentQuestion + 1} of ${currentQuizData.length}`;
+            progressEl.style.width = `${((currentQuestion + 1) / currentQuizData.length) * 100}%`;
+            nextBtn.textContent = currentQuestion === currentQuizData.length - 1 ? 'Finish' : 'Next Question';
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            scoreEl.textContent = `Score: ${score} / ${currentQuestion + 1}`;
+            resultEl.innerHTML = answerSubmitted
+                ? `${userAnswers[currentQuestion].answer === currentQuiz.correct ? 'Correct!' : 'Incorrect!'} 
+                   The correct answer is: "${currentQuiz.correct}"
+                   <div class="explanation">Explanation: ${currentQuiz.explanation}</div>`
+                : '';
+        }
+
+        // Select answer (unchanged)
+        function selectAnswer(option, element) {
+            if (answerSubmitted || userAnswers[currentQuestion]) return;
+
+            userAnswers[currentQuestion] = { answer: option, submitted: false };
+            const options = optionsEl.children;
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+            element.classList.add('selected');
+        }
+
+        // Submit answer and show feedback (unchanged)
+        function submitAnswer() {
+            const currentQuiz = currentQuizData[currentQuestion];
+            if (!userAnswers[currentQuestion]) {
+                alert('Please select an answer!');
+                return false;
+            }
+
+            if (!userAnswers[currentQuestion].submitted) {
+                userAnswers[currentQuestion].submitted = true;
+                answerSubmitted = true;
+                clearInterval(timerInterval);
+                const isCorrect = userAnswers[currentQuestion].answer === currentQuiz.correct;
+                if (isCorrect && !userAnswers[currentQuestion].counted) {
+                    score++;
+                    userAnswers[currentQuestion].counted = true;
+                }
+
+                const options = optionsEl.children;
+                for (let i = 0; i < options.length; i++) {
+                    const optionText = options[i].textContent;
+                    if (optionText === currentQuiz.correct) {
+                        options[i].classList.add('correct');
+                    } else if (optionText === userAnswers[currentQuestion].answer && !isCorrect) {
+                        options[i].classList.add('incorrect');
+                    }
+                    options[i].style.pointerEvents = 'none';
+                }
+
+                resultEl.innerHTML = `
+                    ${isCorrect ? 'Correct!' : 'Incorrect!'} 
+                    The correct answer is: "${currentQuiz.correct}"
+                    <div class="explanation">Explanation: ${currentQuiz.explanation}</div>
+                `;
+                scoreEl.textContent = `Score: ${score} / ${currentQuestion + 1}`;
+            }
+            return true;
+        }
+
+        // Timer function (unchanged)
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = `Time Left: ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitAnswer();
+                }
+            }, 1000);
+        }
+
+        // Previous button (unchanged)
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        });
+
+        // Next button (unchanged)
+        nextBtn.addEventListener('click', () => {
+            if (!answerSubmitted) {
+                if (submitAnswer()) {
+                    return; // Wait for next click to proceed
+                }
+            } else if (currentQuestion < currentQuizData.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showReview();
+            }
+        });
+
+        // Show review mode (unchanged)
+        function showReview() {
+            clearInterval(timerInterval);
+            quizContainer.style.display = 'none';
+            reviewContainer.style.display = 'block';
+            reviewContentEl.innerHTML = '';
+
+            currentQuizData.forEach((quiz, index) => {
+                const userAnswer = userAnswers[index] ? userAnswers[index].answer : "Not answered";
+                const isCorrect = userAnswer === quiz.correct;
+                const reviewItem = document.createElement('div');
+                reviewItem.classList.add('review-item');
+                reviewItem.innerHTML = `
+                    <p><strong>Question ${index + 1}:</strong> ${quiz.question}</p>
+                    <p><strong>Your Answer:</strong> ${userAnswer} (${isCorrect ? 'Correct' : 'Incorrect'})</p>
+                    <p><strong>Correct Answer:</strong> ${quiz.correct}</p>
+                    <p><strong>Explanation:</strong> ${quiz.explanation}</p>
+                `;
+                reviewContentEl.appendChild(reviewItem);
+            });
+
+            reviewContentEl.innerHTML += `<p><strong>Final Score:</strong> ${score} out of ${currentQuizData.length} (${Math.round((score / currentQuizData.length) * 100)}%)</p>`;
+        }
+    </script>
+</body>
+
+</html>
