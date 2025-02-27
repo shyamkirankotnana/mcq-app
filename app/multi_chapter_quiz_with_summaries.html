@@ -265,6 +265,8 @@
                 <option value="chapter3">Chapter 3: Category III AIF Ecosystem</option>
                 <option value="chapter4">Chapter 4: Category III AIF: Fund Structures and Service Providers</option>
                 <option value="chapter5">Chapter 5: Regulatory Framework</option>
+                <option value="chapter6">Chapter 6: Performance Measurement and Risk Management</option>
+
             </select>
         </div>
     </div>
@@ -3804,7 +3806,371 @@
                     correct: "By ensuring transparency, standardization, and investor protection through fair computation of fees, returns, and risks",
                     explanation: "The Final Revision emphasizes that calculations (e.g., fees, NAV, risks) support SEBI’s goals by ensuring transparency, standardization, and investor protection in highly leveraged, dynamic environments."
                 }
+            ],
+
+            chapter6: [
+                {
+                    question: "What is the primary purpose of Management Fees in a Category III AIF?",
+                    options: ["To incentivize profit generation for investors", "To compensate the Investment Manager for fund management services", "To cover losses incurred by the fund", "To distribute profits directly to investors"],
+                    correct: "To compensate the Investment Manager for fund management services",
+                    explanation: "Management Fees are paid to the Investment Manager for providing fund management services, regardless of the fund’s gains or losses, as described in Section 6.1.1."
+                },
+                {
+                    question: "What is the typical range of Management Fees for a Category III AIF as a percentage of Gross Net Asset Value (GNAV)?",
+                    options: ["0.5% to 1%", "1% to 2.5%", "2.5% to 5%", "5% to 10%"],
+                    correct: "1% to 2.5%",
+                    explanation: "Management Fees for Category III AIFs typically range from 1% to 2.5% of the Gross Net Asset Value, as outlined in Section 6.1.1."
+                },
+                {
+                    question: "How often are Management Fees typically paid in a Category III AIF?",
+                    options: ["Monthly", "Quarterly, semi-annually, or yearly", "Annually only", "At the fund’s dissolution only"],
+                    correct: "Quarterly, semi-annually, or yearly",
+                    explanation: "Management Fees are generally paid on a periodic basis, such as quarterly, semi-annually, or yearly, as specified in the Private Placement Memorandum, per Section 6.1.1."
+                },
+                {
+                    question: "Which of the following expenses is included in the Set-up Costs of a Category III AIF?",
+                    options: ["Daily operational costs", "Costs for drafting the Private Placement Memorandum", "Incentive Fees", "Transaction costs for ongoing trades"],
+                    correct: "Costs for drafting the Private Placement Memorandum",
+                    explanation: "Set-up Costs include offering costs, drafting the Private Placement Memorandum, registration, and compliance costs, as mentioned in Section 6.1.1."
+                },
+                {
+                    question: "What type of fee is NOT part of the Operating Expenses for a Category III AIF?",
+                    options: ["Legal and audit fees", "Incentive Fees", "Insurance premiums for key personnel", "Costs of financial statements"],
+                    correct: "Incentive Fees",
+                    explanation: "Incentive Fees are performance-based and separate from Operating Expenses, which include legal, audit, insurance, and reporting costs, per Section 6.1.1."
+                },
+                {
+                    question: "What is the purpose of the Hurdle Rate in a Category III AIF?",
+                    options: ["To guarantee a minimum return to investors", "To set a threshold for triggering Incentive Fees", "To calculate Management Fees", "To cover transaction expenses"],
+                    correct: "To set a threshold for triggering Incentive Fees",
+                    explanation: "The Hurdle Rate is a minimum return threshold (e.g., 10%-12% p.a.) that must be exceeded before Incentive Fees are paid, benchmarking investor expectations, per Section 6.1.2."
+                },
+                {
+                    question: "In the Indian AIF industry, what is the typical range for the Hurdle Rate?",
+                    options: ["5% to 7% per annum", "7% to 8% per annum", "10% to 12% per annum", "12% to 15% per annum"],
+                    correct: "10% to 12% per annum",
+                    explanation: "Hurdle Rates in India typically range from 10% to 12% per annum, higher than international standards (7%-8%), as noted in Section 6.1.2."
+                },
+                {
+                    question: "Who typically prefers a lower Hurdle Rate in a Category III AIF, and why?",
+                    options: ["Investors, to maximize their returns", "Investment Managers, to increase Incentive Fees", "Investors, to reduce their risk exposure", "Investment Managers, to align with market standards"],
+                    correct: "Investment Managers, to increase Incentive Fees",
+                    explanation: "Investment Managers prefer a lower Hurdle Rate to generate higher Incentive Fees by more easily exceeding the threshold, as explained in Section 6.1.2."
+                },
+                {
+                    question: "What is the High-Water Mark (HWM) in a Category III AIF used for?",
+                    options: ["To calculate the Gross Net Asset Value", "To ensure Incentive Fees are only paid on new value created", "To determine Management Fees", "To set the Hurdle Rate"],
+                    correct: "To ensure Incentive Fees are only paid on new value created",
+                    explanation: "The High-Water Mark is the highest Net Asset Value (net of expenses/fees) achieved, ensuring Incentive Fees are paid only on gains above this level, protecting investors, per Section 6.1.3."
+                },
+                {
+                    question: "What happens if a Category III AIF’s Net Asset Value declines below its High-Water Mark?",
+                    options: ["Incentive Fees increase for the Manager", "No Incentive Fees are paid until NAV exceeds the HWM", "Management Fees are reduced", "Investors receive a guaranteed return"],
+                    correct: "No Incentive Fees are paid until NAV exceeds the HWM",
+                    explanation: "If NAV falls below the High-Water Mark, no Incentive Fees are paid until the NAV surpasses the previous peak, safeguarding investor interests, per Section 6.1.3."
+                },
+                {
+                    question: "What is the purpose of the Catch-up Provision in a Category III AIF?",
+                    options: ["To distribute all profits to investors exclusively", "To allow the Investment Manager to quickly achieve their pre-determined profit share", "To reduce Management Fees for investors", "To cap operating expenses"],
+                    correct: "To allow the Investment Manager to quickly achieve their pre-determined profit share",
+                    explanation: "The Catch-up Provision enables the Manager to receive residual profits after investor capital/hurdle until reaching their pre-determined profit share (e.g., 20% Incentive Fee), per Section 6.1.4."
+                },
+                {
+                    question: "Which fee component is NOT allowed for Mutual Funds under SEBI regulations?",
+                    options: ["Management Fees", "Incentive Fees", "Transaction Costs", "Custodian Fees"],
+                    correct: "Incentive Fees",
+                    explanation: "Mutual Funds are prohibited from charging Incentive Fees to limit risk and leverage for retail investors, unlike Category III AIFs, per Section 6.1.5."
+                },
+                {
+                    question: "What is the typical Total Expense Ratio (TER) limit for Mutual Funds as a percentage of Assets under Management (AUM)?",
+                    options: ["Less than 1.5%", "2.5% to 5%", "Up to 10%", "No specific limit"],
+                    correct: "Less than 1.5%",
+                    explanation: "SEBI sets TER limits for Mutual Funds often below 1.5% of AUM to protect investors, as noted in Section 6.1.5."
+                },
+                {
+                    question: "How does the fee structure flexibility of Portfolio Management Services (PMS) differ from Category III AIFs?",
+                    options: ["PMS has less flexibility than AIFs", "PMS allows investors to negotiate customized fee structures, unlike AIFs’ fixed fees", "Both have identical fee structures", "AIFs charge higher fees than PMS"],
+                    correct: "PMS allows investors to negotiate customized fee structures, unlike AIFs’ fixed fees",
+                    explanation: "PMS offers investors flexibility to choose between fixed or fixed+variable fees, while Category III AIFs have pre-determined fees per unit class, per Section 6.1.5."
+                },
+                {
+                    question: "What is the maximum Exit Load a Portfolio Management Service (PMS) can charge in its second year?",
+                    options: ["1%", "2%", "3%", "No Exit Load after the first year"],
+                    correct: "2%",
+                    explanation: "PMS can charge a maximum Exit Load of 2% in the second year, per SEBI (Portfolio Managers) Regulations, 2020, in Section 6.1.5."
+                },
+                {
+                    question: "What does Gross (Pre-expense) Return represent in a Category III AIF?",
+                    options: ["Return after all fees and expenses", "Return before deducting any fund expenses, costs, or fees", "Return after Management Fees only", "Return before GST"],
+                    correct: "Return before deducting any fund expenses, costs, or fees",
+                    explanation: "Gross (Pre-expense) Return is calculated using the Gross Asset Value before deducting any fund expenses, costs, management fees, or Incentive Fees, per Section 6.1.6."
+                },
+                {
+                    question: "How does Goods and Services Tax (GST) affect the fees of a Category III AIF?",
+                    options: ["It is not applied to any fees", "It is levied at 18% on management, trusteeship, and external service fees, passed to investors", "It reduces Incentive Fees", "It is only applied to operating expenses"],
+                    correct: "It is levied at 18% on management, trusteeship, and external service fees, passed to investors",
+                    explanation: "GST at 18% is levied on management, trusteeship, and external service provider fees, with costs passed to investors, impacting Net Returns, per Section 6.1.7."
+                },
+                {
+                    question: "What is the definition of Internal Rate of Return (IRR) in a Category III AIF?",
+                    options: ["The annualized return after all fees and taxes", "The rate equating present value of cash outflows to cash inflows", "The total return on Gross Net Asset Value", "The risk-free rate of return"],
+                    correct: "The rate equating present value of cash outflows to cash inflows",
+                    explanation: "IRR is the annualized compounded rate at which the present value of cash outflows (capital calls, expenses) equals cash inflows (distributions, terminal value), per Section 6.2.1."
+                },
+                {
+                    question: "Which performance multiple measures the ratio of total distributions to total capital contributions?",
+                    options: ["Residual Value to Paid-In-Capital (RVPI)", "Total Value to Paid-In-Capital (TVPI)", "Distributions to Paid-In-Capital (DPI)", "Internal Rate of Return (IRR)"],
+                    correct: "Distributions to Paid-In-Capital (DPI)",
+                    explanation: "DPI (Distributions to Paid-In-Capital) is the ratio of total distributions to total capital contributions, indicating returned capital, per Section 6.2.2."
+                },
+                {
+                    question: "What is the relationship between Total Value to Paid-In-Capital (TVPI), Distributions to Paid-In-Capital (DPI), and Residual Value to Paid-In-Capital (RVPI)?",
+                    options: ["TVPI = DPI × RVPI", "TVPI = DPI + RVPI", "RVPI = TVPI – DPI", "DPI = TVPI / RVPI"],
+                    correct: "TVPI = DPI + RVPI",
+                    explanation: "TVPI is the sum of DPI and RVPI, representing the total value (realized + unrealized) created by the fund, per Section 6.2.2."
+                },
+                {
+                    question: "Which investor-level risk is associated with the illiquid nature of Category III AIF investments?",
+                    options: ["Leverage Risk", "Illiquidity Risk", "Compliance Risk", "Tax Risk"],
+                    correct: "Illiquidity Risk",
+                    explanation: "Illiquidity Risk arises because Category III AIFs’ underlying investments are illiquid, making valuation and exits challenging until investments are realized, per Section 6.2.3."
+                },
+                {
+                    question: "What is the SEBI-imposed limit on leverage for a Category III AIF?",
+                    options: ["1 times the Net Asset Value (NAV)", "2 times the Net Asset Value (NAV)", "3 times the Net Asset Value (NAV)", "No specific limit"],
+                    correct: "2 times the Net Asset Value (NAV)",
+                    explanation: "SEBI’s prudential norms limit leverage for Category III AIFs to two times the Net Asset Value (NAV), per Section 6.2.3."
+                },
+                {
+                    question: "Which risk measure quantifies the volatility of a fund’s historical returns relative to the mean?",
+                    options: ["Skewness", "Kurtosis", "Standard Deviation", "Maximum Drawdown"],
+                    correct: "Standard Deviation",
+                    explanation: "Standard Deviation measures the volatility of historical returns from the mean, using the formula σ = √(Σ(Rᵢ – R̄)² / n), per Section 6.2.4.1."
+                },
+                {
+                    question: "What does a Skewness value of zero indicate about a return distribution?",
+                    options: ["A perfectly symmetrical (normal) distribution", "A positively skewed distribution with right-tail outliers", "A negatively skewed distribution with left-tail outliers", "High volatility with no outliers"],
+                    correct: "A perfectly symmetrical (normal) distribution",
+                    explanation: "A Skewness of zero indicates a perfectly symmetrical (normal) distribution, with no outliers on either side of the mean, per Section 6.2.4.2."
+                },
+                {
+                    question: "What does a positive Skewness indicate about a fund’s return distribution?",
+                    options: ["More negative outliers, indicating higher risk", "More positive outliers, potentially beneficial for investors", "A symmetrical distribution with no outliers", "Lower volatility and risk"],
+                    correct: "More positive outliers, potentially beneficial for investors",
+                    explanation: "Positive Skewness indicates a right tail with more positive outliers, which can be beneficial for investors, though not preferred if extreme, per Section 6.2.4.2."
+                },
+                {
+                    question: "What does a Kurtosis value greater than 3 signify?",
+                    options: ["A platykurtic distribution with lower risk", "A leptokurtic distribution with higher risk and fatter tails", "A normal distribution with no risk", "A symmetrical distribution with no outliers"],
+                    correct: "A leptokurtic distribution with higher risk and fatter tails",
+                    explanation: "A Kurtosis >3 (leptokurtic) indicates fatter tails and higher risk due to extreme outcomes, per Section 6.2.4.2."
+                },
+                {
+                    question: "What does the Sharpe Ratio measure in a Category III AIF?",
+                    options: ["Excess return per unit of systematic risk", "Excess return per unit of total risk", "Peak-to-trough decline in Assets under Management", "Maximum expected loss over a timeframe"],
+                    correct: "Excess return per unit of total risk",
+                    explanation: "The Sharpe Ratio measures excess return (portfolio return minus risk-free rate) per unit of total risk (standard deviation), per Section 6.2.5.1."
+                },
+                {
+                    question: "When is the Treynor Ratio most appropriate for use?",
+                    options: ["For undiversified portfolios", "For well-diversified portfolios", "For calculating maximum drawdown", "For measuring illiquidity risk"],
+                    correct: "For well-diversified portfolios",
+                    explanation: "The Treynor Ratio is most useful for well-diversified portfolios, measuring excess return per unit of systematic risk (beta), per Section 6.2.5.2."
+                },
+                {
+                    question: "What is the formula for Maximum Drawdown (MDD) in a fund?",
+                    options: ["(Peak Value – Trough Value) / Peak Value", "(Trough Value – Peak Value) / Trough Value", "(Peak Value + Trough Value) / Peak Value", "(Trough Value / Peak Value) × 100%"],
+                    correct: "(Peak Value – Trough Value) / Peak Value",
+                    explanation: "Maximum Drawdown (MDD) = (Peak Value – Trough Value) / Peak Value, measuring the largest peak-to-trough decline in Assets under Management, per Section 6.2.5.3."
+                },
+                {
+                    question: "What does Value at Risk (VaR) quantify for a Category III AIF?",
+                    options: ["The highest possible return over a period", "The maximum expected loss over a timeframe with a confidence level", "The average return of the fund", "The total risk of the portfolio"],
+                    correct: "The maximum expected loss over a timeframe with a confidence level",
+                    explanation: "VaR quantifies the maximum expected loss over a given timeframe with a pre-defined confidence level (e.g., 95% probability), per Section 6.2.5.4."
+                },
+                {
+                    question: "What is the primary goal of performance benchmarking for a Category III AIF?",
+                    options: ["To increase Management Fees for the Investment Manager", "To monitor and compare fund returns with peers or standards", "To reduce operating expenses for investors", "To guarantee a minimum return for investors"],
+                    correct: "To monitor and compare fund returns with peers or standards",
+                    explanation: "Performance benchmarking monitors and compares Category III AIF returns with peers or standards to evaluate performance, per Section 6.3."
+                },
+                {
+                    question: "Which characteristic is NOT required for a valid benchmark according to CFA Institute/GIPS standards?",
+                    options: ["Measurable", "Unambiguous", "Guaranteed return", "Investable"],
+                    correct: "Guaranteed return",
+                    explanation: "A valid benchmark must be pre-specified, relevant, measurable, unambiguous, investable, representative, accountable, and complete, but not guarantee returns, per Section 6.3."
+                },
+                {
+                    question: "What type of benchmark might a Category III AIF with an ‘absolute-return’ strategy use?",
+                    options: ["A broad-market index like NIFTY 50", "A fixed rate predetermined by the Investment Manager, e.g., 10% per annum", "A sectoral index like NIFTY FMCG", "A small-cap index like NIFTY SMALL CAP 100"],
+                    correct: "A fixed rate predetermined by the Investment Manager, e.g., 10% per annum",
+                    explanation: "Absolute-return strategies aim for returns independent of market movements, using a fixed rate (e.g., 10% p.a.) predetermined by the Investment Manager, per Section 6.3."
+                },
+                {
+                    question: "How often does SEBI mandate performance benchmarking for Category III AIFs that have completed at least one year from First Close?",
+                    options: ["Monthly", "Quarterly", "Half-yearly", "Annually"],
+                    correct: "Half-yearly",
+                    explanation: "Performance benchmarking is conducted half-yearly (September 30 and March 31) for AIFs ≥1 year from First Close, per Section 6.3 (Box 6.2)."
+                },
+                {
+                    question: "What is Alpha in the context of a Category III AIF’s performance?",
+                    options: ["The total return generated by the fund", "The excess return over the benchmark return", "The risk-free rate used in calculations", "The management fee rate applied"],
+                    correct: "The excess return over the benchmark return",
+                    explanation: "Alpha is the excess return generated by a Category III AIF compared to its benchmark, calculated using the Capital Asset Pricing Model (CAPM), per Section 6.3.1."
+                },
+                {
+                    question: "Which assumption of the Capital Asset Pricing Model (CAPM) states that investors are risk-averse?",
+                    options: ["Perfect competition in the market", "Risk-averse investor behavior", "Information efficiency among investors", "No taxes or transaction costs"],
+                    correct: "Risk-averse investor behavior",
+                    explanation: "CAPM assumes investors are risk-averse, preferring low-risk securities for a given return or higher returns for a given risk, per Section 6.3.1."
+                },
+                {
+                    question: "What is the formula for Expected Return in the Capital Asset Pricing Model (CAPM)?",
+                    options: ["E(R) = Rₓ + β × (Rₘ – Rₓ)", "E(R) = Rₓ / β × Rₘ", "E(R) = β × (Rₘ + Rₓ)", "E(R) = Rₘ – Rₓ / β"],
+                    correct: "E(R) = Rₓ + β × (Rₘ – Rₓ)",
+                    explanation: "The CAPM formula for Expected Return is E(R) = Rₓ + β × (Rₘ – Rₓ), where Rₓ is the risk-free rate, β is beta, and Rₘ is the market (benchmark) return, per Section 6.3.1."
+                },
+                {
+                    question: "What is a key limitation of Value at Risk (VaR) as a risk measure?",
+                    options: ["It measures only total risk", "It does not specify the size of loss beyond the confidence level", "It guarantees no losses will occur", "It focuses only on positive returns"],
+                    correct: "It does not specify the size of loss beyond the confidence level",
+                    explanation: "VaR quantifies maximum expected loss but fails to indicate the size of loss beyond the confidence level, per Section 6.2.5.4."
+                },
+                {
+                    question: "True or False: Category III AIFs can charge Incentive Fees annually in open-ended funds.",
+                    options: ["True", "False"],
+                    correct: "True",
+                    explanation: "Incentive Fees can be paid regularly in open-ended Category III AIFs, unlike closed-ended funds where they are paid at the end of the fund tenure, per Section 6.1.3."
+                },
+                {
+                    question: "Which risk-adjusted measure compares the risk premium per unit of systematic risk borne by a fund?",
+                    options: ["Sharpe Ratio", "Treynor Ratio", "Maximum Drawdown", "Value at Risk"],
+                    correct: "Treynor Ratio",
+                    explanation: "The Treynor Ratio measures excess return per unit of systematic risk (beta), as described in Section 6.2.5.2."
+                },
+                {
+                    question: "What is the maximum Incentive Fee percentage typically allowed for Category III AIFs?",
+                    options: ["10%", "15%", "20%", "40%"],
+                    correct: "20%",
+                    explanation: "Incentive Fees for Category III AIFs can be up to 20% of Incremental Returns, as per industry practice and Section 6.1.5."
+                },
+                {
+                    question: "Which environmental, social, and governance (ESG) requirement must Category III AIFs follow for investments in listed equities?",
+                    options: ["Reporting financial ratios quarterly", "Adhering to the Stewardship Code", "Limiting leverage to 1x NAV", "Avoiding derivative investments"],
+                    correct: "Adhering to the Stewardship Code",
+                    explanation: "Category III AIFs must follow the Stewardship Code for listed equity investments since FY 2020-21, requiring internal controls and periodic reports, per Section 6.2.3."
+                },
+                {
+                    question: "True or False: Portfolio Management Services (PMS) are prohibited from charging upfront fees like registration or subscription fees.",
+                    options: ["True", "False"],
+                    correct: "True",
+                    explanation: "PMS are banned from charging upfront fees (e.g., registration/subscription fees) to enhance transparency and accountability, per SEBI (Portfolio Managers) Regulations, 2020, in Section 6.1.5."
+                },
+                {
+                    question: "What is the maximum operating expense cap for PMS, excluding brokerage, as a percentage of average daily AUM?",
+                    options: ["0.25%", "0.5%", "1%", "No cap"],
+                    correct: "0.5%",
+                    explanation: "PMS operating expenses (excluding brokerage) are capped at 0.5% of the investor’s average daily Assets under Management annually, per Section 6.1.5."
+                },
+                {
+                    question: "Which investor-level risk is associated with the Investment Manager’s inability to raise sufficient capital for a fund?",
+                    options: ["Leverage Risk", "Reputational Risk", "Compliance Risk", "Illiquidity Risk"],
+                    correct: "Reputational Risk",
+                    explanation: "Reputational Risk arises if the Investment Manager fails to raise sufficient capital for First or Final Close or delivers poor returns, deterring investors, per Section 6.2.3."
+                },
+                {
+                    question: "What is the primary risk associated with the uncertainty in tax laws for Category III AIF investors?",
+                    options: ["Leverage Risk", "Tax Risk", "Reputational Risk", "Illiquidity Risk"],
+                    correct: "Tax Risk",
+                    explanation: "Tax Risk arises from uncertainty in tax laws and structures for Category III AIFs, impacting tax liabilities and net returns for investors, as described in Section 6.2.3."
+                },
+                {
+                    question: "How are Set-up Costs for a Category III AIF typically amortized over time?",
+                    options: ["Over the first 12 months from First Close", "Over the first 36 months or the entire fund life from First Close", "Annually until fund dissolution", "Immediately upon fund launch"],
+                    correct: "Over the first 36 months or the entire fund life from First Close",
+                    explanation: "Set-up Costs can be amortized over the first 36 months or the entire life of the Category III AIF, commencing from the date of First Close, as noted in Section 6.1.1."
+                },
+                {
+                    question: "Which investor-level risk requires Category III AIFs to comply with SEBI circulars like Investor Charters and prudential norms?",
+                    options: ["Compliance Risk", "Leverage Risk", "ESG Risk", "Reputational Risk"],
+                    correct: "Compliance Risk",
+                    explanation: "Compliance Risk involves adhering to stringent SEBI norms, such as Investor Charters, CTR reports, and prudential norms, which can strain Manager resources if not well-equipped, per Section 6.2.3."
+                },
+                {
+                    question: "What is the purpose of the full-trail commission method in Portfolio Management Services (PMS)?",
+                    options: ["To charge upfront fees at subscription", "To align the interests of Portfolio Managers, distributors, and investors for long-term investment", "To reduce operating expenses for investors", "To increase Management Fees for Portfolio Managers"],
+                    correct: "To align the interests of Portfolio Managers, distributors, and investors for long-term investment",
+                    explanation: "The full-trail commission method pays distributors’ commissions quarterly or periodically until the investor exits, ensuring long-term alignment of interests, per Section 6.1.5."
+                },
+                {
+                    question: "Which ESG requirement specifically mandates Category III AIFs to report Stewardship activities to SEBI and clients?",
+                    options: ["Limiting leverage in investments", "Following the Stewardship Code for listed equities", "Reporting financial performance quarterly", "Avoiding market-neutral strategies"],
+                    correct: "Following the Stewardship Code for listed equities",
+                    explanation: "Category III AIFs must follow the Stewardship Code for listed equities since FY 2020-21, requiring periodic reports to SEBI and clients on Stewardship activities, per Section 6.2.3."
+                },
+                {
+                    question: "How does a high Catch-up Rate benefit the Investment Manager of a Category III AIF?",
+                    options: ["It reduces Management Fees", "It allows the Manager to receive a larger share of residual profits quickly", "It lowers the Hurdle Rate", "It caps operating expenses"],
+                    correct: "It allows the Manager to receive a larger share of residual profits quickly",
+                    explanation: "A high Catch-up Rate (e.g., 100%) enables the Manager to receive all residual profits after investor capital/hurdle until their pre-determined profit share is met, per Section 6.1.4."
+                },
+                {
+                    question: "What is a key challenge in benchmarking a Category III AIF with an absolute-return strategy?",
+                    options: ["It requires a broad-market index like NIFTY 50", "It is not benchmarked against market indices but a fixed rate predetermined by the Manager", "It must use sectoral indices only", "It relies on small-cap indices"],
+                    correct: "It is not benchmarked against market indices but a fixed rate predetermined by the Manager",
+                    explanation: "Absolute-return strategies aim for returns independent of market movements, using a fixed rate (e.g., 10% p.a.) rather than market indices, making benchmarking challenging, per Section 6.3."
+                },
+                {
+                    question: "Which CAPM assumption might not hold true in real-world Category III AIF investments due to changing market conditions?",
+                    options: ["Risk-averse investor behavior", "Constant risk-free return", "Information efficiency among investors", "Perfect competition in the market"],
+                    correct: "Constant risk-free return",
+                    explanation: "CAPM assumes a constant risk-free return, but returns on government securities may rise or fall, making this assumption unrealistic in real-world conditions, per Section 6.3.1."
+                },
+                {
+                    question: "What is a potential limitation of using Maximum Drawdown (MDD) as a risk measure?",
+                    options: ["It measures only positive returns", "It does not indicate how often large losses occur or recovery time", "It quantifies maximum expected gain", "It focuses only on systematic risk"],
+                    correct: "It does not indicate how often large losses occur or recovery time",
+                    explanation: "MDD measures the largest peak-to-trough decline but does not consider loss frequency or recovery time, per Section 6.2.5.3."
+                },
+                {
+                    question: "How does a negatively skewed return distribution impact investor perception of a Category III AIF?",
+                    options: ["It indicates higher potential gains, making it attractive", "It suggests higher risk due to negative outliers, making it less attractive", "It shows a normal distribution with no risk", "It reduces volatility, appealing to risk-averse investors"],
+                    correct: "It suggests higher risk due to negative outliers, making it less attractive",
+                    explanation: "Negative Skewness indicates a left tail with more negative outliers, suggesting higher risk and making the fund less attractive to investors, per Section 6.2.4.2."
+                },
+                {
+                    question: "What is the role of Benchmarking Agencies in the Category III AIF industry?",
+                    options: ["To set Management Fees for all AIFs", "To collect performance data and create industry benchmarks for comparison", "To guarantee returns for investors", "To limit leverage for funds"],
+                    correct: "To collect performance data and create industry benchmarks for comparison",
+                    explanation: "Benchmarking Agencies, mandated by SEBI, collect performance data from AIFs and create industry benchmarks (e.g., asset-weighted indices) for comparing fund performance, per Section 6.3."
+                },
+                {
+                    question: "True or False: Category III AIFs must report performance data to Benchmarking Agencies only if they have completed at least two years from First Close.",
+                    options: ["True", "False"],
+                    correct: "False",
+                    explanation: "Category III AIFs must report performance data to Benchmarking Agencies if they have completed at least one year from First Close, per Section 6.3 (Box 6.2)."
+                },
+                {
+                    question: "What type of data must Category III AIFs provide to Benchmarking Agencies on March 31 of each year?",
+                    options: ["Unaudited data only", "Audited data only", "Both audited and unaudited data", "Pre-tax data only"],
+                    correct: "Audited data only",
+                    explanation: "Data provided on March 31 must be audited, while September 30 data may be unaudited, per the operational guidelines in Section 6.3 (Box 6.2)."
+                },
+                {
+                    question: "How does a high Standard Deviation impact the perception of a Category III AIF’s risk?",
+                    options: ["It indicates lower risk and stability", "It suggests higher volatility and increased risk", "It shows a symmetrical return distribution", "It reduces the need for risk-adjusted metrics"],
+                    correct: "It suggests higher volatility and increased risk",
+                    explanation: "A high Standard Deviation indicates greater volatility of historical returns from the mean, suggesting increased risk for the fund, per Section 6.2.4.1."
+                },
+                {
+                    question: "What is a potential drawback of using the Treynor Ratio for an undiversified Category III AIF portfolio?",
+                    options: ["It overestimates total risk", "It focuses only on systematic risk, not total risk", "It measures maximum drawdown instead of return", "It ignores the risk-free rate"],
+                    correct: "It focuses only on systematic risk, not total risk",
+                    explanation: "The Treynor Ratio measures excess return per unit of systematic risk (beta), which may not reflect total risk for undiversified portfolios, making the Sharpe Ratio more appropriate, per Section 6.2.5.2."
+                }
             ]
+
         };
 
 
